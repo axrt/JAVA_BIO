@@ -18,7 +18,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	/**
 	 * The QBLAST service address
 	 */
-	protected static String QBLAST_SERVICE_URL = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?";
+	protected static final String QBLAST_SERVICE_URL = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?";
 
 	/**
 	 * <b>Description</b> Specfies the upper limit on number alignment to
@@ -31,7 +31,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * respectively, if not specified explicitly. The default for wwwblast is 50
 	 * if not specified in the URL. Commandline equivalent is '-b'.<br>
 	 */
-	protected static String ALIGNMENTS = "ALIGNMENTS";
+	protected static final String ALIGNMENTS = "ALIGNMENTS";
 	/**
 	 * <b>Description</b> Specifies the type of alignment view for the result
 	 * display<br>
@@ -46,7 +46,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * (integer value). Commandline BLAST equivalent: '-m'.
 	 * PairwiseWithIdentities has no commandline or wwwblast equivalent.<br>
 	 */
-	protected static String ALIGNMENT_VIEW = "ALIGNMENT_VIEW";
+	protected static final String ALIGNMENT_VIEW = "ALIGNMENT_VIEW";
 	/**
 	 * <b>Description</b> BLAST program to use for the search<br>
 	 * <b>Value</b> blastn, MegaBlast, discoMegablast; blastp, psiBlast,
@@ -55,7 +55,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>CMD</b> Put<br>
 	 * <b>Example</b> '...&BLAST_PROGRAM=blastx&...' sets this to blastx.<br>
 	 */
-	protected static String BLAST_PROGRAM = "BLAST_PROGRAM";
+	protected static final String BLAST_PROGRAM = "BLAST_PROGRAM";
 	/**
 	 * <b>Description</b> Performs simultaneous cdd search for protein BLAST<br>
 	 * <b>Value</b> true, false<br>
@@ -68,7 +68,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * wwwblast, which cannot perform simultaneous CDD search. For standalone,
 	 * use rpsblast program.<br>
 	 */
-	protected static String CDD_SEARCH = "CDD_SEARCH";
+	protected static final String CDD_SEARCH = "CDD_SEARCH";
 	/**
 	 * <b>Description</b> Specifies the action requested from Blast.cgi<br>
 	 * <b>Value</b> Put, Get, Web, Info, request<br>
@@ -80,7 +80,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * assisted result retrieval, use 'Get'. No wwwblast or commandline BLAST
 	 * equivalent.<br>
 	 */
-	protected static String CMD = "CMD";
+	protected static final String CMD = "CMD";
 	/**
 	 * <b>Description</b> Type of composition based statistics to apply<br>
 	 * <b>Value</b> 0, 1 , 2 , 3<br>
@@ -98,7 +98,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node106.html#Yu:2005:Bioinformatics:15509610"
 	 * >[7]</a>.<br>
 	 */
-	protected static String COMPOSITION_BASED_STATISTICS = "COMPOSITION_BASED_STATISTICS";
+	protected static final String COMPOSITION_BASED_STATISTICS = "COMPOSITION_BASED_STATISTICS";
 	/**
 	 * <b>Description</b> Specifies the target DATABASE<br>
 	 * <b>Value</b> List of common set available through 'CMD=info' with no
@@ -115,7 +115,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/remote_blastdblist.html"
 	 * >this</a>. Same in wwwblast. Commandline blast equivalent: '-d'.<br>
 	 */
-	protected static String DATABASE = "DATABASE";
+	protected static final String DATABASE = "DATABASE";
 	/**
 	 * <b>Description</b> Specifies which type of matched subjects are placed
 	 * first in Description<br>
@@ -130,7 +130,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * these two databases are marked by special group bits in their ASN.1
 	 * deflines.<br>
 	 */
-	protected static String DATABASE_SORT = "DATABASE_SORT";
+	protected static final String DATABASE_SORT = "DATABASE_SORT";
 	/**
 	 * <b>Description</b> Specifies database subdirectory name<br>
 	 * <b>Value</b> string, valid database subdirectory name<br>
@@ -143,7 +143,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * bypassing this parameter altogether, as in
 	 * '...&DATABASE=Microbial/83333&...'. <br>
 	 */
-	protected static String DATABASE_PREFIX = "DATABASE_PREFIX";
+	protected static final String DATABASE_PREFIX = "DATABASE_PREFIX";
 	/**
 	 * <b>Description</b> Specifies the codon table to use in the translation of
 	 * the target database<br>
@@ -155,7 +155,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * wwwblast. Commandline BLAST equivalent '-D'. More information is <a
 	 * href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi">here</a>.<br>
 	 */
-	protected static String DB_GENETIC_CODE = "DB_GENETIC_CODE";
+	protected static final String DB_GENETIC_CODE = "DB_GENETIC_CODE";
 	/**
 	 * <b>Description</b> Specifies the upper limit for number of one line
 	 * description to display<br>
@@ -170,7 +170,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node77.html#sub:Number-of-Alignments"
 	 * >this</a>.<br>
 	 */
-	protected static String DESCRIPTIONS = "DESCRIPTIONS";
+	protected static final String DESCRIPTIONS = "DESCRIPTIONS";
 	/**
 	 * <b>Description</b> Specifies the display order of database matches<br>
 	 * <b>Value</b> integer<br>
@@ -186,7 +186,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node85.html#sub:Display-of-Description"
 	 * >this</a>.<br>
 	 */
-	protected static String DISPLAY_SORT = "DISPLAY_SORT";
+	protected static final String DISPLAY_SORT = "DISPLAY_SORT";
 	/**
 	 * <b>Description</b> Specifies the query terms for limiting a given BLAST
 	 * search<br>
@@ -202,7 +202,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node79.html#sub:Entrez-Query-Terms"
 	 * >this</a>.<br>
 	 */
-	protected static String ENTREZ_QUERY = "ENTREZ_QUERY";
+	protected static final String ENTREZ_QUERY = "ENTREZ_QUERY";
 	/**
 	 * <b>Description</b> Specifies the Expect value (significance) cutoff<br>
 	 * <b>Value</b> double precision floating point<br>
@@ -218,7 +218,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * href="http://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html">this
 	 * page</a>.<br>
 	 */
-	protected static String EXPECT = "EXPECT";
+	protected static final String EXPECT = "EXPECT";
 	/**
 	 * <b>Description</b> Specifies the upper Expect value cutoff for the
 	 * formatting step<br>
@@ -231,7 +231,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * of alignments with Expect values fall between the range specified by
 	 * these two parameters. Irrelevant to wwwblast or commandline BLAST.<br>
 	 */
-	protected static String EXPECT_HIGH = "EXPECT_HIGH";
+	protected static final String EXPECT_HIGH = "EXPECT_HIGH";
 	/**
 	 * <b>Description</b> Specifies the lower Expect value cutoff for the
 	 * formatting step<br>
@@ -243,7 +243,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * display of alignments with Expect values fall between the range specified
 	 * by these two parameters. Irrelevant to wwwblast or commandline BLAST.<br>
 	 */
-	protected static String EXPECT_LOW = "EXPECT_LOW";
+	protected static final String EXPECT_LOW = "EXPECT_LOW";
 	/**
 	 * <b>Description</b> Specifies with which query to start formatting results<br>
 	 * <b>Value</b> integer<br>
@@ -256,7 +256,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * start formatting from 'input' skipping queries from '1' to 'input - 1'
 	 * altogether. No wwwblast or commandline blast equivalent.<br>
 	 */
-	protected static String FIRST_QUERY_NUM = "FIRST_QUERY_NUM";
+	protected static final String FIRST_QUERY_NUM = "FIRST_QUERY_NUM";
 	/**
 	 * <b>Description</b> Specifies the filter function(s) to use during the
 	 * search<br>
@@ -271,7 +271,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node80.html#sub:Filter-Strings:-Functions"
 	 * >this</a>.<br>
 	 */
-	protected static String FILTER = "FILTER";
+	protected static final String FILTER = "FILTER";
 	/**
 	 * <b>Description</b> Specifies the Entrez query term used to restrict the
 	 * result displayed<br>
@@ -287,7 +287,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node79.html#sub:Entrez-Query-Terms"
 	 * >this</a>.<br>
 	 */
-	protected static String FORMAT_ENTREZ_QUERY = "FORMAT_ENTREZ_QUERY";
+	protected static final String FORMAT_ENTREZ_QUERY = "FORMAT_ENTREZ_QUERY";
 	/**
 	 * <b>Description</b> Specifies the result object to format and display<br>
 	 * <b>Value</b> Alignment, PSSM, TaxBlast, Bioseq<br>
@@ -299,7 +299,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * relevant to wwwblast or commandline BLAST. For batch query,
 	 * 'FORMAT_OBJECT=TaxBlast' only works for the first query.<br>
 	 */
-	protected static String FORMAT_OBJECT = "FORMAT_OBJECT";
+	protected static final String FORMAT_OBJECT = "FORMAT_OBJECT";
 	/**
 	 * <b>Description</b> Specifies the results format<br>
 	 * <b>Value</b> HTML, Text, ASN.1, XML<br>
@@ -314,7 +314,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * 'FORMAT_OBJECT=TaxBlast' with 'FORMAT_TYPE=HTML'. Not relevant to
 	 * wwwblast. Partial equivalent in comandline BLAST is '-m' and '-t'.<br>
 	 */
-	protected static String FORMAT_TYPE = "FORMAT_TYPE";
+	protected static final String FORMAT_TYPE = "FORMAT_TYPE";
 /**
 	 * <b>Description</b> Specifies the gap opening and gap extension costs<br>
 	 * <b>Value</b> two space separated integers<br>
@@ -323,7 +323,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>Example</b> '...&GAPCOSTS=12+2&...' will set the values to 12 and 2, respectively.<br>
 	 * <b>Note:</b> Only a limited set of values are acceptable for supported scoring matrices. If not specified in the 'Put' URL, the default 'GAPCOSTS=11+1' will be used for blastp, and 'GAPCOSTS=5+2' will be used for blastn. See details on this setting <a href="http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node89.html#sub:On-Matrices-and">here</a>.<br>
 	 */
-	protected static String GAPCOSTS = "GAPCOSTS";
+	protected static final String GAPCOSTS = "GAPCOSTS";
 	/**
 	 * <b>Description</b> Specifies the codon table to use for query translation<br>
 	 * <b>Value</b> 1 to 16, 21, 22<br>
@@ -333,7 +333,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>Note:</b> Used by 'PROGAME=blastx' and 'PROGAME=tblastx'. Same as in
 	 * wwwblast. Commandline BLAST equivalent '-Q'.<br>
 	 */
-	protected static String GENETIC_CODE = "GENETIC_CODE";
+	protected static final String GENETIC_CODE = "GENETIC_CODE";
 	/**
 	 * <b>Description</b> Generates sequence retrieval buttons and check boxes<br>
 	 * <b>Value</b> true, false<br>
@@ -344,7 +344,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * Irrelevant to script assisted searches. No equivalent in standalone
 	 * wwwblast and commandline BLAST.<br>
 	 */
-	protected static String GET_SEQUENCE = "GET_SEQUENCE";
+	protected static final String GET_SEQUENCE = "GET_SEQUENCE";
 	/**
 	 * <b>Description</b> Sets the upper limit for number of alignments and
 	 * descriptions available in the formatting and reformatting step.<br>
@@ -360,7 +360,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node77.html#sub:Number-of-Alignments"
 	 * >this</a>.<br>
 	 */
-	protected static String HITLIST_SIZE = "HITLIST_SIZE";
+	protected static final String HITLIST_SIZE = "HITLIST_SIZE";
 	/**
 	 * <b>Description</b> Sorts HSPs from the same subject in various ways<br>
 	 * <b>Value</b> Integer<br>
@@ -373,7 +373,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * start'. Options 2 and 4 can place the HSPs from mRNA vs genomic alignment
 	 * in their correct order.<br>
 	 */
-	protected static String HSP_SORT = "HSP_SORT";
+	protected static final String HSP_SORT = "HSP_SORT";
 	/**
 	 * <b>Description</b> Sets Expect value cutoff for inclusion of sequences in
 	 * PSSM construction<br>
@@ -385,7 +385,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * explicitly specified in the 'Put' or 'Get' URL. Use E_THRESH in wwwblast
 	 * and '-h' in commandline BLAST, respectively.<br>
 	 */
-	protected static String I_THRESHOLD = "I_THRESHOLD";
+	protected static final String I_THRESHOLD = "I_THRESHOLD";
 	/**
 	 * <b>Description</b> Masks the lowercase region of the query sequence<br>
 	 * <b>Value</b> true, false<br>
@@ -397,7 +397,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * matches to the remainder of the query can be better evaluated. Same as in
 	 * wwwblast. Use '-U' in commandline BLAST.<br>
 	 */
-	protected static String LCASE_MASK = "LCASE_MASK";
+	protected static final String LCASE_MASK = "LCASE_MASK";
 	/**
 	 * <b>Description</b> Selects the character to use for the display of masked
 	 * regions<br>
@@ -410,7 +410,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * filter will be displayed in the type of characters specified by this
 	 * parameter. Not available in standalone wwwblast or commandline BLAST.<br>
 	 */
-	protected static String MASK_CHAR = "MASK_CHAR";
+	protected static final String MASK_CHAR = "MASK_CHAR";
 	/**
 	 * <b>Description</b> Selects the color in which to display the masked
 	 * regions<br>
@@ -425,7 +425,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node87.html#sub:Display-CDS-and"
 	 * >this</a>.<br>
 	 */
-	protected static String MASK_COLOR = "MASK_COLOR";
+	protected static final String MASK_COLOR = "MASK_COLOR";
 	/**
 	 * <b>Description</b> Specifies the nucleotide match/mismatch scores<br>
 	 * <b>Value</b> Comma separated integer pairs<br>
@@ -440,7 +440,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node90.html#sub:Nucleotide-Scoring-Matrices"
 	 * >this</a>.<br>
 	 */
-	protected static String MATCH_SCORES = "MATCH_SCORES";
+	protected static final String MATCH_SCORES = "MATCH_SCORES";
 	/**
 	 * <b>Description</b> Determines the protein score matrix to use<br>
 	 * <b>Value</b> PAM30, PAM70, BLOSUM45, BLOSUM42, BLOSUM80<br>
@@ -453,7 +453,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * 'MATRIX_PARAM' in wwwblast, which combines these two parameters together.
 	 * Equivalent in standalone command BLAST '-M'.<br>
 	 */
-	protected static String MATRIX_NAME = "MATRIX_NAME";
+	protected static final String MATRIX_NAME = "MATRIX_NAME";
 	/**
 	 * <b>Description</b> Specifies the maximum number of hits returned<br>
 	 * <b>Value</b> integer<br>
@@ -466,7 +466,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * ALIGNMENTS and DESCRIPTIONS. Partial commandline equivalent: '-b' and
 	 * '-v'.<br>
 	 */
-	protected static String MAX_NUM_SEQ = "MAX_NUM_SEQ";
+	protected static final String MAX_NUM_SEQ = "MAX_NUM_SEQ";
 	/**
 	 * <b>Description</b> Use the megablast algorithm in nucleotide BLAST<br>
 	 * <b>Value</b> true, false<br>
@@ -481,7 +481,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node81.html#sub:MEGABLAST-Features"
 	 * >this</a>.<br>
 	 */
-	protected static String MEGABLAST = "MEGABLAST";
+	protected static final String MEGABLAST = "MEGABLAST";
 	/**
 	 * <b>Description</b> Displays the gi numbers for the database matches<br>
 	 * <b>Value</b> true, false<br>
@@ -491,7 +491,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>Note:</b> Set to 'false' if not specified in the 'Get' URL. Same as in
 	 * wwwblast. For commandline BLAST, use '-I T'<br>
 	 */
-	protected static String NCBI_GI = "NCBI_GI";
+	protected static final String NCBI_GI = "NCBI_GI";
 	/**
 	 * <b>Description</b> Display the BLAST result in new window<br>
 	 * <b>Value</b> true, false<br>
@@ -503,7 +503,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * Irrelevant to script assisted searches. No equivalent in wwwblast or
 	 * commandline BLAST.<br>
 	 */
-	protected static String NEWWIN = "NEWWIN";
+	protected static final String NEWWIN = "NEWWIN";
 	/**
 	 * <b>Description</b> Display the BLAST result in new window<br>
 	 * <b>Value</b> true, false<br>
@@ -515,7 +515,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * Irrelevant to searches submitted through scripts. No equivalent in
 	 * wwwblast or commandline BLAST.<br>
 	 */
-	protected static String NEWWINRES = "NEWWINRES";
+	protected static final String NEWWINRES = "NEWWINRES";
 	/**
 	 * <b>Description</b> Displays the BLAST sans the graphic header<br>
 	 * <b>Value</b> true, false<br>
@@ -526,7 +526,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * the returned result to make it smaller and more readable. No equivalent
 	 * in wwwblast or commandline BLAST.<br>
 	 */
-	protected static String NOHEADER = "NOHEADER";
+	protected static final String NOHEADER = "NOHEADER";
 	/**
 	 * <b>Description</b> Specifies the upper limit of alignments displayed in
 	 * graphic overview<br>
@@ -539,7 +539,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * not explicitly specified in the 'Get' URL. Irrelevant to script assisted
 	 * search. No equivalent in wwwblast and irrelevant to commandline BLAST.<br>
 	 */
-	protected static String NUM_OVERVIEW = "NUM_OVERVIEW";
+	protected static final String NUM_OVERVIEW = "NUM_OVERVIEW";
 	/**
 	 * <b>Description</b> Accepts parameters value pairs not specified by
 	 * individual parameters listed here<br>
@@ -553,7 +553,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * details. Inputs must be properly escaped for use within the URL. Same as
 	 * in wwwblast. Irrelevant to standalone commandline BLAST.<br>
 	 */
-	protected static String OTHER_ADVACED = "OTHER_ADVACED";
+	protected static final String OTHER_ADVACED = "OTHER_ADVACED";
 	/**
 	 * <b>Description</b> Specifies the type of BLAST template to generate<br>
 	 * <b>Value</b> BlastHome, BlastDocs, BlastNews, BlastTips, BlastSearch,
@@ -565,7 +565,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * assisted searches. No equivalent in wwwblast or standalone commandline
 	 * BLAST.<br>
 	 */
-	protected static String PAGE_TYPE = "PAGE_TYPE";
+	protected static final String PAGE_TYPE = "PAGE_TYPE";
 	/**
 	 * <b>Description</b> Specifies the percent identity cutoff for the
 	 * alignment display<br>
@@ -577,7 +577,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * for HSP or aligned region only. The same is true for wwwblast.
 	 * Commandline BLAST equivalent: '-p'.<br>
 	 */
-	protected static String PERC_IDENT = "PERC_IDENT";
+	protected static final String PERC_IDENT = "PERC_IDENT";
 	/**
 	 * <b>Description</b> Specifies the pattern for use with PHI-BLAST searches<br>
 	 * <b>Value</b> pattern in ProSite syntax<br>
@@ -593,7 +593,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node92.html#sub:Pattern-Syntax-for"
 	 * >this</a>. Same as in wwwblast. Commandline BLAST equivalent: '-k'.<br>
 	 */
-	protected static String PHI_PATTERN = "PHI_PATTERN";
+	protected static final String PHI_PATTERN = "PHI_PATTERN";
 	/**
 	 * <b>Description</b> Specifies the BLAST program to use (and the type of
 	 * search to perform)<br>
@@ -605,7 +605,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>Note:</b> This parameter must be specified. Same as in wwwblast.
 	 * Commandline BLAST equivalent: '-p'<br>
 	 */
-	protected static String PROGRAM = "PROGRAM";
+	protected static final String PROGRAM = "PROGRAM";
 	/**
 	 * <b>Description</b> Sepecifies the input PSSM<br>
 	 * <b>Value</b> string (PSSM from previous PSI-BLAST search)<br>
@@ -616,7 +616,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * search with the same query. This parameter is not available in wwwblast.
 	 * Standalone commandline BLAST equivalent: '-R'.<br>
 	 */
-	protected static String PSSM = "PSSM";
+	protected static final String PSSM = "PSSM";
 	/**
 	 * <b>Description</b> Sepecifies the input query<br>
 	 * <b>Value</b> Accession, GI, or actual sequences in various formats<br>
@@ -632,7 +632,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * equivalent: '-i', which takes a text file name and accepts only FASTA
 	 * formatted sequences.<br>
 	 */
-	protected static String QUERY = "QUERY";
+	protected static final String QUERY = "QUERY";
 	/**
 	 * <b>Description</b> Specified whether to believe the query FASTA defline<br>
 	 * <b>Value</b> true, false<br>
@@ -642,7 +642,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * <b>Note:</b> No equivalent in wwwblast. Commandline BLAST equivalent:
 	 * '-J'.<br>
 	 */
-	protected static String QUERY_BELIEVE_DEFLINE = "QUERY_BELIEVE_DEFLINE";
+	protected static final String QUERY_BELIEVE_DEFLINE = "QUERY_BELIEVE_DEFLINE";
 	/**
 	 * <b>Description</b> Specifies the query starting position when only a
 	 * portion is to be used<br>
@@ -656,7 +656,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * applied to all queries. Same as in wwwblast. Commandline BLAST
 	 * equivalent: '-L'.<br>
 	 */
-	protected static String QUERY_FROM = "QUERY_FROM";
+	protected static final String QUERY_FROM = "QUERY_FROM";
 	/**
 	 * <b>Description</b> Specifies the query ending position when only a
 	 * portion is to be used<br>
@@ -669,7 +669,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * query to use in the search. Same as in wwwblast. Standalone commandline
 	 * BLAST equivalent: '-L'.<br>
 	 */
-	protected static String QUERY_TO = "QUERY_TO";
+	protected static final String QUERY_TO = "QUERY_TO";
 	/**
 	 * <b>Description</b> Specifies the species-specific repeat libraries to use<br>
 	 * <b>Value</b> string<br>
@@ -684,7 +684,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * R ``-d library'' ', where library is the name of the species-specific
 	 * repeat library.<br>
 	 */
-	protected static String REPEATS = "REPEATS";
+	protected static final String REPEATS = "REPEATS";
 	/**
 	 * <b>Description</b> Specifies the RID to use<br>
 	 * <b>Value</b> <i>valid RID</i><br>
@@ -698,7 +698,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * as such during regular expression matching. Irrelevant to wwwblast and
 	 * commandline BLAST.<br>
 	 */
-	protected static String RID = "RID";
+	protected static final String RID = "RID";
 	/**
 	 * <b>Description</b> Formats the protein BLAST result for PSI-BLAST
 	 * iterations<br>
@@ -712,7 +712,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * officially supported at this time. Use psiblast.cgi and blastpgp for
 	 * wwwblast and commandline BLAST, respectively.<br>
 	 */
-	protected static String RUN_PSIBLAST = "RUN_PSIBLAST";
+	protected static final String RUN_PSIBLAST = "RUN_PSIBLAST";
 	/**
 	 * <b>Description</b> Specifies the effective search space size to use in
 	 * Expect value calculation<br>
@@ -725,7 +725,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * commandline BLAST, or '-Y value' under OTHER_ADVANCED parameter for
 	 * wwwblast.<br>
 	 */
-	protected static String SEARCHSP_EFF = "SEARCHSP_EFF";
+	protected static final String SEARCHSP_EFF = "SEARCHSP_EFF";
 	/**
 	 * <b>Description</b> Adjusts parameter settings automatically for queries
 	 * 30 letters or shorter<br>
@@ -740,7 +740,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * search with short sequences, manually set WORD_SIZE (-W), FILTER (-F),
 	 * and EXPECT (-e) parameters.<br>
 	 */
-	protected static String SHORT_QUERY_ADJUST = "SHORT_QUERY_ADJUST";
+	protected static final String SHORT_QUERY_ADJUST = "SHORT_QUERY_ADJUST";
 	/**
 	 * <b>Description</b> Activates translations of CDS features found in the
 	 * matches<br>
@@ -755,7 +755,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node87.html#sub:Display-CDS-and"
 	 * >this</a>.<br>
 	 */
-	protected static String SHOW_CDS_FEATURES = "SHOW_CDS_FEATURES";
+	protected static final String SHOW_CDS_FEATURES = "SHOW_CDS_FEATURES";
 	/**
 	 * <b>Description</b> Displays linkout icons for database hits with
 	 * additional information in other databases<br>
@@ -772,7 +772,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node87.html#sub:Display-CDS-and"
 	 * >this</a>.<br>
 	 */
-	protected static String SHOW_LINKOUT = "SHOW_LINKOUT";
+	protected static final String SHOW_LINKOUT = "SHOW_LINKOUT";
 	/**
 	 * <b>Description</b> Displays graphic overview for the BLAST result<br>
 	 * <b>Value</b> true, false<br>
@@ -785,7 +785,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node84.html#sub:Show-Overview"
 	 * >this</a>.<br>
 	 */
-	protected static String SHOW_OVERVIEW = "SHOW_OVERVIEW";
+	protected static final String SHOW_OVERVIEW = "SHOW_OVERVIEW";
 	/**
 	 * <b>Description</b> Determines the length of template within which the
 	 * word match is evaluated<br>
@@ -798,7 +798,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node88.html#sub:Template-Length-and"
 	 * >this</a>. Same as in wwwblast. Commandline BLAST equivalent: '-t'.<br>
 	 */
-	protected static String TEMPLATE_LENGTH = "TEMPLATE_LENGTH";
+	protected static final String TEMPLATE_LENGTH = "TEMPLATE_LENGTH";
 	/**
 	 * <b>Description</b> Determines the type of template to use in evaluating
 	 * word matches<br>
@@ -812,7 +812,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * "http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/new/node88.html#sub:Template-Length-and"
 	 * >this</a>. Same as in wwwblast. Commandline BLAST equivalent: '-N'.<br>
 	 */
-	protected static String TEMPLATE_TYPE = "TEMPLATE_TYPE";
+	protected static final String TEMPLATE_TYPE = "TEMPLATE_TYPE";
 	/**
 	 * <b>Description</b> Determines the threshold for extending word matches<br>
 	 * <b>Value</b> integer<br>
@@ -823,7 +823,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * controlled by WORD_SIZE. Not available to wwwblast. Standalone
 	 * commandline equivalent: '-f'.<br>
 	 */
-	protected static String THRESHOLD = "THRESHOLD";
+	protected static final String THRESHOLD = "THRESHOLD";
 	/**
 	 * <b>Description</b> Requires two word hits within a given distance for
 	 * alignment extension<br>
@@ -835,7 +835,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * makes the search more stringent. Same as in wwwblast. Commandline BLAST
 	 * equivalent: '-A'.<br>
 	 */
-	protected static String TWO_HITS = "TWO_HITS";
+	protected static final String TWO_HITS = "TWO_HITS";
 	/**
 	 * <b>Description</b> Specifies the size of word to use<br>
 	 * <b>Value</b> integer<br>
@@ -848,7 +848,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * 28. Discomegablast uses 11 or 12. Same as in wwwblast. Commandline BLAST
 	 * equivalent: '-W'.<br>
 	 */
-	protected static String WORD_SIZE = "WORD_SIZE";
+	protected static final String WORD_SIZE = "WORD_SIZE";
 	/**
 	 * <b>Description</b> Specifies the BLAST type<br>
 	 * <b>Value</b> string<br>
@@ -860,5 +860,5 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * genome maps in MapViewer. When activated, hits are hyperlinked to graphic
 	 * display in MapViewer. Mostly irrelevant to script assisted searches.<br>
 	 */
-	protected static String WWW_BLAST_TYPE = "WWW_BLAST_TYPE";
+	protected static final String WWW_BLAST_TYPE = "WWW_BLAST_TYPE";
 }
