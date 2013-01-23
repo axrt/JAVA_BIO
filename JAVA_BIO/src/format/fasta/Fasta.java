@@ -61,5 +61,26 @@ public abstract class Fasta {
 		}
 		return true;
 	}
+	/**
+     * Allows to extract a fasta-formatted sequence from the Fasta object.
+     * The sequence contains 60 characters per row.
+     * @return a {@link String} with the text representation of the AC and sequence.
+     */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+        sb.append(Fasta.fastaStart);
+        sb.append(this.AC);
+        sb.append('\n');
+        int line = 0;
+        for (int i = 0; i < this.sequence.length(); i++) {
+            sb.append(this.sequence.charAt(i));
+            line++;
+            if (line % Fasta.fastaLineLenght == 0) {
+                sb.append('\n');
+            }
+        }
+        return new String(sb);
+	}
 
 }
