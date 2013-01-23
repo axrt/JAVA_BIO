@@ -1,0 +1,65 @@
+package format.fasta;
+
+import java.util.Set;
+
+/**
+ * An Object representation of a fasta-fromatted sequence.
+ * 
+ * @author axrt
+ */
+public abstract class Fasta {
+	/**
+	 * A {@link String} representation of an abstract fasta-formatted sequence.
+	 */
+	protected String sequence;
+	/**
+	 * A {@link String} representation of an abstract fasta record <u>A</u>ccession <u>N</u>umber.
+	 */
+	protected String AC;
+	/**
+	 * Represents a set of valid characters
+	 */
+	private static Set<Character> allowedChars;
+	/**
+	 * Fasta format starter character
+	 */
+	private static final char fastaStart = '>';
+	/**
+	 * A conventional number of characters within a fasta-fromatted file
+	 */
+	private static final int fastaLineLenght = 60;
+	/**
+	 * A special string to form a BadFastaFileFormatException message in case
+	 * the first line of a given fasta does not contain a starter character
+	 */
+	private static final String badStartFormat = "Bad start of Fasta: ";
+	/**
+	 * A special string to form a BadFastaFileFormatException message in case
+	 * the the sequence of a given fasta contains illegal characters
+	 */
+	private static final String illegalSymbolFound = "Sequence contains illegal characters!";
+
+	public Fasta(String sequence) {
+		this.sequence = sequence;
+	}
+
+	/**
+	 * Checks for whether a given String contains illegal characters (the ones
+	 * that do not correspond to any conventional abbreviation and some special
+	 * characters).
+	 * 
+	 * @param stringToCheck
+	 *            is a {@link String} that contains a fasta record sequence
+	 * @return {@code true} if stringToCheck contains illegal characters,
+	 *         {@code false} - if not
+	 */
+	protected static boolean checkForIllegalCharacters(String stringToCheck) {
+		for (int i = 0; i < stringToCheck.length(); i++) {
+			if (!Fasta.allowedChars.contains(stringToCheck.charAt(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}
