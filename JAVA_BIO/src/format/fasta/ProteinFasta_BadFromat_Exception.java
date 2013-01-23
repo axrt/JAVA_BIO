@@ -1,6 +1,8 @@
 package format.fasta;
 
-public class ProteinFasta_BadFromat_Exception extends Exception {
+import format.BadFromatException;
+
+public class ProteinFasta_BadFromat_Exception extends BadFromatException {
 
 	public ProteinFasta_BadFromat_Exception() {
 		// TODO Auto-generated constructor stub
