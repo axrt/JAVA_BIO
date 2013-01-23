@@ -19,11 +19,11 @@ public abstract class Fasta {
 	/**
 	 * Represents a set of valid characters
 	 */
-	private static Set<Character> allowedChars;
+	protected static Set<Character> allowedChars;
 	/**
 	 * Fasta format starter character
 	 */
-	private static final char fastaStart = '>';
+	protected static final String fastaStart = ">";
 	/**
 	 * A conventional number of characters within a fasta-fromatted file
 	 */
@@ -39,7 +39,8 @@ public abstract class Fasta {
 	 */
 	private static final String illegalSymbolFound = "Sequence contains illegal characters!";
 
-	public Fasta(String sequence) {
+	public Fasta(String AC,String sequence) {
+		this.AC=AC;
 		this.sequence = sequence;
 	}
 
@@ -53,13 +54,13 @@ public abstract class Fasta {
 	 * @return {@code true} if stringToCheck contains illegal characters,
 	 *         {@code false} - if not
 	 */
-	protected static boolean checkForIllegalCharacters(String stringToCheck) {
+	protected static int checksOutForIllegalCharacters(String stringToCheck) {
 		for (int i = 0; i < stringToCheck.length(); i++) {
 			if (!Fasta.allowedChars.contains(stringToCheck.charAt(i))) {
-				return false;
+				return i;
 			}
 		}
-		return true;
+		return 0;
 	}
 	/**
      * Allows to extract a fasta-formatted sequence from the Fasta object.
