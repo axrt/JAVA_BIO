@@ -154,7 +154,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * 
 	 * @throws BadQBLASTRequestException
 	 */
-	private void extractRID() throws Bad_Q_BLAST_RequestException {
+	protected void extractRID() throws Bad_Q_BLAST_RequestException {
 		// Checking whether the request has been accepted correctly
 		// In case the output contains the keywords for the QBLAST comment tag,
 		// it either has error message, or everything went well and the RID can
@@ -209,7 +209,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @throws Bad_Q_BLAST_RequestException
 	 *             the NCBI server does not have a result for the requested RID
 	 */
-	private boolean resultsReady() throws IOException,
+	protected boolean resultsReady() throws IOException,
 			Bad_Q_BLAST_RequestException {
 		BufferedReader br = null;
 		// Generates a status request

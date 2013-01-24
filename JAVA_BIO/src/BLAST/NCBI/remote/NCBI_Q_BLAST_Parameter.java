@@ -34,7 +34,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	/**
 	 * @return the {@link String} key.
 	 */
-	protected String getKey() {
+	public String getKey() {
 		return this.key;
 	}
 
@@ -46,7 +46,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"ALIGNMENTS=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter ALIGNMENTS(int value) {
+	public static NCBI_Q_BLAST_Parameter ALIGNMENTS(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.ALIGNMENTS,
 				String.valueOf(value));
 	}
@@ -57,7 +57,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum ALIGNMENT_VIEW_PARAM {
+	public enum ALIGNMENT_VIEW_PARAM {
 		Pairwise, PairwiseWithIdentities, QueryAnchored, QueryAnchoredNoIdentities, FlatQueryAnchored, FlatQueryAnchoredNoIdentities, Tabular;
 	}
 
@@ -69,7 +69,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"ALIGNMENT_VIEW=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter ALIGNMENT_VIEW(
+	public static NCBI_Q_BLAST_Parameter ALIGNMENT_VIEW(
 			ALIGNMENT_VIEW_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.ALIGNMENT_VIEW,
 				value.name());
@@ -81,7 +81,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum BLAST_PROGRAM_PARAM {
+	public enum BLAST_PROGRAM_PARAM {
 		blastn, MegaBlast, discoMegablast, blastp, psiBlast, phiBlast, blastx, tblastn, tblastx;
 	}
 
@@ -93,7 +93,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"BLAST_PROGRAM=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter BLAST_PROGRAM(
+	public static NCBI_Q_BLAST_Parameter BLAST_PROGRAM(
 			BLAST_PROGRAM_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.BLAST_PROGRAM,
 				value.name());
@@ -107,7 +107,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"BLAST_PROGRAM=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter CDD_SEARCH(boolean value) {
+	public static NCBI_Q_BLAST_Parameter CDD_SEARCH(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.CDD_SEARCH,
 				String.valueOf(value));
 	}
@@ -118,7 +118,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum CMD_PARAM {
+	public enum CMD_PARAM {
 		Put, Get, Web, Info, requestx;
 	}
 
@@ -129,7 +129,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"CMD=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter CMD(CMD_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter CMD(CMD_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.CMD, value.name());
 	}
 
@@ -140,7 +140,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum COMPOSITION_BASED_STATISTICS_PARAM {
+	public enum COMPOSITION_BASED_STATISTICS_PARAM {
 		zero, one, two, three;
 	}
 
@@ -153,7 +153,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"COMPOSITION_BASED_STATISTICS=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter COMPOSITION_BASED_STATISTICS(
+	public static NCBI_Q_BLAST_Parameter COMPOSITION_BASED_STATISTICS(
 			COMPOSITION_BASED_STATISTICS_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(
 				NCBI_Q_BLAST_Helper.COMPOSITION_BASED_STATISTICS, value.name());
@@ -165,7 +165,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum DATABASE_PARAM {
+	public enum DATABASE_PARAM {
 		nr, refseq_rna, refseq_genomic, chromosome, est, gss, htgs, pat, pdb, alu, dbsts, Whole_Genome_Shotgun_contigs, tsa_nt, TL, refseq_protein, swissprot, env_nr;
 	}
 
@@ -176,7 +176,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"DATABASE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter DATABASE(DATABASE_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter DATABASE(DATABASE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE, value.name());
 	}
 
@@ -188,7 +188,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DATABASE_SORT=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter DATABASE_SORT(int value) {
+	public static NCBI_Q_BLAST_Parameter DATABASE_SORT(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE_SORT,
 				String.valueOf(value));
 	}
@@ -201,7 +201,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DATABASE_PREFIX=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter DATABASE_PREFIX(String value) {
+	public static NCBI_Q_BLAST_Parameter DATABASE_PREFIX(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE_PREFIX,
 				String.valueOf(value));
 	}
@@ -213,7 +213,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum GENETIC_CODE_PARAM {
+	public enum GENETIC_CODE_PARAM {
 		one("1"), two("2"), three("3"), four("4"), five("5"), six("6"), seven(
 				"7"), eight("8"), nine("9"), ten("10"), eleven("11"), twelve(
 				"12"), thirteen("13"), fourteen("14"), fifteen("15"), sixteen(
@@ -244,7 +244,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DB_GENETIC_CODE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter DB_GENETIC_CODE(
+	public static NCBI_Q_BLAST_Parameter DB_GENETIC_CODE(
 			GENETIC_CODE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DB_GENETIC_CODE,
 				value.toString());
@@ -258,7 +258,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DESCRIPTIONS=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter DESCRIPTIONS(int value) {
+	public static NCBI_Q_BLAST_Parameter DESCRIPTIONS(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DESCRIPTIONS,
 				String.valueOf(value));
 	}
@@ -283,7 +283,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"ENTREZ_QUERY=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter ENTREZ_QUERY(String value) {
+	public static NCBI_Q_BLAST_Parameter ENTREZ_QUERY(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.ENTREZ_QUERY, value);
 	}
 
@@ -294,7 +294,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"EXPECT=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter EXPECT(double value) {
+	public static NCBI_Q_BLAST_Parameter EXPECT(double value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.EXPECT,
 				String.valueOf(value));
 	}
@@ -307,7 +307,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"EXPECT_HIGH=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter EXPECT_HIGH(double value) {
+	public static NCBI_Q_BLAST_Parameter EXPECT_HIGH(double value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.EXPECT_HIGH,
 				String.valueOf(value));
 	}
@@ -320,7 +320,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"EXPECT_LOW=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter EXPECT_LOW(double value) {
+	public static NCBI_Q_BLAST_Parameter EXPECT_LOW(double value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.EXPECT_LOW,
 				String.valueOf(value));
 	}
@@ -333,7 +333,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FIRST_QUERY_NUM=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter FIRST_QUERY_NUM(int value) {
+	public static NCBI_Q_BLAST_Parameter FIRST_QUERY_NUM(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FIRST_QUERY_NUM,
 				String.valueOf(value));
 	}
@@ -344,7 +344,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum FILTER_PARAM {
+	public enum FILTER_PARAM {
 		T, F, m, L, R, S, D;
 	}
 
@@ -355,7 +355,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"FILTER=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter FILTER(FILTER_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter FILTER(FILTER_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FILTER, value.name());
 	}
 
@@ -366,7 +366,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FORMAT_ENTREZ_QUERY=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter FORMAT_ENTREZ_QUERY(String value) {
+	public static NCBI_Q_BLAST_Parameter FORMAT_ENTREZ_QUERY(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FORMAT_ENTREZ_QUERY,
 				value);
 	}
@@ -377,7 +377,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum FORMAT_OBJECT_PARAM {
+	public enum FORMAT_OBJECT_PARAM {
 		Alignment, PSSM, TaxBlast, Bioseq;
 	}
 
@@ -389,7 +389,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FORMAT_OBJECT=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter FORMAT_OBJECT(
+	public static NCBI_Q_BLAST_Parameter FORMAT_OBJECT(
 			FORMAT_OBJECT_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FORMAT_OBJECT,
 				value.name());
@@ -401,7 +401,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum FORMAT_TYPE_PARAM {
+	public enum FORMAT_TYPE_PARAM {
 		HTML("HTML"), Text("Text"), ASN("ASN.1"), XML("XML");
 		private final String value;
 
@@ -429,7 +429,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FORMAT_TYPE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter FORMAT_TYPE(FORMAT_TYPE_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter FORMAT_TYPE(FORMAT_TYPE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FORMAT_TYPE,
 				value.toString());
 	}
@@ -442,7 +442,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            "value-space-value" format
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"GAPCOSTS=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter GAPCOSTS(int firstValue,
+	public static NCBI_Q_BLAST_Parameter GAPCOSTS(int firstValue,
 			int secondValue) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.GAPCOSTS,
 				String.valueOf(firstValue) + ' ' + String.valueOf(secondValue));
@@ -456,7 +456,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"GENETIC_CODE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter GENETIC_CODE(
+	public static NCBI_Q_BLAST_Parameter GENETIC_CODE(
 			GENETIC_CODE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.GENETIC_CODE,
 				value.toString());
@@ -470,7 +470,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"GET_SEQUENCE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter GET_SEQUENCE(boolean value) {
+	public static NCBI_Q_BLAST_Parameter GET_SEQUENCE(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.GET_SEQUENCE,
 				String.valueOf(value));
 	}
@@ -483,7 +483,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"HITLIST_SIZE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter HITLIST_SIZE(int value) {
+	public static NCBI_Q_BLAST_Parameter HITLIST_SIZE(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.HITLIST_SIZE,
 				String.valueOf(value));
 	}
@@ -495,7 +495,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"HSP_SORT=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter HSP_SORT(int value) {
+	public static NCBI_Q_BLAST_Parameter HSP_SORT(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.HSP_SORT,
 				String.valueOf(value));
 	}
@@ -508,7 +508,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"I_THRESHOLD=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter I_THRESHOL(double value) {
+	public static NCBI_Q_BLAST_Parameter I_THRESHOL(double value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.I_THRESHOLD,
 				String.valueOf(value));
 	}
@@ -521,7 +521,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"LCASE_MASK=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter LCASE_MASK(boolean value) {
+	public static NCBI_Q_BLAST_Parameter LCASE_MASK(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.LCASE_MASK,
 				String.valueOf(value));
 	}
@@ -532,7 +532,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum MASK_CHAR_PARAM {
+	public enum MASK_CHAR_PARAM {
 
 		X_N("1"), lowercase("2");
 		private final String value;
@@ -560,7 +560,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"MASK_CHAR=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MASK_CHAR(MASK_CHAR_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter MASK_CHAR(MASK_CHAR_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MASK_CHAR,
 				value.toString());
 	}
@@ -571,7 +571,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum MASK_COLOR_PARAM {
+	public enum MASK_COLOR_PARAM {
 
 		black("0"), grey("1"), red("2");
 		private final String value;
@@ -600,7 +600,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"MASK_COLOR=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MASK_COLOR(MASK_COLOR_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter MASK_COLOR(MASK_COLOR_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MASK_COLOR,
 				value.toString());
 	}
@@ -614,7 +614,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"MATCH_SCORES=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MATCH_SCORES(int firstValue,
+	public static NCBI_Q_BLAST_Parameter MATCH_SCORES(int firstValue,
 			int secondValue) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MATCH_SCORES,
 				String.valueOf(firstValue) + ',' + String.valueOf(secondValue));
@@ -626,7 +626,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum MATRIX_NAME_PARAM {
+	public enum MATRIX_NAME_PARAM {
 		PAM30, PAM70, BLOSUM45, BLOSUM42, BLOSUM80;
 	}
 
@@ -638,7 +638,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"MATRIX_NAME=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MATRIX_NAME(MATRIX_NAME_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter MATRIX_NAME(MATRIX_NAME_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MATRIX_NAME,
 				value.name());
 	}
@@ -651,7 +651,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"MAX_NUM_SEQ=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MAX_NUM_SEQ(int value) {
+	public static NCBI_Q_BLAST_Parameter MAX_NUM_SEQ(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MAX_NUM_SEQ,
 				String.valueOf(value));
 	}
@@ -663,7 +663,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"MEGABLAST=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter MEGABLAST(boolean value) {
+	public static NCBI_Q_BLAST_Parameter MEGABLAST(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.MEGABLAST,
 				String.valueOf(value));
 	}
@@ -675,7 +675,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NCBI_GI=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter NCBI_GI(boolean value) {
+	public static NCBI_Q_BLAST_Parameter NCBI_GI(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.NCBI_GI,
 				String.valueOf(value));
 	}
@@ -687,7 +687,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NEWWIN=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter NEWWIN(boolean value) {
+	public static NCBI_Q_BLAST_Parameter NEWWIN(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.NEWWIN,
 				String.valueOf(value));
 	}
@@ -699,7 +699,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NEWWINRES=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter NEWWINRES(boolean value) {
+	public static NCBI_Q_BLAST_Parameter NEWWINRES(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.NEWWINRES,
 				String.valueOf(value));
 	}
@@ -711,7 +711,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NOHEADER=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter NOHEADER(boolean value) {
+	public static NCBI_Q_BLAST_Parameter NOHEADER(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.NOHEADER,
 				String.valueOf(value));
 	}
@@ -724,7 +724,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"NUM_OVERVIEW=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter NUM_OVERVIEW(int value) {
+	public static NCBI_Q_BLAST_Parameter NUM_OVERVIEW(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.NUM_OVERVIEW,
 				String.valueOf(value));
 	}
@@ -738,7 +738,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>Example:</b> '...&OTHER_ADVANCED=<b><u>-A+50</b></u>&...' will
 	 *         set the two hits window size to 50.
 	 */
-	protected static NCBI_Q_BLAST_Parameter OTHER_ADVACED(String value) {
+	public static NCBI_Q_BLAST_Parameter OTHER_ADVACED(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.OTHER_ADVACED, value);
 	}
 
@@ -748,7 +748,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum PAGE_TYPE_PARAM {
+	public enum PAGE_TYPE_PARAM {
 		BlastHome, BlastDocs, BlastNews, BlastTips, BlastSearch, BlastFormatting, BlastResults;
 	}
 
@@ -759,7 +759,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"PAGE_TYPE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter PAGE_TYPE(PAGE_TYPE_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter PAGE_TYPE(PAGE_TYPE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PAGE_TYPE, value.name());
 	}
 
@@ -774,7 +774,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         provided, returns either{@link NCBI_Q_BLAST_Parameter}
 	 *         <b>"PERC_IDENT=0"</b> or <b>"PERC_IDENT=100"</b> respectively.
 	 */
-	protected static NCBI_Q_BLAST_Parameter PERC_IDENT(int value) {
+	public static NCBI_Q_BLAST_Parameter PERC_IDENT(int value) {
 		if (value < 0) {
 			return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PERC_IDENT,
 					String.valueOf(0));
@@ -797,7 +797,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         '...&PHI_PATTERN=%5BRK%5D-X(3)-%5BDE%5D-X(2)-Y.&...' sets the
 	 *         pattern to [RK]-X(3)-[DE]-X(2)-Y.
 	 */
-	protected static NCBI_Q_BLAST_Parameter PHI_PATTERN(String value) {
+	public static NCBI_Q_BLAST_Parameter PHI_PATTERN(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PHI_PATTERN, value);
 	}
 
@@ -807,7 +807,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum PROGRAM_PARAM {
+	public enum PROGRAM_PARAM {
 		blastn, blastp, blastx, tblastn, tblastx;
 	}
 
@@ -818,7 +818,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"PROGRAM=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter PROGRAM(PROGRAM_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter PROGRAM(PROGRAM_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PROGRAM, value.name());
 	}
 
@@ -829,7 +829,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"PSSM=value"</b>
 	 *         string (PSSM from previous PSI-BLAST search).<br>
 	 */
-	protected static NCBI_Q_BLAST_Parameter PSSM(String value) {
+	public static NCBI_Q_BLAST_Parameter PSSM(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PSSM, value);
 	}
 
@@ -840,7 +840,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"QUERY=value"</b>
 	 *         Accession, GI, or actual sequences in various formats.<br>
 	 */
-	protected static NCBI_Q_BLAST_Parameter QUERY(String value) {
+	public static NCBI_Q_BLAST_Parameter QUERY(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.QUERY, value);
 	}
 
@@ -852,7 +852,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"QUERY_BELIEVE_DEFLINE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter QUERY_BELIEVE_DEFLINE(boolean value) {
+	public static NCBI_Q_BLAST_Parameter QUERY_BELIEVE_DEFLINE(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.QUERY_BELIEVE_DEFLINE,
 				String.valueOf(value));
 	}
@@ -866,7 +866,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         integer, from 1 to sequence length, must be smaller than the
 	 *         'QUERY_TO'.
 	 */
-	protected static NCBI_Q_BLAST_Parameter QUERY_FROM(int value) {
+	public static NCBI_Q_BLAST_Parameter QUERY_FROM(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.QUERY_FROM,
 				String.valueOf(value));
 	}
@@ -880,7 +880,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         integer, up to sequence length, must be greater than the
 	 *         'QUERY_FROM'.
 	 */
-	protected static NCBI_Q_BLAST_Parameter QUERY_TO(int value) {
+	public static NCBI_Q_BLAST_Parameter QUERY_TO(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.QUERY_TO,
 				String.valueOf(value));
 	}
@@ -892,7 +892,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            libraries to use
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"REPEATS=value"</b>.<br>
 	 */
-	protected static NCBI_Q_BLAST_Parameter REPEATS(String value) {
+	public static NCBI_Q_BLAST_Parameter REPEATS(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.REPEATS, value);
 	}
 
@@ -903,7 +903,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"RID=value"</b>, valid
 	 *         RID.<br>
 	 */
-	protected static NCBI_Q_BLAST_Parameter RID(String value) {
+	public static NCBI_Q_BLAST_Parameter RID(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.RID, value);
 	}
 
@@ -915,7 +915,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"RUN_PSIBLAST=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter RUN_PSIBLAST(boolean value) {
+	public static NCBI_Q_BLAST_Parameter RUN_PSIBLAST(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.RUN_PSIBLAST,
 				String.valueOf(value));
 	}
@@ -928,7 +928,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SEARCHSP_EFF=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter SEARCHSP_EFF(double value) {
+	public static NCBI_Q_BLAST_Parameter SEARCHSP_EFF(double value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SEARCHSP_EFF,
 				String.valueOf(value));
 	}
@@ -941,7 +941,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHORT_QUERY_ADJUST=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter SHORT_QUERY_ADJUST(boolean value) {
+	public static NCBI_Q_BLAST_Parameter SHORT_QUERY_ADJUST(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST,
 				String.valueOf(value));
 	}
@@ -954,7 +954,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_CDS_FEATURE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter SHOW_CDS_FEATURE(boolean value) {
+	public static NCBI_Q_BLAST_Parameter SHOW_CDS_FEATURE(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHOW_CDS_FEATURES,
 				String.valueOf(value));
 	}
@@ -967,7 +967,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_LINKOUT=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter SHOW_LINKOUT(boolean value) {
+	public static NCBI_Q_BLAST_Parameter SHOW_LINKOUT(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHOW_LINKOUT,
 				String.valueOf(value));
 	}
@@ -980,7 +980,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_OVERVIEW=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter SHOW_OVERVIEW(boolean value) {
+	public static NCBI_Q_BLAST_Parameter SHOW_OVERVIEW(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHOW_OVERVIEW,
 				String.valueOf(value));
 	}
@@ -991,7 +991,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum TEMPLATE_LENGTH_PARAM {
+	public enum TEMPLATE_LENGTH_PARAM {
 
 		sixteen("16"), eighteen("18"), twentyone("21");
 		private final String value;
@@ -1020,7 +1020,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"TEMPLATE_LENGTH=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter TEMPLATE_LENGTH(
+	public static NCBI_Q_BLAST_Parameter TEMPLATE_LENGTH(
 			TEMPLATE_LENGTH_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.TEMPLATE_LENGTH,
 				value.toString());
@@ -1032,7 +1032,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	protected enum TEMPLATE_TYPE_PARAM {
+	public enum TEMPLATE_TYPE_PARAM {
 
 		coding("0"), non_coding("1"), both("2");
 		private final String value;
@@ -1061,7 +1061,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"TEMPLATE_TYPE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter TEMPLATE_TYPE(
+	public static NCBI_Q_BLAST_Parameter TEMPLATE_TYPE(
 			TEMPLATE_TYPE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.TEMPLATE_TYPE,
 				value.toString());
@@ -1074,7 +1074,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"THRESHOLD=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter THRESHOLD(int value) {
+	public static NCBI_Q_BLAST_Parameter THRESHOLD(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.THRESHOLD,
 				String.valueOf(value));
 	}
@@ -1086,7 +1086,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"TWO_HITS=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter TWO_HITS(boolean value) {
+	public static NCBI_Q_BLAST_Parameter TWO_HITS(boolean value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.TWO_HITS,
 				String.valueOf(value));
 	}
@@ -1098,7 +1098,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *            converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"WORD_SIZE=value"</b>.
 	 */
-	protected static NCBI_Q_BLAST_Parameter WORD_SIZE(int value) {
+	public static NCBI_Q_BLAST_Parameter WORD_SIZE(int value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.WORD_SIZE,
 				String.valueOf(value));
 	}
@@ -1110,7 +1110,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"WWW_BLAST_TYPE=value"</b>, valid RID.<br>
 	 */
-	protected static NCBI_Q_BLAST_Parameter WWW_BLAST_TYPE(String value) {
+	public static NCBI_Q_BLAST_Parameter WWW_BLAST_TYPE(String value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.WWW_BLAST_TYPE, value);
 	}
 
