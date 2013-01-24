@@ -179,7 +179,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	public static NCBI_Q_BLAST_Parameter DATABASE(DATABASE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE, value.name());
 	}
-
+    //TODO: add an ability to add many databases at a time
 	/**
 	 * 
 	 * @param value

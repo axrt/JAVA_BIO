@@ -61,7 +61,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	/**
 	 * An object representation of the output, returned from the NCBI server
 	 */
-	private BlastOutput blastOutput;
+	protected BlastOutput blastOutput;
 
 	/**
 	 * @return the query
@@ -101,9 +101,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @param {@link NCBI_Q_BLAST_Parameter}parameter
 	 * @return {@code true} if success, else {@code false}
 	 */
-	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) {
-		return this.request_parameters.add(parameter);
-	}
+	public abstract boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter);
 
 	/**
 	 * Forms a QUERY, escapes all the special symbols within it and adds it to
@@ -253,53 +251,5 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		br.close();
 		return false;
 	}
-
-	/**
-	 * Retrieves the BLAST output from the NCBI server and stores it in the
-	 * blastOutput private field
-	 * 
-	 * @throws JAXBException in case a JAXB parser error
-	 * @throws SAXException in case an XML error occurs
-	 * @throws IOException in case an error in connection occurs
-	 */
-	private void retrieveResult() throws SAXException, JAXBException,
-			IOException {
-		String retreiveRequest = NCBI_Q_BLAST_Parameter.CMD(
-				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
-				+ NCBI_Q_BLAST_ParameterSet.ampersand
-				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString()
-				+ NCBI_Q_BLAST_ParameterSet.ampersand
-				+ NCBI_Q_BLAST_Parameter.FORMAT_TYPE(
-						NCBI_Q_BLAST_Parameter.FORMAT_TYPE_PARAM.XML)
-						.toString();
-		// On a laggy network might be useful to prevent looping through failed
-		// attempts
-		// to catch the output
-		int retreiveAttempts = 0;
-		try {
-			// Generates a status request
-			URL request = new URL(retreiveRequest);
-			// Opens a connection
-			URLConnection connection = request.openConnection();
-			// Gets InputStream and redirects to the helper,
-			// sets blastoutPut field
-			this.blastOutput = NCBI_Q_BLAST_Helper.catchBLASTOutput(connection
-					.getInputStream());
-		} catch (IOException ioe) {
-			throw new IOException("A connection error has occurred: "
-					+ ioe.getMessage(), ioe);
-		} catch (UnmarshalException ue) {
-			// Retry opening connection and retrieving the output
-			retreiveAttempts++;
-			if (retreiveAttempts < 4) {
-				URL request = new URL(retreiveRequest);
-				URLConnection connection = request.openConnection();
-				this.blastOutput = NCBI_Q_BLAST_Helper
-						.catchBLASTOutput(connection.getInputStream());
-			} else {
-				throw new IOException("Failed to retreive the output: "
-						+ ue.getMessage(), ue);
-			}
-		}
-	}
+	protected abstract void retrieveResult() throws Exception;
 }

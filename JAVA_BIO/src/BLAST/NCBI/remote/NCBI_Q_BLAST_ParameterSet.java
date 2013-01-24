@@ -30,9 +30,19 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	protected static final String ampersand = "&";
 
 	/**
+	 * Allows and extending class to add a number of parameters, specific to a
+	 * certain implementation.
+	 * 
+	 * @param {@link String} parameter
+	 * @return {@code true} if all parameters added successfully, else {@code false}
+	 */
+	protected abstract boolean addAllowedParameters();
+
+	/**
 	 * 
 	 */
 	public NCBI_Q_BLAST_ParameterSet() {
+		this.allowedParameters=new HashSet<String>();
 	}
 
 	/**
@@ -40,6 +50,7 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(Collection<NCBI_Q_BLAST_Parameter> arg0) {
 		super(arg0);
+		this.allowedParameters=new HashSet<String>();
 	}
 
 	/**
@@ -47,6 +58,7 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(int arg0) {
 		super(arg0);
+		this.allowedParameters=new HashSet<String>();
 	}
 
 	/**
@@ -55,6 +67,7 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(int arg0, float arg1) {
 		super(arg0, arg1);
+		this.allowedParameters=new HashSet<String>();
 	}
 
 	/**
@@ -64,7 +77,8 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	 * @return {@code true} in case added, {@code false} in case not added or
 	 *         rejected due to "allowed parameters restrictions".
 	 */
-	//TODO: think of a way how to restrict any attempts to add unique parameters multiple times
+	// TODO: think of a way how to restrict any attempts to add unique
+	// parameters multiple times
 	@Override
 	public boolean add(NCBI_Q_BLAST_Parameter e) {
 		if (this.allowedParameters.contains(e.getKey())) {
