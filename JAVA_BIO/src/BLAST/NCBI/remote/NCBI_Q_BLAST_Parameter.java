@@ -6,12 +6,9 @@ package BLAST.NCBI.remote;
  * @author axrt
  * 
  */
-public class NCBI_Q_BLAST_Parameter {
+public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 
 	private static final char equals = '=';
-	private final String key;
-	private final String value;
-
 	/**
 	 * Private constructor
 	 * 
@@ -21,9 +18,8 @@ public class NCBI_Q_BLAST_Parameter {
 	 * @param value
 	 *            {@code String} value, specific for a certain parameter
 	 */
-	private NCBI_Q_BLAST_Parameter(String key, String value) {
-		this.key = key;
-		this.value = value;
+	protected NCBI_Q_BLAST_Parameter(String key, String value) {
+		super(key, value);
 	}
 
 	/**

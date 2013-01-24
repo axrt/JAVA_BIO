@@ -3,6 +3,8 @@
  */
 package BLAST.NCBI.remote;
 
+import java.util.ArrayList;
+
 import format.fasta.Fasta;
 import BLAST.NCBI.NCBI_BLAST;
 
@@ -20,42 +22,45 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * The QBLAST service address
 	 */
 	protected static final String QBLAST_SERVICE_URL = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?";
-    /**
-     * RID, assigned by the NCBI server
-     */
+	/**
+	 * RID, assigned by the NCBI server
+	 */
 	protected String BLAST_RID;
 	/**
-	 * A flag that indicates whether this instance has already been BLASTed or not
+	 * A flag that indicates whether this instance has already been BLASTed or
+	 * not
 	 */
 	protected boolean BLASTed;
 	/**
 	 * A Fasta record, that contains the query
 	 */
-	protected final Fasta query;
-	
+	protected final ArrayList<Fasta> query;
+
 	/**
 	 * @return the query
 	 */
 	public String getQuery() {
 		return query.toString();
 	}
+
 	/**
 	 * @return the bLASTed
 	 */
 	protected boolean isBLASTed() {
 		return BLASTed;
 	}
+
 	/**
 	 * @return {@link String} the BLAST_RID
 	 */
 	protected String getBLAST_RID() {
 		return BLAST_RID;
 	}
-	
+
 	/**
 	 * @param {{@link Fasta} - a query record
 	 */
-	protected NCBI_Q_BLAST(Fasta query) {
+	protected NCBI_Q_BLAST(ArrayList<Fasta> query) {
 		super();
 		this.query = query;
 	}
