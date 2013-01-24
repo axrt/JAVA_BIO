@@ -9,8 +9,8 @@ public class ProteinFasta extends Fasta implements Serializable {
 		// Initializing the legal character set for a protein sequence
 		allowedChars = new HashSet<Character>(
 				java.util.Arrays.asList(new Character[] { 'A', 'R', 'N', 'D',
-						'C', 'E', 'Q', 'G', 'H', 'I', 'K', 'M', 'F', 'P', 'S',
-						'T', 'W', 'Y', 'V', 'U', 'O', '\n', '/' }));
+						'C', 'E', 'Q', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P',
+						'S', 'T', 'W', 'Y', 'V', 'U', 'O', '\n', '/' }));
 	}
 
 	/**
@@ -73,6 +73,7 @@ public class ProteinFasta extends Fasta implements Serializable {
 	/**
 	 * A static factory to assemble a {@link ProteinFasta} from a {@link String}
 	 * , that represents a fasta-fromatted record
+	 * 
 	 * @param {@link String} fastaRecord
 	 * @return a new instance of a {@link ProteinFasta}
 	 * @throws ProteinFasta_BadFromat_Exception

@@ -97,9 +97,8 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 		StringBuilder sb = new StringBuilder();
 		// Now iterate over the set of parameters in order to form the request
 		// string
-		Iterator<NCBI_Q_BLAST_Parameter> iterator = this.iterator();
-		while (iterator().hasNext()) {
-			sb.append(iterator.next().toString());
+		for(NCBI_Q_BLAST_Parameter parameter:this){
+			sb.append(parameter.toString());
 			sb.append(NCBI_Q_BLAST_ParameterSet.ampersand);
 		}
 		return new String(sb);

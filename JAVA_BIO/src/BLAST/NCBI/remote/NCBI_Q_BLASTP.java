@@ -9,6 +9,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
@@ -27,7 +28,7 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 * @param query
 	 * @param query_IDs
 	 */
-	public NCBI_Q_BLASTP(ArrayList<Fasta> query, ArrayList<String> query_IDs) {
+	protected NCBI_Q_BLASTP(List<Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
 		this.request_parameters = new NCBI_Q_BLAST_ParameterSet() {
 			private String[] allowedParametersList = {
@@ -62,7 +63,7 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 					NCBI_Q_BLAST_Helper.REPEATS, NCBI_Q_BLAST_Helper.RID,
 					NCBI_Q_BLAST_Helper.SEARCHSP_EFF,
 					NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST,
-					NCBI_Q_BLAST_Helper.THRESHOLD, };
+					NCBI_Q_BLAST_Helper.THRESHOLD };
 
 			@Override
 			protected boolean addAllowedParameters() {
@@ -83,6 +84,7 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 		} else {
 			return this.request_parameters.add(parameter);
 		}
+		//TODO: make this throw an exception
 	}
 
 	/*
@@ -98,7 +100,14 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 			this.extractRID();
 			// TODO: delete the outprint
 			System.out.println(this.BLAST_RID);
-
+			while(!this.resultsReady()){
+				Thread.sleep(1000);
+				// TODO: delete the outprint
+				System.out.println("Waiting for "+this.BLAST_RID);
+			}
+			this.retrieveResult();
+			// TODO: delete the outprint
+			System.out.println("Sucks ass.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,7 +127,8 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	@Override
 	protected void retrieveResult() throws SAXException, JAXBException,
 			IOException {
-		String retreiveRequest = NCBI_Q_BLAST_Parameter.CMD(
+		String retreiveRequest = NCBI_Q_BLAST.QBLAST_SERVICE_URL+
+				NCBI_Q_BLAST_Parameter.CMD(
 				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
 				+ NCBI_Q_BLAST_ParameterSet.ampersand
 				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString()
@@ -156,5 +166,7 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 			}
 		}
 	}
-
+    public static NCBI_Q_BLASTP newDefaultInstance(List<Fasta> query, List<String> query_IDs){
+    	return new NCBI_Q_BLASTP(query, query_IDs);
+    }
 }

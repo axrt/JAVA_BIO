@@ -79,6 +79,8 @@ public class NCBI_Q_BLAST_EscapeSymbols {
 				NCBI_Q_BLAST_EscapeSymbols.atSign);
 		toReformat = toReformat.replaceAll("\\|",
 				NCBI_Q_BLAST_EscapeSymbols.verticalSlash);
+		toReformat = toReformat.replaceAll(String.valueOf('>'),
+				NCBI_Q_BLAST_EscapeSymbols.fastaStart);
 		return toReformat;
 	}
 }

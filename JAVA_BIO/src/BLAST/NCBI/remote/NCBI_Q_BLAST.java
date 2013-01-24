@@ -9,15 +9,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.UnmarshalException;
-
-import org.xml.sax.SAXException;
-
-import format.fasta.Fasta;
 import BLAST.NCBI.NCBI_BLAST;
 import BLAST.NCBI.output.BlastOutput;
+import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter.CMD_PARAM;
+import format.fasta.Fasta;
 
 /**
  * @author axrt <br>
@@ -45,11 +42,11 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	/**
 	 * A Fasta record, that contains the query
 	 */
-	protected final ArrayList<Fasta> query;
+	protected final List<Fasta> query;
 	/**
 	 * A list of genbak/EMBL ids that shall be used for a BLAST search
 	 */
-	protected final ArrayList<String> query_IDs;
+	protected final List<String> query_IDs;
 	/**
 	 * A field that stores an HTML of the request acceptance
 	 */
@@ -87,7 +84,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	/**
 	 * @param {@link Fasta} - a query record
 	 */
-	protected NCBI_Q_BLAST(ArrayList<Fasta> query, ArrayList<String> query_IDs) {
+	protected NCBI_Q_BLAST(List<Fasta> query, List<String> query_IDs) {
 		super();
 		this.query = query;
 		this.query_IDs = query_IDs;
@@ -133,10 +130,15 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 *             in case a connection error occurs
 	 */
 	protected void sendBLASTRequest() throws IOException {
+		// Make the CMD=Put
+		this.request_parameters.add(NCBI_Q_BLAST_Parameter
+				.CMD(NCBI_Q_BLAST_Parameter.CMD_PARAM.Put));
 		BufferedReader br = null;
 		// Generates a request
 		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
+		//TODO: delete the outprint later
+		System.out.println(request);
 		// Opens a connection to send the request to the server
 		URLConnection connection = request.openConnection();
 		// Gets the text output, which is actually an HTML page
@@ -251,5 +253,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		br.close();
 		return false;
 	}
+
 	protected abstract void retrieveResult() throws Exception;
 }
