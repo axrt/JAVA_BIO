@@ -8,7 +8,7 @@ package BLAST.NCBI.remote;
  */
 public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 
-	private static final char equals = '=';
+	protected static final char equals = '=';
 	/**
 	 * Private constructor
 	 * 
@@ -57,7 +57,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum ALIGNMENT_VIEW_PARAM {
+	protected enum ALIGNMENT_VIEW_PARAM {
 		Pairwise, PairwiseWithIdentities, QueryAnchored, QueryAnchoredNoIdentities, FlatQueryAnchored, FlatQueryAnchoredNoIdentities, Tabular;
 	}
 
@@ -81,7 +81,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum BLAST_PROGRAM_PARAM {
+	protected enum BLAST_PROGRAM_PARAM {
 		blastn, MegaBlast, discoMegablast, blastp, psiBlast, phiBlast, blastx, tblastn, tblastx;
 	}
 
@@ -118,7 +118,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum CMD_PARAM {
+	protected enum CMD_PARAM {
 		Put, Get, Web, Info, requestx;
 	}
 
@@ -140,7 +140,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum COMPOSITION_BASED_STATISTICS_PARAM {
+	protected enum COMPOSITION_BASED_STATISTICS_PARAM {
 		zero, one, two, three;
 	}
 
@@ -165,7 +165,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum DATABASE_PARAM {
+	protected enum DATABASE_PARAM {
 		nr, refseq_rna, refseq_genomic, chromosome, est, gss, htgs, pat, pdb, alu, dbsts, Whole_Genome_Shotgun_contigs, tsa_nt, TL, refseq_protein, swissprot, env_nr;
 	}
 
@@ -213,7 +213,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum GENETIC_CODE_PARAM {
+	protected enum GENETIC_CODE_PARAM {
 		one("1"), two("2"), three("3"), four("4"), five("5"), six("6"), seven(
 				"7"), eight("8"), nine("9"), ten("10"), eleven("11"), twelve(
 				"12"), thirteen("13"), fourteen("14"), fifteen("15"), sixteen(
@@ -344,7 +344,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum FILTER_PARAM {
+	protected enum FILTER_PARAM {
 		T, F, m, L, R, S, D;
 	}
 
@@ -377,7 +377,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum FORMAT_OBJECT_PARAM {
+	protected enum FORMAT_OBJECT_PARAM {
 		Alignment, PSSM, TaxBlast, Bioseq;
 	}
 
@@ -401,7 +401,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum FORMAT_TYPE_PARAM {
+	protected enum FORMAT_TYPE_PARAM {
 		HTML("HTML"), Text("Text"), ASN("ASN.1"), XML("XML");
 		private final String value;
 
@@ -532,7 +532,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum MASK_CHAR_PARAM {
+	protected enum MASK_CHAR_PARAM {
 
 		X_N("1"), lowercase("2");
 		private final String value;
@@ -571,7 +571,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum MASK_COLOR_PARAM {
+	protected enum MASK_COLOR_PARAM {
 
 		black("0"), grey("1"), red("2");
 		private final String value;
@@ -626,7 +626,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum MATRIX_NAME_PARAM {
+	protected enum MATRIX_NAME_PARAM {
 		PAM30, PAM70, BLOSUM45, BLOSUM42, BLOSUM80;
 	}
 
@@ -748,7 +748,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum PAGE_TYPE_PARAM {
+	protected enum PAGE_TYPE_PARAM {
 		BlastHome, BlastDocs, BlastNews, BlastTips, BlastSearch, BlastFormatting, BlastResults;
 	}
 
@@ -807,7 +807,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum PROGRAM_PARAM {
+	protected enum PROGRAM_PARAM {
 		blastn, blastp, blastx, tblastn, tblastx;
 	}
 
@@ -991,7 +991,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum TEMPLATE_LENGTH_PARAM {
+	protected enum TEMPLATE_LENGTH_PARAM {
 
 		sixteen("16"), eighteen("18"), twentyone("21");
 		private final String value;
@@ -1032,7 +1032,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @author axrt
 	 * 
 	 */
-	private enum TEMPLATE_TYPE_PARAM {
+	protected enum TEMPLATE_TYPE_PARAM {
 
 		coding("0"), non_coding("1"), both("2");
 		private final String value;
