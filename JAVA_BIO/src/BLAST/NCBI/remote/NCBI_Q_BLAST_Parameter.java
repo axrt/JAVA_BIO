@@ -36,6 +36,13 @@ public class NCBI_Q_BLAST_Parameter {
 	}
 
 	/**
+	 * @return the {@link String} key.
+	 */
+	protected String getKey() {
+		return this.key;
+	}
+
+	/**
 	 * 
 	 * @param value
 	 *            {@link int} value for a parameter that will be automatically
@@ -841,7 +848,6 @@ public class NCBI_Q_BLAST_Parameter {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST.QUERY, value);
 	}
 
-	// TODO: Create a factory for a QUERY from a Fasta
 	/**
 	 * 
 	 * @param value
