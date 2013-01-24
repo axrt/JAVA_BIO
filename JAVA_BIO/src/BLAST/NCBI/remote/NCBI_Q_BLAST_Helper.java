@@ -1,5 +1,19 @@
 package BLAST.NCBI.remote;
 
+import java.io.IOException;
+import java.io.InputStream;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
+import javax.xml.transform.sax.SAXSource;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
+import BLAST.NCBI.output.BlastOutput;
+
 public enum NCBI_Q_BLAST_Helper {
 
 	Instance;
@@ -848,4 +862,44 @@ public enum NCBI_Q_BLAST_Helper {
 	 * display in MapViewer. Mostly irrelevant to script assisted searches.<br>
 	 */
 	protected static final String WWW_BLAST_TYPE = "WWW_BLAST_TYPE";
+
+	/**
+	 * Return a {@code BlastOutput} from an {@code InputStream}. Used by: 1.
+	 * {@code NCBI_BLAST} to get the output
+	 * 
+	 * @param in
+	 *            :{@code InputStream } from a URL or other type of connecton
+	 * @return {@code BlastOutput}
+	 * @throws Exception
+	 */
+	public static BlastOutput catchBLASTOutput(InputStream in) throws Exception {
+		JAXBContext jc = JAXBContext.newInstance(BlastOutput.class);
+		Unmarshaller u = jc.createUnmarshaller();
+		XMLReader xmlreader = XMLReaderFactory.createXMLReader();
+		xmlreader.setFeature("http://xml.org/sax/features/namespaces", true);
+		xmlreader.setFeature("http://xml.org/sax/features/namespace-prefixes",
+				true);
+		xmlreader.setEntityResolver(new EntityResolver() {
+
+			@Override
+			public InputSource resolveEntity(String publicId, String systemId)
+					throws SAXException, IOException {
+				String file = null;
+				if (systemId.contains("NCBI_BlastOutput.dtd")) {
+					file = "NCBI_BlastOutput.dtd";
+				}
+				if (systemId.contains("NCBI_Entity.mod.dtd")) {
+					file = "NCBI_Entity.mod.dtd";
+				}
+				if (systemId.contains("NCBI_BlastOutput.mod.dtd")) {
+					file = "NCBI_BlastOutput.mod.dtd";
+				}
+				return new InputSource(BlastOutput.class
+						.getResourceAsStream(file));
+			}
+		});
+		InputSource input = new InputSource(in);
+		Source source = new SAXSource(xmlreader, input);
+		return (BlastOutput) u.unmarshal(source);
+	}
 }
