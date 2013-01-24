@@ -10,8 +10,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
+
+import org.xml.sax.SAXException;
+
 import format.fasta.Fasta;
 import BLAST.NCBI.NCBI_BLAST;
+import BLAST.NCBI.output.BlastOutput;
 
 /**
  * @author axrt <br>
@@ -52,6 +58,10 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * A set of parameters to generate a request with
 	 */
 	protected NCBI_Q_BLAST_ParameterSet request_parameters;
+	/**
+	 * An object representation of the output, returned from the NCBI server
+	 */
+	private BlastOutput blastOutput;
 
 	/**
 	 * @return the query
@@ -215,7 +225,8 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		// Generates a status request
 		String statusRequest = NCBI_Q_BLAST_Parameter.CMD(
 				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
-				+ '&' + NCBI_Q_BLAST_Helper.RID + '=' + this.BLAST_RID;
+				+ NCBI_Q_BLAST_ParameterSet.ampersand
+				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString();
 		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL + statusRequest);
 		// Opens a connection
 		URLConnection connection = request.openConnection();
@@ -241,6 +252,58 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		}
 		br.close();
 		return false;
+	}
+
+	/**
+	 * Retrieves the BLAST output from the NCBI server and stores it in the
+	 * blastOutput private field
+	 * 
+	 * @throws JAXBException
+	 * @throws SAXException
+	 * @throws IOException
+	 * 
+	 * @throws UnmarshalException
+	 *             in case of a connection error or a JAXB parser error
+	 */
+	private void retrieveResult() throws SAXException, JAXBException,
+			IOException {
+		String retreiveRequest = NCBI_Q_BLAST_Parameter.CMD(
+				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
+				+ NCBI_Q_BLAST_ParameterSet.ampersand
+				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString()
+				+ NCBI_Q_BLAST_ParameterSet.ampersand
+				+ NCBI_Q_BLAST_Parameter.FORMAT_TYPE(
+						NCBI_Q_BLAST_Parameter.FORMAT_TYPE_PARAM.XML)
+						.toString();
+		// On a laggy network might be useful to prevent looping through failed
+		// attempts
+		// to catch the output
+		int retreiveAttempts = 0;
+		try {
+			// Generates a status request
+			URL request = new URL(retreiveRequest);
+			// Opens a connection
+			URLConnection connection = request.openConnection();
+			// Gets InputStream and redirects to the helper,
+			// sets blastoutPut field
+			this.blastOutput = NCBI_Q_BLAST_Helper.catchBLASTOutput(connection
+					.getInputStream());
+		} catch (IOException ioe) {
+			throw new IOException("A connection error has occurred: "
+					+ ioe.getMessage(), ioe);
+		} catch (UnmarshalException ue) {
+			// Retry opening connection and retrieving the output
+			retreiveAttempts++;
+			if (retreiveAttempts < 4) {
+				URL request = new URL(retreiveRequest);
+				URLConnection connection = request.openConnection();
+				this.blastOutput = NCBI_Q_BLAST_Helper
+						.catchBLASTOutput(connection.getInputStream());
+			} else {
+				throw new IOException("Failed to retreive the output: "
+						+ ue.getMessage(), ue);
+			}
+		}
 	}
 
 }

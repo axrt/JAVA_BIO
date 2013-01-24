@@ -3,6 +3,7 @@ package BLAST.NCBI.remote;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
 import javax.xml.transform.sax.SAXSource;
@@ -870,9 +871,10 @@ public enum NCBI_Q_BLAST_Helper {
 	 * @param in
 	 *            :{@code InputStream } from a URL or other type of connecton
 	 * @return {@code BlastOutput}
+	 * @throws JAXBException 
 	 * @throws Exception
 	 */
-	public static BlastOutput catchBLASTOutput(InputStream in) throws Exception {
+	public static BlastOutput catchBLASTOutput(InputStream in) throws SAXException, JAXBException {
 		JAXBContext jc = JAXBContext.newInstance(BlastOutput.class);
 		Unmarshaller u = jc.createUnmarshaller();
 		XMLReader xmlreader = XMLReaderFactory.createXMLReader();
