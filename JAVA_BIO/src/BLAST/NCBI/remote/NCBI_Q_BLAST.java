@@ -258,12 +258,9 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * Retrieves the BLAST output from the NCBI server and stores it in the
 	 * blastOutput private field
 	 * 
-	 * @throws JAXBException
-	 * @throws SAXException
-	 * @throws IOException
-	 * 
-	 * @throws UnmarshalException
-	 *             in case of a connection error or a JAXB parser error
+	 * @throws JAXBException in case a JAXB parser error
+	 * @throws SAXException in case an XML error occurs
+	 * @throws IOException in case an error in connection occurs
 	 */
 	private void retrieveResult() throws SAXException, JAXBException,
 			IOException {
@@ -305,5 +302,4 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 			}
 		}
 	}
-
 }
