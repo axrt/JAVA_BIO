@@ -98,7 +98,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @param {@link NCBI_Q_BLAST_Parameter}parameter
 	 * @return {@code true} if success, else {@code false}
 	 */
-	public abstract boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter);
+	public abstract boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) throws Exception;
 
 	/**
 	 * Forms a QUERY, escapes all the special symbols within it and adds it to
@@ -137,8 +137,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		// Generates a request
 		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
-		//TODO: delete the outprint later
-		System.out.println(request);
 		// Opens a connection to send the request to the server
 		URLConnection connection = request.openConnection();
 		// Gets the text output, which is actually an HTML page

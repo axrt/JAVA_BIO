@@ -18,18 +18,31 @@ import org.xml.sax.SAXException;
 
 import format.fasta.Fasta;
 
+//TODO: document this class
 /**
+ * An abstraction of a BLATP from NCBI, which defines which parameters may be
+ * used on the URlAPI. Implements a static factory for default instances, which
+ * retreive results as an XML and simply print out any exceptions that may be
+ * thrown in {@code run()}. However, an extending custom implementation may
+ * choose a different format for saving the output as well as may use an
+ * alternative way of handling exceptions.
+ * 
  * @author axrt
  * 
  */
-public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
+public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 
 	/**
-	 * @param query
-	 * @param query_IDs
+	 * @param {@link List<Fasta>} query - a list of query fasta records, that
+	 *        shall be used as an input
+	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
+	 *        blast. Both parameters may be used simultaneously, making it easier
+	 *        to mix fasta records with sequences, that are already in the
+	 *        database
 	 */
 	protected NCBI_Q_BLASTP(List<Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
+		// Declaring a list of allowed parameters
 		this.request_parameters = new NCBI_Q_BLAST_ParameterSet() {
 			private String[] allowedParametersList = {
 					NCBI_Q_BLAST_Helper.QUERY, NCBI_Q_BLAST_Helper.QUERY_FROM,
@@ -65,108 +78,116 @@ public class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 					NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST,
 					NCBI_Q_BLAST_Helper.THRESHOLD };
 
+			/**
+			 * Pushes the allowed parameters from the list into a set for a fast
+			 * lookup
+			 */
 			@Override
 			protected boolean addAllowedParameters() {
 				return this.allowedParameters.addAll(Arrays
 						.asList(this.allowedParametersList));
 			}
 
-		};
+		};// End of implementation
+
+		// Actually adding all of the allowed parameters on the list
 		this.request_parameters.addAllowedParameters();
 		// Set the PROGRAM to blastp
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.PROGRAM(NCBI_Q_BLAST_Parameter.PROGRAM_PARAM.blastp));
 	}
-
-	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) {
+    
+	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) throws Bad_Q_BLAST_Parameter_Exception{
 		if (parameter.getKey().equals(NCBI_Q_BLAST_Helper.PROGRAM)) {
 			return false;
 		} else {
-			return this.request_parameters.add(parameter);
-		}
-		//TODO: make this throw an exception
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run() {
-		try {
-			this.formQuery();
-			this.sendBLASTRequest();
-			this.extractRID();
-			// TODO: delete the outprint
-			System.out.println(this.BLAST_RID);
-			while(!this.resultsReady()){
-				Thread.sleep(1000);
-				// TODO: delete the outprint
-				System.out.println("Waiting for "+this.BLAST_RID);
-			}
-			this.retrieveResult();
-			// TODO: delete the outprint
-			System.out.println("Sucks ass.");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Retrieves the BLAST output from the NCBI server and stores it in the
-	 * blastOutput private field
-	 * 
-	 * @throws JAXBException
-	 *             in case a JAXB parser error
-	 * @throws SAXException
-	 *             in case an XML error occurs
-	 * @throws IOException
-	 *             in case an error in connection occurs
-	 */
-	@Override
-	protected void retrieveResult() throws SAXException, JAXBException,
-			IOException {
-		String retreiveRequest = NCBI_Q_BLAST.QBLAST_SERVICE_URL+
-				NCBI_Q_BLAST_Parameter.CMD(
-				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
-				+ NCBI_Q_BLAST_ParameterSet.ampersand
-				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString()
-				+ NCBI_Q_BLAST_ParameterSet.ampersand
-				+ NCBI_Q_BLAST_Parameter.FORMAT_TYPE(
-						NCBI_Q_BLAST_Parameter.FORMAT_TYPE_PARAM.XML)
-						.toString();
-		// On a laggy network might be useful to prevent looping through failed
-		// attempts
-		// to catch the output
-		int retreiveAttempts = 0;
-		try {
-			// Generates a status request
-			URL request = new URL(retreiveRequest);
-			// Opens a connection
-			URLConnection connection = request.openConnection();
-			// Gets InputStream and redirects to the helper,
-			// sets blastoutPut field
-			this.blastOutput = NCBI_Q_BLAST_Helper.catchBLASTOutput(connection
-					.getInputStream());
-		} catch (IOException ioe) {
-			throw new IOException("A connection error has occurred: "
-					+ ioe.getMessage(), ioe);
-		} catch (UnmarshalException ue) {
-			// Retry opening connection and retrieving the output
-			retreiveAttempts++;
-			if (retreiveAttempts < 4) {
-				URL request = new URL(retreiveRequest);
-				URLConnection connection = request.openConnection();
-				this.blastOutput = NCBI_Q_BLAST_Helper
-						.catchBLASTOutput(connection.getInputStream());
-			} else {
-				throw new IOException("Failed to retreive the output: "
-						+ ue.getMessage(), ue);
+			if(!this.request_parameters.add(parameter)){
+				throw new Bad_Q_BLAST_Parameter_Exception(parameter);
+			}else{
+				return true;
 			}
 		}
+		// TODO: make this throw an exception
 	}
-    public static NCBI_Q_BLASTP newDefaultInstance(List<Fasta> query, List<String> query_IDs){
-    	return new NCBI_Q_BLASTP(query, query_IDs);
-    }
+
+	public static NCBI_Q_BLASTP newDefaultInstance(List<Fasta> query,
+			List<String> query_IDs) {
+		return new NCBI_Q_BLASTP(query, query_IDs) {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see java.lang.Runnable#run()
+			 */
+			@Override
+			public void run() {
+				try {
+					this.formQuery();
+					this.sendBLASTRequest();
+					this.extractRID();
+					while (!this.resultsReady()) {
+						Thread.sleep(1000);
+					}
+					this.retrieveResult();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			/**
+			 * Retrieves the BLAST output from the NCBI server and stores it in
+			 * the blastOutput private field
+			 * 
+			 * @throws JAXBException
+			 *             in case a JAXB parser error
+			 * @throws SAXException
+			 *             in case an XML error occurs
+			 * @throws IOException
+			 *             in case an error in connection occurs
+			 */
+			@Override
+			protected void retrieveResult() throws SAXException, JAXBException,
+					IOException {
+				String retreiveRequest = NCBI_Q_BLAST.QBLAST_SERVICE_URL
+						+ NCBI_Q_BLAST_Parameter.CMD(
+								NCBI_Q_BLAST_Parameter.CMD_PARAM.Get)
+								.toString()
+						+ NCBI_Q_BLAST_ParameterSet.ampersand
+						+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString()
+						+ NCBI_Q_BLAST_ParameterSet.ampersand
+						+ NCBI_Q_BLAST_Parameter.FORMAT_TYPE(
+								NCBI_Q_BLAST_Parameter.FORMAT_TYPE_PARAM.XML)
+								.toString();
+				// On a laggy network might be useful to prevent looping through
+				// failed
+				// attempts
+				// to catch the output
+				int retreiveAttempts = 0;
+				try {
+					// Generates a status request
+					URL request = new URL(retreiveRequest);
+					// Opens a connection
+					URLConnection connection = request.openConnection();
+					// Gets InputStream and redirects to the helper,
+					// sets blastoutPut field
+					this.blastOutput = NCBI_Q_BLAST_Helper
+							.catchBLASTOutput(connection.getInputStream());
+				} catch (IOException ioe) {
+					throw new IOException("A connection error has occurred: "
+							+ ioe.getMessage(), ioe);
+				} catch (UnmarshalException ue) {
+					// Retry opening connection and retrieving the output
+					retreiveAttempts++;
+					if (retreiveAttempts < 4) {
+						URL request = new URL(retreiveRequest);
+						URLConnection connection = request.openConnection();
+						this.blastOutput = NCBI_Q_BLAST_Helper
+								.catchBLASTOutput(connection.getInputStream());
+					} else {
+						throw new IOException("Failed to retreive the output: "
+								+ ue.getMessage(), ue);
+					}
+				}
+			}
+		};
+	}
 }
