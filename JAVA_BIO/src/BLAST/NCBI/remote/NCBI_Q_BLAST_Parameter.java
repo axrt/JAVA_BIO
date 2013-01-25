@@ -55,13 +55,6 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	}
 
 	/**
-	 * @return the {@link String} key.
-	 */
-	public String getKey() {
-		return this.key;
-	}
-
-	/**
 	 * 
 	 * @param value
 	 *            {@link int} value for a parameter that will be automatically

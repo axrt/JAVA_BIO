@@ -3,6 +3,7 @@
  */
 package BLAST.NCBI.remote;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +16,7 @@ import java.util.Iterator;
  * @author axrt
  * 
  */
-public abstract class NCBI_Q_BLAST_ParameterSet extends
+public class NCBI_Q_BLAST_ParameterSet extends
 		HashSet<NCBI_Q_BLAST_Parameter> {
 
 	/**
@@ -30,44 +31,43 @@ public abstract class NCBI_Q_BLAST_ParameterSet extends
 	protected static final String ampersand = "&";
 
 	/**
-	 * Allows and extending class to add a number of parameters, specific to a
-	 * certain implementation.
-	 * 
-	 * @param {@link String} parameter
-	 * @return {@code true} if all parameters added successfully, else {@code false}
-	 */
-	protected abstract boolean addAllowedParameters();
-
-	/**
 	 * 
 	 */
-	public NCBI_Q_BLAST_ParameterSet() {
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters) {
 		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters.addAll(Arrays
+				.asList(allowedParameters));
 	}
 
 	/**
 	 * @param arg0
 	 */
-	public NCBI_Q_BLAST_ParameterSet(Collection<NCBI_Q_BLAST_Parameter> arg0) {
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,Collection<NCBI_Q_BLAST_Parameter> arg0) {
 		super(arg0);
 		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters.addAll(Arrays
+				.asList(allowedParameters));
 	}
 
 	/**
 	 * @param arg0
 	 */
-	public NCBI_Q_BLAST_ParameterSet(int arg0) {
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0) {
 		super(arg0);
 		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters.addAll(Arrays
+				.asList(allowedParameters));
 	}
 
 	/**
 	 * @param arg0
 	 * @param arg1
 	 */
-	public NCBI_Q_BLAST_ParameterSet(int arg0, float arg1) {
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0, float arg1) {
 		super(arg0, arg1);
 		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters.addAll(Arrays
+				.asList(allowedParameters));
 	}
 
 	/**

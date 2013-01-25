@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -20,59 +18,66 @@ import format.fasta.Fasta;
 import format.fasta.ProteinFasta;
 
 /**
- * An abstraction of a BLATP from NCBI, which defines which parameters may be
- * used on the URlAPI. Implements a static factory for default instances, which
- * retreive results as an XML and simply print out any exceptions that may be
- * thrown in {@code run()}. However, an extending custom implementation may
- * choose a different format for saving the output as well as may use an
- * alternative way of handling exceptions.
- * 
  * @author axrt
  * 
  */
-public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
+public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
 
 	/**
-	 * @param {@link List<Fasta>} query - a list of query fasta records, that
-	 *        shall be used as an input
-	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
-	 *        blast. Both parameters may be used simultaneously, making it
-	 *        easier to mix fasta records with sequences, that are already in
-	 *        the database
+	 * @param query
+	 * @param query_IDs
 	 */
-	protected NCBI_Q_BLASTP(List<Fasta> query, List<String> query_IDs) {
+	public NCBI_Q_TBLASTN(List<Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
 		// Declaring a list of allowed parameters
 		this.request_parameters = new NCBI_Q_BLAST_ParameterSet(new String[] {
-				NCBI_Q_BLAST_Helper.QUERY, NCBI_Q_BLAST_Helper.QUERY_FROM,
-				NCBI_Q_BLAST_Helper.QUERY_TO, NCBI_Q_BLAST_Helper.DATABASE,
+				NCBI_Q_BLAST_Helper.ALIGNMENTS,
+				NCBI_Q_BLAST_Helper.ALIGNMENT_VIEW,
+				NCBI_Q_BLAST_Helper.BLAST_PROGRAM,
+				NCBI_Q_BLAST_Helper.CDD_SEARCH, NCBI_Q_BLAST_Helper.DATABASE,
 				NCBI_Q_BLAST_Helper.DATABASE_SORT,
 				NCBI_Q_BLAST_Helper.DATABASE_PREFIX,
-				NCBI_Q_BLAST_Helper.BLAST_PROGRAM,
-				NCBI_Q_BLAST_Helper.ALIGNMENTS, NCBI_Q_BLAST_Helper.CDD_SEARCH,
-				NCBI_Q_BLAST_Helper.CMD,
-				NCBI_Q_BLAST_Helper.COMPOSITION_BASED_STATISTICS,
-				NCBI_Q_BLAST_Helper.DISPLAY_SORT,
+				NCBI_Q_BLAST_Helper.DB_GENETIC_CODE,
+				NCBI_Q_BLAST_Helper.DESCRIPTIONS,
+				NCBI_Q_BLAST_Helper.DISPLAY_SORT, NCBI_Q_BLAST_Helper.CMD,
 				NCBI_Q_BLAST_Helper.ENTREZ_QUERY, NCBI_Q_BLAST_Helper.EXPECT,
+				NCBI_Q_BLAST_Helper.EXPECT_HIGH,
 				NCBI_Q_BLAST_Helper.EXPECT_LOW,
-				NCBI_Q_BLAST_Helper.EXPECT_HIGH, NCBI_Q_BLAST_Helper.FILTER,
+				NCBI_Q_BLAST_Helper.FIRST_QUERY_NUM,
+				NCBI_Q_BLAST_Helper.FILTER,
+				NCBI_Q_BLAST_Helper.FORMAT_ENTREZ_QUERY,
+				NCBI_Q_BLAST_Helper.FORMAT_OBJECT,
 				NCBI_Q_BLAST_Helper.FORMAT_TYPE, NCBI_Q_BLAST_Helper.GAPCOSTS,
+				NCBI_Q_BLAST_Helper.GENETIC_CODE,
+				NCBI_Q_BLAST_Helper.GET_SEQUENCE,
 				NCBI_Q_BLAST_Helper.HITLIST_SIZE, NCBI_Q_BLAST_Helper.HSP_SORT,
 				NCBI_Q_BLAST_Helper.I_THRESHOLD,
 				NCBI_Q_BLAST_Helper.LCASE_MASK, NCBI_Q_BLAST_Helper.MASK_CHAR,
+				NCBI_Q_BLAST_Helper.MASK_COLOR,
+				NCBI_Q_BLAST_Helper.MATCH_SCORES,
 				NCBI_Q_BLAST_Helper.MATRIX_NAME,
 				NCBI_Q_BLAST_Helper.MAX_NUM_SEQ, NCBI_Q_BLAST_Helper.NCBI_GI,
+				NCBI_Q_BLAST_Helper.NEWWIN, NCBI_Q_BLAST_Helper.NEWWINRES,
+				NCBI_Q_BLAST_Helper.NOHEADER, NCBI_Q_BLAST_Helper.NUM_OVERVIEW,
 				NCBI_Q_BLAST_Helper.OTHER_ADVACED,
-				NCBI_Q_BLAST_Helper.PHI_PATTERN, NCBI_Q_BLAST_Helper.PROGRAM,
-				NCBI_Q_BLAST_Helper.PSSM,
+				NCBI_Q_BLAST_Helper.PAGE_TYPE, NCBI_Q_BLAST_Helper.PHI_PATTERN,
+				NCBI_Q_BLAST_Helper.PROGRAM, NCBI_Q_BLAST_Helper.PSSM,
+				NCBI_Q_BLAST_Helper.QUERY,
 				NCBI_Q_BLAST_Helper.QUERY_BELIEVE_DEFLINE,
+				NCBI_Q_BLAST_Helper.QUERY_FROM, NCBI_Q_BLAST_Helper.QUERY_TO,
 				NCBI_Q_BLAST_Helper.REPEATS, NCBI_Q_BLAST_Helper.RID,
 				NCBI_Q_BLAST_Helper.SEARCHSP_EFF,
 				NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST,
-				NCBI_Q_BLAST_Helper.THRESHOLD });// End of implementation
-		// Set the PROGRAM to blastp
+				NCBI_Q_BLAST_Helper.SHOW_CDS_FEATURES,
+				NCBI_Q_BLAST_Helper.SHOW_LINKOUT,
+				NCBI_Q_BLAST_Helper.SHOW_OVERVIEW,
+				NCBI_Q_BLAST_Helper.THRESHOLD, NCBI_Q_BLAST_Helper.WORD_SIZE,
+				NCBI_Q_BLAST_Helper.WWW_BLAST_TYPE,
+
+		});// End of implementation
+			// Set the PROGRAM to blastp
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
-				.PROGRAM(NCBI_Q_BLAST_Parameter.PROGRAM_PARAM.blastp));
+				.PROGRAM(NCBI_Q_BLAST_Parameter.PROGRAM_PARAM.tblastn));
 	}
 
 	/**
@@ -87,18 +92,12 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 			throws Bad_Q_BLAST_Parameter_Exception {
 		// Check what parameter goes as an input
 		if (parameter.key.equals(NCBI_Q_BLAST_Helper.BLAST_PROGRAM)) {
-			// As long as only blastp, psiBlast, and phiBlast with
-			// 'PROGRAM=blastp'
+			// As long as only tblastn is allowed with
+			// 'PROGRAM=tblastn'
 			// are allowed, check for whether any of these three are being
 			// inputed
 			if (parameter.getValue().equals(
-					NCBI_Q_BLAST_Parameter.BLAST_PROGRAM_PARAM.psiBlast.name())
-					|| parameter.getValue().equals(
-							NCBI_Q_BLAST_Parameter.BLAST_PROGRAM_PARAM.phiBlast
-									.name())
-					|| parameter.getValue().equals(
-							NCBI_Q_BLAST_Parameter.BLAST_PROGRAM_PARAM.blastp
-									.name())) {
+					NCBI_Q_BLAST_Parameter.BLAST_PROGRAM_PARAM.tblastn.name())) {
 				this.request_parameters.add(parameter);
 				return true;
 			} else {
@@ -114,19 +113,19 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 * A static factory to get a "Default" (XML output, Exception printout)
 	 * instance of a BLASTP
 	 * 
-	 * @param {@link List<ProteinFasta>} query - a list of query fasta records, that
-	 *        shall be used as an input
+	 * @param {@link List<ProteinFasta>} query - a list of query fasta records,
+	 *        that shall be used as an input
 	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
 	 *        blast.
 	 * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
 	 */
-	public static NCBI_Q_BLASTP newDefaultInstance(List<ProteinFasta> query,
+	public static NCBI_Q_TBLASTN newDefaultInstance(List<ProteinFasta> query,
 			List<String> query_IDs) {
-		List<Fasta> upCast=new ArrayList<Fasta>(query.size());
-		for(int i=0;i<query.size();i++){
-			upCast.add((Fasta)query.get(i));
+		List<Fasta> upCast = new ArrayList<Fasta>(query.size());
+		for (int i = 0; i < query.size(); i++) {
+			upCast.add((Fasta) query.get(i));
 		}
-		return new NCBI_Q_BLASTP(upCast, query_IDs) {
+		return new NCBI_Q_TBLASTN(upCast, query_IDs) {
 
 			/**
 			 * Retrieves the BLAST output from the NCBI server and stores it in

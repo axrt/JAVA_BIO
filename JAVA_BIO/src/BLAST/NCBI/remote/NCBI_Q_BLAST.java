@@ -59,7 +59,10 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * An object representation of the output, returned from the NCBI server
 	 */
 	protected BlastOutput blastOutput;
-
+	/**
+	 * A list of allowed parameter names
+	 */
+	protected String[] allowedParametersList;
 	/**
 	 * @return the query
 	 */
@@ -92,13 +95,30 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	}
 
 	/**
-	 * Adds a parameter to the {@link NCBI_Q_BLAST}, that is being prepared to
-	 * launch
-	 * 
-	 * @param {@link NCBI_Q_BLAST_Parameter}parameter
-	 * @return {@code true} if success, else {@code false}
+	 * @param {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
+	 *        to add
+	 * @return {@code true} is successfully added, {@link false} elsewise
+	 * @throws {@link Bad_Q_BLAST_Parameter_Exception} in case a forbidden
+	 *         parameters is attempted to insert
 	 */
-	public abstract boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) throws Exception;
+	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter)
+			throws Bad_Q_BLAST_Parameter_Exception {
+		// In this abstraction is's all about a certain implementation, so it has been set in the
+		// constructor already and any change of the
+		// "PROGRAM" is forbidden, though, the parameter itself is ok.
+		if (parameter.getKey().equals(NCBI_Q_BLAST_Helper.PROGRAM)) {
+			return false;
+		} else {
+			// Returns true if successfully added
+			if (!this.request_parameters.add(parameter)) {
+				// But throws Bad_Q_BLAST_Parameter_Exception in case a
+				// forbidden parameter is attempted to add
+				throw new Bad_Q_BLAST_Parameter_Exception(parameter);
+			} else {
+				return true;
+			}
+		}
+	}
 
 	/**
 	 * Forms a QUERY, escapes all the special symbols within it and adds it to
@@ -131,6 +151,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	protected void sendBLASTRequest() throws IOException {
 		// Make the CMD=Put
+		//TODO: get rid of put in implementations and make it hardcoded here
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.CMD(NCBI_Q_BLAST_Parameter.CMD_PARAM.Put));
 		BufferedReader br = null;
@@ -187,6 +208,8 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 					// If no such line (containing RID exists),
 					// the page may have given some unexpected error
 				}
+				// TODO: improve the way the messages are being transferred in
+				// case of an error
 				// Otherwise print out the message within the exception message
 			} else if (line.contains(messageID)) {
 				// Extracts the message
@@ -250,6 +273,27 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		}
 		br.close();
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		try {
+			this.formQuery();
+			this.sendBLASTRequest();
+			this.extractRID();
+			while (!this.resultsReady()) {
+				Thread.sleep(3000);
+			}
+			this.retrieveResult();
+			this.BLASTed=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected abstract void retrieveResult() throws Exception;

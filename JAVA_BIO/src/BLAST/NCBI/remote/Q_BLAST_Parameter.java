@@ -25,5 +25,16 @@ public abstract class Q_BLAST_Parameter {
 		this.key = key;
 		this.value = value;
 	}
-
+	/**
+	 * @return the {@link String} key.
+	 */
+	public String getKey() {
+		return this.key;
+	}
+	/**
+	 * @return the {@link String} value.
+	 */
+	public String getValue() {
+		return this.value;
+	}
 }
