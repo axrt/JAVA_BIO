@@ -36,9 +36,9 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 * @param {@link List<Fasta>} query - a list of query fasta records, that
 	 *        shall be used as an input
 	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
-	 *        blast. Both parameters may be used simultaneously, making it easier
-	 *        to mix fasta records with sequences, that are already in the
-	 *        database
+	 *        blast. Both parameters may be used simultaneously, making it
+	 *        easier to mix fasta records with sequences, that are already in
+	 *        the database
 	 */
 	protected NCBI_Q_BLASTP(List<Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
@@ -96,19 +96,44 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.PROGRAM(NCBI_Q_BLAST_Parameter.PROGRAM_PARAM.blastp));
 	}
-    
-	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter) throws Bad_Q_BLAST_Parameter_Exception{
+
+	/**
+	 * @param {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
+	 *        to add
+	 * @return {@code true} is successfully added, {@link false} elsewise
+	 * @throws {@link Bad_Q_BLAST_Parameter_Exception} in case a forbidden
+	 *         parameters is attempted to insert
+	 */
+	@Override
+	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter)
+			throws Bad_Q_BLAST_Parameter_Exception {
+		// In this abstraction is's all about BLASTP, so it has been set in the
+		// constructor already and any change of the
+		// "PROGRAM" is forbidden, though, the parameter itself is ok.
 		if (parameter.getKey().equals(NCBI_Q_BLAST_Helper.PROGRAM)) {
 			return false;
 		} else {
-			if(!this.request_parameters.add(parameter)){
+			// Returns true if successfully added
+			if (!this.request_parameters.add(parameter)) {
+				// But throws Bad_Q_BLAST_Parameter_Exception in case a
+				// forbidden parameter is attempted to add
 				throw new Bad_Q_BLAST_Parameter_Exception(parameter);
-			}else{
+			} else {
 				return true;
 			}
 		}
 	}
 
+	/**
+	 * A static factory to get a "Default" (XML output, Exception printout)
+	 * instance of a BLASTP
+	 * 
+	 * @param {@link List<Fasta>} query - a list of query fasta records, that
+	 *        shall be used as an input
+	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
+	 *        blast.
+	 * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
+	 */
 	public static NCBI_Q_BLASTP newDefaultInstance(List<Fasta> query,
 			List<String> query_IDs) {
 		return new NCBI_Q_BLASTP(query, query_IDs) {
