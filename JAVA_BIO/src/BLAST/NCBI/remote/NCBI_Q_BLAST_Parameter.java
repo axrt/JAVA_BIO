@@ -6,32 +6,32 @@ package BLAST.NCBI.remote;
  * @author axrt
  * 
  */
-public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
+public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 
 	public class Bad_Q_BLAST_Parameter extends Exception {
 
 		public Bad_Q_BLAST_Parameter() {
-			// TODO Auto-generated constructor stub
 		}
 
 		public Bad_Q_BLAST_Parameter(String arg0) {
 			super(arg0);
-			// TODO Auto-generated constructor stub
+
 		}
 
 		public Bad_Q_BLAST_Parameter(Throwable arg0) {
 			super(arg0);
-			// TODO Auto-generated constructor stub
+
 		}
 
 		public Bad_Q_BLAST_Parameter(String arg0, Throwable arg1) {
 			super(arg0, arg1);
-			// TODO Auto-generated constructor stub
+
 		}
 
 	}
 
 	protected static final char equals = '=';
+
 	/**
 	 * Private constructor
 	 * 
@@ -116,8 +116,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"BLAST_PROGRAM=value"</b>.
 	 */
-	public static NCBI_Q_BLAST_Parameter BLAST_PROGRAM(
-			BLAST_PROGRAM_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter BLAST_PROGRAM(BLAST_PROGRAM_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.BLAST_PROGRAM,
 				value.name());
 	}
@@ -200,9 +199,30 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"DATABASE=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter DATABASE(DATABASE_PARAM value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE, value.name());
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE,
+				value.name());
 	}
-    //TODO: add an ability to add many databases at a time
+
+	/**
+	 * 
+	 * @param values
+	 *            Overloads, making it possible to choose multiple databases.
+	 *            {@link DATABASE_PARAM}[] values for a parameter that will be
+	 *            automatically converted to {@link String}
+	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"DATABASE=value"</b>.
+	 */
+	public static NCBI_Q_BLAST_Parameter DATABASE(DATABASE_PARAM[] values) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < values.length; i++) {
+			sb.append(values[i].name());
+			if (i < values.length) {
+				sb.append('+');
+			}
+		}
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.DATABASE,
+				new String(sb));
+	}
+
 	/**
 	 * 
 	 * @param value
@@ -307,7 +327,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"ENTREZ_QUERY=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter ENTREZ_QUERY(String value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.ENTREZ_QUERY, value);
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.ENTREZ_QUERY,
+				value);
 	}
 
 	/**
@@ -379,7 +400,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"FILTER=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter FILTER(FILTER_PARAM value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FILTER, value.name());
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FILTER,
+				value.name());
 	}
 
 	/**
@@ -390,8 +412,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"FORMAT_ENTREZ_QUERY=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter FORMAT_ENTREZ_QUERY(String value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FORMAT_ENTREZ_QUERY,
-				value);
+		return new NCBI_Q_BLAST_Parameter(
+				NCBI_Q_BLAST_Helper.FORMAT_ENTREZ_QUERY, value);
 	}
 
 	/**
@@ -412,8 +434,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FORMAT_OBJECT=value"</b>.
 	 */
-	public static NCBI_Q_BLAST_Parameter FORMAT_OBJECT(
-			FORMAT_OBJECT_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter FORMAT_OBJECT(FORMAT_OBJECT_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.FORMAT_OBJECT,
 				value.name());
 	}
@@ -479,8 +500,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"GENETIC_CODE=value"</b>.
 	 */
-	public static NCBI_Q_BLAST_Parameter GENETIC_CODE(
-			GENETIC_CODE_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter GENETIC_CODE(GENETIC_CODE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.GENETIC_CODE,
 				value.toString());
 	}
@@ -762,7 +782,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         set the two hits window size to 50.
 	 */
 	public static NCBI_Q_BLAST_Parameter OTHER_ADVACED(String value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.OTHER_ADVACED, value);
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.OTHER_ADVACED,
+				value);
 	}
 
 	/**
@@ -783,7 +804,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"PAGE_TYPE=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter PAGE_TYPE(PAGE_TYPE_PARAM value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PAGE_TYPE, value.name());
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PAGE_TYPE,
+				value.name());
 	}
 
 	/**
@@ -821,7 +843,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         pattern to [RK]-X(3)-[DE]-X(2)-Y.
 	 */
 	public static NCBI_Q_BLAST_Parameter PHI_PATTERN(String value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PHI_PATTERN, value);
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PHI_PATTERN,
+				value);
 	}
 
 	/**
@@ -842,7 +865,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"PROGRAM=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter PROGRAM(PROGRAM_PARAM value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PROGRAM, value.name());
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.PROGRAM,
+				value.name());
 	}
 
 	/**
@@ -876,7 +900,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"QUERY_BELIEVE_DEFLINE=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter QUERY_BELIEVE_DEFLINE(boolean value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.QUERY_BELIEVE_DEFLINE,
+		return new NCBI_Q_BLAST_Parameter(
+				NCBI_Q_BLAST_Helper.QUERY_BELIEVE_DEFLINE,
 				String.valueOf(value));
 	}
 
@@ -965,8 +990,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"SHORT_QUERY_ADJUST=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter SHORT_QUERY_ADJUST(boolean value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST,
-				String.valueOf(value));
+		return new NCBI_Q_BLAST_Parameter(
+				NCBI_Q_BLAST_Helper.SHORT_QUERY_ADJUST, String.valueOf(value));
 	}
 
 	/**
@@ -978,8 +1003,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"SHOW_CDS_FEATURE=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter SHOW_CDS_FEATURE(boolean value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.SHOW_CDS_FEATURES,
-				String.valueOf(value));
+		return new NCBI_Q_BLAST_Parameter(
+				NCBI_Q_BLAST_Helper.SHOW_CDS_FEATURES, String.valueOf(value));
 	}
 
 	/**
@@ -1084,8 +1109,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"TEMPLATE_TYPE=value"</b>.
 	 */
-	public static NCBI_Q_BLAST_Parameter TEMPLATE_TYPE(
-			TEMPLATE_TYPE_PARAM value) {
+	public static NCBI_Q_BLAST_Parameter TEMPLATE_TYPE(TEMPLATE_TYPE_PARAM value) {
 		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.TEMPLATE_TYPE,
 				value.toString());
 	}
@@ -1134,7 +1158,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter{
 	 *         <b>"WWW_BLAST_TYPE=value"</b>, valid RID.<br>
 	 */
 	public static NCBI_Q_BLAST_Parameter WWW_BLAST_TYPE(String value) {
-		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.WWW_BLAST_TYPE, value);
+		return new NCBI_Q_BLAST_Parameter(NCBI_Q_BLAST_Helper.WWW_BLAST_TYPE,
+				value);
 	}
 
 }

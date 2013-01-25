@@ -107,7 +107,6 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 				return true;
 			}
 		}
-		// TODO: make this throw an exception
 	}
 
 	public static NCBI_Q_BLASTP newDefaultInstance(List<Fasta> query,
