@@ -7,7 +7,7 @@ import BLAST.NCBI.NCBI_BLAST;
 
 /**
  * @author axrt
- * A generalized abstraction of an NCBI BLAST process that is preformed localy
+ * A generalized abstraction of an NCBI BLAST process that is performed locally
  * through an NCBI executable from 
  * ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
  */
