@@ -42,10 +42,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * A set of parameters to generate a request with
 	 */
 	protected NCBI_Q_BLAST_ParameterSet request_parameters;
-	/**
-	 * An object representation of the output, returned from the NCBI server
-	 */
-	protected BlastOutput blastOutput;
+	
 	/**
 	 * A list of allowed parameter names
 	 */
@@ -58,25 +55,10 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	}
 
 	/**
-	 * @return the BLASTed
-	 */
-	protected boolean isBLASTed() {
-		return BLASTed;
-	}
-
-	/**
 	 * @return {@link String} the BLAST_RID
 	 */
 	protected String getBLAST_RID() {
 		return BLAST_RID;
-	}
-	
-
-	/** 
-	 * @return {@link BlastOutput}the blastOutput
-	 */
-	public BlastOutput getBlastOutput() {
-		return this.blastOutput;
 	}
 
 	/**

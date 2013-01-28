@@ -122,6 +122,13 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 */
 	public static NCBI_Q_BLASTP newDefaultInstance(List<ProteinFasta> query,
 			List<String> query_IDs) {
+		if(query_IDs==null){
+			query_IDs=new ArrayList<String>();
+		}
+		if(query==null){
+			query=new ArrayList<ProteinFasta>();
+		}
+		//TODO: input a check for whether both lists are empty or declared null
 		List<Fasta> upCast=new ArrayList<Fasta>(query.size());
 		for(int i=0;i<query.size();i++){
 			upCast.add((Fasta)query.get(i));

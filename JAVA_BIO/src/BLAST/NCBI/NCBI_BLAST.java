@@ -8,12 +8,18 @@ import java.util.List;
 
 import format.fasta.Fasta;
 import BLAST.BLAST;
+import BLAST.NCBI.output.BlastOutput;
+
 //TODO: document
 /**
  * @author axrt A general abstraction of a "Basic Local Alignment Tool" service
  *         at http://blast.ncbi.nlm.nih.gov/Blast.cgi provided by NCBI
  */
 public abstract class NCBI_BLAST extends BLAST {
+	/**
+	 * An object representation of the output, returned from the NCBI server
+	 */
+	protected BlastOutput blastOutput;
 	/**
 	 * A Fasta record, that contains the query
 	 */
@@ -27,7 +33,21 @@ public abstract class NCBI_BLAST extends BLAST {
 	 * not
 	 */
 	protected boolean BLASTed;
-    
+
+	/**
+	 * @return the BLASTed
+	 */
+	protected boolean isBLASTed() {
+		return this.BLASTed;
+	}
+
+	/**
+	 * @return {@link BlastOutput}the blastOutput
+	 */
+	public BlastOutput getBlastOutput() {
+		return this.blastOutput;
+	}
+
 	protected NCBI_BLAST(List<Fasta> query, List<String> query_IDs) {
 		this.query = query;
 		this.query_IDs = query_IDs;
