@@ -83,6 +83,14 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	protected String getBLAST_RID() {
 		return BLAST_RID;
 	}
+	
+
+	/** 
+	 * @return {@link BlastOutput}the blastOutput
+	 */
+	public BlastOutput getBlastOutput() {
+		return this.blastOutput;
+	}
 
 	/**
 	 * @param {@link Fasta} - a query record
@@ -158,6 +166,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		// Generates a request
 		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
+		System.out.println(request);
 		// Opens a connection to send the request to the server
 		URLConnection connection = request.openConnection();
 		// Gets the text output, which is actually an HTML page
@@ -286,7 +295,9 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 			this.formQuery();
 			this.sendBLASTRequest();
 			this.extractRID();
+			//System.out.println("RID: "+this.getBLAST_RID());
 			while (!this.resultsReady()) {
+				//System.out.println("Waiting..");
 				Thread.sleep(3000);
 			}
 			this.retrieveResult();

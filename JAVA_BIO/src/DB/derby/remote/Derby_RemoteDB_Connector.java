@@ -1,5 +1,5 @@
 package DB.derby.remote;
-
+//TODO: documentf
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -45,12 +45,18 @@ public abstract class Derby_RemoteDB_Connector {
 		this.derbyURL = derbyURL;
 		this.user = user;
 		this.password = password;
-		this.create = create;
+		this.create = ";create="+create;
 		// Initializing and assembling properties
 		this.derbyConnectionProperties = new Properties();
 		this.derbyConnectionProperties.put("user", this.user);
 		this.derbyConnectionProperties.put("password", this.password);
-		this.derbyConnectionProperties.put("create", this.create);
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Connection getConnection() {
+		return connection;
 	}
 
 	/**
@@ -74,11 +80,12 @@ public abstract class Derby_RemoteDB_Connector {
 	 * @return {@code true} if connected, {@code false} if smth went wrong
 	 * @throws SQLException
 	 */
-	private boolean connectToEmbeddedDerbyDatabase() throws SQLException,
+	public boolean connectToRemoteDerbyDatabase() throws SQLException,
 			ClassNotFoundException {
+		//TODO: input a boolean connected
 		if (Derby_RemoteDB_Connector.loadDerbyDriver()) {
-			this.connection = DriverManager.getConnection(this.derbyURL,
-					derbyConnectionProperties);
+			this.connection = DriverManager.getConnection(this.derbyURL+this.create,
+					this.derbyConnectionProperties);
 			return true;
 		} else {
 			return false;
