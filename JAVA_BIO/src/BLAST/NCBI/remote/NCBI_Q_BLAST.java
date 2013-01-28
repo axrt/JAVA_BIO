@@ -35,19 +35,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	protected String BLAST_RID;
 	/**
-	 * A flag that indicates whether this instance has already been BLASTed or
-	 * not
-	 */
-	protected boolean BLASTed;
-	/**
-	 * A Fasta record, that contains the query
-	 */
-	protected final List<Fasta> query;
-	/**
-	 * A list of genbak/EMBL ids that shall be used for a BLAST search
-	 */
-	protected final List<String> query_IDs;
-	/**
 	 * A field that stores an HTML of the request acceptance
 	 */
 	protected String requestAcceptedPage;
@@ -93,13 +80,19 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	}
 
 	/**
-	 * @param {@link Fasta} - a query record
+	 * Constructor
+	 * @param {@link List<Fasta> query} - a list of query fasta records
+	 * @param {@link List<String> query_IDs} - - a list of query fasta record IDs
 	 */
 	protected NCBI_Q_BLAST(List<Fasta> query, List<String> query_IDs) {
-		super();
-		this.query = query;
-		this.query_IDs = query_IDs;
-		this.BLASTed = false;
+		super(query, query_IDs);
+	}
+	/**
+	 * @param {@link Fasta} - a query record
+	 *
+	 */
+	protected NCBI_Q_BLAST(List<Fasta> query) {
+		super(query);
 	}
 
 	/**
