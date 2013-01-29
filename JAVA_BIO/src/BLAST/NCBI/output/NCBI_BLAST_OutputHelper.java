@@ -27,14 +27,14 @@ public enum NCBI_BLAST_OutputHelper {
 	Instance;
 	
 	private NCBI_BLAST_OutputHelper(){
-		throw new AssertionError("Instantination forbidden...");
+		
 	}
 	/**
 	 * Return a {@code BlastOutput} from an {@code InputStream}. Used by: 1.
 	 * {@code NCBI_BLAST} to get the output
 	 * 
 	 * @param in
-	 *            :{@code InputStream } from a URL or other type of connecton
+	 *            :{@code InputStream } from a URL or other type of connection
 	 * @return {@code BlastOutput}
 	 * @throws JAXBException
 	 * @throws Exception

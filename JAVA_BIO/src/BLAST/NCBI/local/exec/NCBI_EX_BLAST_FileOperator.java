@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import format.fasta.Fasta;
@@ -51,6 +52,7 @@ public class NCBI_EX_BLAST_FileOperator extends UtilFileOperator {
 	}
 
 	protected InputStream readOutputXML(File outputFile) throws IOException {
+		//return new URL("file://"+outputFile.getPath()).openStream();
 		return new FileInputStream(outputFile);
 	}
 
