@@ -49,14 +49,17 @@ public abstract class NCBI_BLAST extends BLAST {
 	}
 
 	protected NCBI_BLAST(List<Fasta> query, List<String> query_IDs) {
+		super();
 		this.query = query;
 		this.query_IDs = query_IDs;
 		this.BLASTed = false;
 	}
 
 	protected NCBI_BLAST(List<Fasta> query) {
+		super();
 		this.query = query;
 		this.query_IDs = new ArrayList<String>();
 		this.BLASTed = false;
 	}
+
 }
