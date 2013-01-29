@@ -25,7 +25,7 @@ public class NCBI_EX_BLASTer_P extends BLASTer {
 	 * @param numberOfThreads
 	 * @param batchSize
 	 */
-	protected NCBI_EX_BLASTer_P(List<ProteinFasta> queryList,List<String> queryListAC,
+	protected NCBI_EX_BLASTer_P(List<? extends ProteinFasta> queryList,List<String> queryListAC,
 			int numberOfThreads, int batchSize) {
 		super(queryList,queryListAC, numberOfThreads, batchSize);
         this.blasts=Collections.synchronizedList(new ArrayList<NCBI_EX_BLASTer_P>());

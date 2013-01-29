@@ -19,28 +19,13 @@ public class ProteinFasta extends Fasta implements Serializable {
 	 * @param {@link String} AC
 	 * @param {@link String} sequence
 	 */
-	protected ProteinFasta(String AC, String sequence) {
-		super(AC, sequence);
-	}
-
-	/**
-	 * A static factory to assemble a {@link ProteinFasta} from AC and a
-	 * sequence.
-	 * 
-	 * @param {@link String} AC
-	 * @param {@link String} sequence
-	 * @return a new instance of a {@link ProteinFasta}
-	 * @throws ProteinFasta_AC_BadFormatException
-	 *             in case smth is not all right with the AC
-	 * @throws ProteinFasta_Sequence_BadFromatException
-	 *             in case smth is not all right with the sequence
-	 */
-	public static ProteinFasta newInstanceFromParts(String AC, String sequence)
+	protected ProteinFasta(String AC, String sequence)
 			throws ProteinFasta_AC_BadFormatException,
 			ProteinFasta_Sequence_BadFromatException {
-		//Enforce uppercase
-		AC=AC.toUpperCase();
-		sequence=sequence.toUpperCase();
+		super(AC, sequence);
+		// Enforce uppercase
+		AC = AC.toUpperCase();
+		sequence = sequence.toUpperCase();
 		// First check for whether the AC does not contain an illegal '>'
 		// diamond character anywhere, except for the very beginning
 		if (AC.contains(Fasta.fastaStart)) {
@@ -67,10 +52,27 @@ public class ProteinFasta extends Fasta implements Serializable {
 			throw new ProteinFasta_Sequence_BadFromatException(
 					"Error within the Sequence: illegal character at positon: "
 							+ String.valueOf(check));
-		} else {
-			// If all goes well, return a new ProteinFasta record object.
-			return new ProteinFasta(AC, sequence);
 		}
+	}
+
+	/**
+	 * A static factory to assemble a {@link ProteinFasta} from AC and a
+	 * sequence.
+	 * 
+	 * @param {@link String} AC
+	 * @param {@link String} sequence
+	 * @return a new instance of a {@link ProteinFasta}
+	 * @throws ProteinFasta_AC_BadFormatException
+	 *             in case smth is not all right with the AC
+	 * @throws ProteinFasta_Sequence_BadFromatException
+	 *             in case smth is not all right with the sequence
+	 */
+	public static ProteinFasta newInstanceFromParts(String AC, String sequence)
+			throws ProteinFasta_AC_BadFormatException,
+			ProteinFasta_Sequence_BadFromatException {
+
+		// If all goes well, return a new ProteinFasta record object.
+		return new ProteinFasta(AC, sequence);
 	}
 
 	/**
