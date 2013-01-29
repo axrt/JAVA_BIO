@@ -23,17 +23,17 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 
 	// TODO: think of smth what to do about the ids
 
-	protected NCBI_EX_BLASTP(List<Fasta> query, List<String> query_IDs,
+	protected NCBI_EX_BLASTP(List<? extends ProteinFasta> query, List<String> query_IDs,
 			File tempDir, File executive, String[] parameterList) {
 		super(query, query_IDs, tempDir, executive, parameterList);
 	}
 
-	protected NCBI_EX_BLASTP(List<Fasta> query, File tempDir, File executive,
+	protected NCBI_EX_BLASTP(List<? extends ProteinFasta> query, File tempDir, File executive,
 			String[] parameterList) {
 		super(query, tempDir, executive, parameterList);
 	}
 
-	public static NCBI_EX_BLASTP newDefaultInstance(List<ProteinFasta> query,
+	public static NCBI_EX_BLASTP newDefaultInstance(List<? extends ProteinFasta> query,
 			List<String> query_IDs, File tempDir, File executive,
 			String[] parameterList) {
 		if (query_IDs == null) {
@@ -44,10 +44,7 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 		}
 		// TODO: input a check for whether both lists are empty or declared null
 		List<Fasta> upCast = new ArrayList<Fasta>(query.size());
-		for (int i = 0; i < query.size(); i++) {
-			upCast.add((Fasta) query.get(i));
-		}
-		return new NCBI_EX_BLASTP(upCast, query_IDs, tempDir, executive,
+		return new NCBI_EX_BLASTP(query, query_IDs, tempDir, executive,
 				parameterList) {
 
 			@Override

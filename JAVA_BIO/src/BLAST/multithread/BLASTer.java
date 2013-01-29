@@ -28,13 +28,15 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener{
 	
 	protected int batchSize;
 	
-	protected Queue<? extends Fasta> queryList;
+	private Queue<Fasta> queryList;
+	private Queue<String> queryListACs;
 	
 	/**
 	 * Constructor
 	 */
-	public BLASTer(List<? extends Fasta> queryList, int numberOfThreads, int batchSize) {
-		this.queryList=new ConcurrentLinkedQueue(queryList);
+	protected BLASTer(List<? extends Fasta> queryList, List<String> queryListACs,int numberOfThreads, int batchSize) {
+		this.queryList=new ConcurrentLinkedQueue<Fasta>(queryList);
+		this.queryListACs=new ConcurrentLinkedQueue<String>(queryListACs);
 		this.numberOfThereds=numberOfThreads;
 		this.batchSize=batchSize;
 		this.executorService=Executors.newFixedThreadPool(this.numberOfThereds);

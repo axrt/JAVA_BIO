@@ -16,6 +16,8 @@ import javax.xml.bind.UnmarshalException;
 
 import org.xml.sax.SAXException;
 
+import BLAST.NCBI.output.NCBI_BLAST_OutputHelper;
+
 import format.fasta.Fasta;
 import format.fasta.ProteinFasta;
 
@@ -40,7 +42,8 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 *        easier to mix fasta records with sequences, that are already in
 	 *        the database
 	 */
-	protected NCBI_Q_BLASTP(List<Fasta> query, List<String> query_IDs) {
+	protected NCBI_Q_BLASTP(List<? extends ProteinFasta> query,
+			List<String> query_IDs) {
 		super(query, query_IDs);
 		// Declaring a list of allowed parameters
 		this.request_parameters = new NCBI_Q_BLAST_ParameterSet(new String[] {
@@ -114,26 +117,23 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 	 * A static factory to get a "Default" (XML output, Exception printout)
 	 * instance of a BLASTP
 	 * 
-	 * @param {@link List<ProteinFasta>} query - a list of query fasta records, that
-	 *        shall be used as an input
+	 * @param {@link List<ProteinFasta>} query - a list of query fasta records,
+	 *        that shall be used as an input
 	 * @param {@link List<String>} query_IDs - a list of database ID/ACs to
 	 *        blast.
 	 * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
 	 */
 	public static NCBI_Q_BLASTP newDefaultInstance(List<ProteinFasta> query,
 			List<String> query_IDs) {
-		if(query_IDs==null){
-			query_IDs=new ArrayList<String>();
+		if (query_IDs == null) {
+			query_IDs = new ArrayList<String>();
 		}
-		if(query==null){
-			query=new ArrayList<ProteinFasta>();
+		if (query == null) {
+			query = new ArrayList<ProteinFasta>();
 		}
-		//TODO: input a check for whether both lists are empty or declared null
-		List<Fasta> upCast=new ArrayList<Fasta>(query.size());
-		for(int i=0;i<query.size();i++){
-			upCast.add((Fasta)query.get(i));
-		}
-		return new NCBI_Q_BLASTP(upCast, query_IDs) {
+		// TODO: input a check for whether both lists are empty or declared null
+
+		return new NCBI_Q_BLASTP(query, query_IDs) {
 
 			/**
 			 * Retrieves the BLAST output from the NCBI server and stores it in
@@ -171,7 +171,7 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 					URLConnection connection = request.openConnection();
 					// Gets InputStream and redirects to the helper,
 					// sets blastoutPut field
-					this.blastOutput = NCBI_Q_BLAST_Helper
+					this.blastOutput = NCBI_BLAST_OutputHelper
 							.catchBLASTOutput(connection.getInputStream());
 				} catch (IOException ioe) {
 					throw new IOException("A connection error has occurred: "
@@ -182,7 +182,7 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
 					if (retreiveAttempts < 4) {
 						URL request = new URL(retreiveRequest);
 						URLConnection connection = request.openConnection();
-						this.blastOutput = NCBI_Q_BLAST_Helper
+						this.blastOutput = NCBI_BLAST_OutputHelper
 								.catchBLASTOutput(connection.getInputStream());
 					} else {
 						throw new IOException("Failed to retreive the output: "

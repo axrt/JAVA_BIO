@@ -15,6 +15,7 @@ import BLAST.NCBI.NCBI_BLAST;
 import BLAST.NCBI.output.BlastOutput;
 import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter.CMD_PARAM;
 import format.fasta.Fasta;
+import format.fasta.ProteinFasta;
 
 /**
  * @author axrt <br>
@@ -66,14 +67,14 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @param {@link List<Fasta> query} - a list of query fasta records
 	 * @param {@link List<String> query_IDs} - - a list of query fasta record IDs
 	 */
-	protected NCBI_Q_BLAST(List<Fasta> query, List<String> query_IDs) {
+	protected NCBI_Q_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
 	}
 	/**
 	 * @param {@link Fasta} - a query record
 	 *
 	 */
-	protected NCBI_Q_BLAST(List<Fasta> query) {
+	protected NCBI_Q_BLAST(List<? extends Fasta> query) {
 		super(query);
 	}
 

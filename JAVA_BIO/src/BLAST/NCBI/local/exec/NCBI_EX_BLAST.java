@@ -31,7 +31,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
 	 * @param query
 	 * @param query_IDs
 	 */
-	protected NCBI_EX_BLAST(List<Fasta> query, List<String> query_IDs,
+	protected NCBI_EX_BLAST(List<? extends Fasta> query, List<String> query_IDs,
 			File tempDir, File executive,String[] parameterList) {
 		super(query, query_IDs);
 		this.fileOperator = new NCBI_EX_BLAST_FileOperator();
@@ -47,7 +47,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
 	/**
 	 * @param query
 	 */
-	protected NCBI_EX_BLAST(List<Fasta> query, File tempDir,File executive,String[] parameterList) {
+	protected NCBI_EX_BLAST(List<? extends Fasta> query, File tempDir,File executive,String[] parameterList) {
 		super(query);
 		this.fileOperator = new NCBI_EX_BLAST_FileOperator();
 		this.tempDir = tempDir;

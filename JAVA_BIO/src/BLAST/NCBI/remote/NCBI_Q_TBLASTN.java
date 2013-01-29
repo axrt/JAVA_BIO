@@ -14,6 +14,8 @@ import javax.xml.bind.UnmarshalException;
 
 import org.xml.sax.SAXException;
 
+import BLAST.NCBI.output.NCBI_BLAST_OutputHelper;
+
 import format.fasta.Fasta;
 import format.fasta.ProteinFasta;
 
@@ -27,7 +29,8 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
 	 * @param query
 	 * @param query_IDs
 	 */
-	public NCBI_Q_TBLASTN(List<Fasta> query, List<String> query_IDs) {
+	public NCBI_Q_TBLASTN(List<? extends ProteinFasta> query,
+			List<String> query_IDs) {
 		super(query, query_IDs);
 		// Declaring a list of allowed parameters
 		this.request_parameters = new NCBI_Q_BLAST_ParameterSet(new String[] {
@@ -121,11 +124,8 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
 	 */
 	public static NCBI_Q_TBLASTN newDefaultInstance(List<ProteinFasta> query,
 			List<String> query_IDs) {
-		List<Fasta> upCast = new ArrayList<Fasta>(query.size());
-		for (int i = 0; i < query.size(); i++) {
-			upCast.add((Fasta) query.get(i));
-		}
-		return new NCBI_Q_TBLASTN(upCast, query_IDs) {
+
+		return new NCBI_Q_TBLASTN(query, query_IDs) {
 
 			/**
 			 * Retrieves the BLAST output from the NCBI server and stores it in
@@ -163,7 +163,7 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
 					URLConnection connection = request.openConnection();
 					// Gets InputStream and redirects to the helper,
 					// sets blastoutPut field
-					this.blastOutput = NCBI_Q_BLAST_Helper
+					this.blastOutput = NCBI_BLAST_OutputHelper
 							.catchBLASTOutput(connection.getInputStream());
 				} catch (IOException ioe) {
 					throw new IOException("A connection error has occurred: "
@@ -174,7 +174,7 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
 					if (retreiveAttempts < 4) {
 						URL request = new URL(retreiveRequest);
 						URLConnection connection = request.openConnection();
-						this.blastOutput = NCBI_Q_BLAST_Helper
+						this.blastOutput = NCBI_BLAST_OutputHelper
 								.catchBLASTOutput(connection.getInputStream());
 					} else {
 						throw new IOException("Failed to retreive the output: "
