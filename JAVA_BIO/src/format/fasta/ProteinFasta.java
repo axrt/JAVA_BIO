@@ -38,6 +38,9 @@ public class ProteinFasta extends Fasta implements Serializable {
 	public static ProteinFasta newInstanceFromParts(String AC, String sequence)
 			throws ProteinFasta_AC_BadFormatException,
 			ProteinFasta_Sequence_BadFromatException {
+		//Enforce uppercase
+		AC=AC.toUpperCase();
+		sequence=sequence.toUpperCase();
 		// First check for whether the AC does not contain an illegal '>'
 		// diamond character anywhere, except for the very beginning
 		if (AC.contains(Fasta.fastaStart)) {

@@ -13,9 +13,11 @@ import org.apache.derby.impl.io.CPStorageFactory;
 import org.apache.derby.impl.services.bytecode.BCJava;
 import org.xml.sax.SAXException;
 
+import BLAST.NCBI.output.NCBI_BLAST_OutputHelper;
 import BLAST.NCBI.remote.NCBI_Q_BLAST_Helper;
 
 import format.fasta.Fasta;
+import format.fasta.ProteinFasta;
 
 public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 
@@ -31,21 +33,21 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 		super(query, tempDir, executive, parameterList);
 	}
 
-	public static NCBI_EX_BLASTP newDefaultInstance(List<Fasta> query,
+	public static NCBI_EX_BLASTP newDefaultInstance(List<ProteinFasta> query,
 			List<String> query_IDs, File tempDir, File executive,
 			String[] parameterList) {
 		if (query_IDs == null) {
 			query_IDs = new ArrayList<String>();
 		}
 		if (query == null) {
-			query = new ArrayList<Fasta>();
+			query = new ArrayList<ProteinFasta>();
 		}
 		// TODO: input a check for whether both lists are empty or declared null
 		List<Fasta> upCast = new ArrayList<Fasta>(query.size());
 		for (int i = 0; i < query.size(); i++) {
 			upCast.add((Fasta) query.get(i));
 		}
-		return new NCBI_EX_BLASTP(query, query_IDs, tempDir, executive,
+		return new NCBI_EX_BLASTP(upCast, query_IDs, tempDir, executive,
 				parameterList) {
 
 			@Override
@@ -69,9 +71,9 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 				// Crate the operating command string
 				String[] command = new String[parameterList.length + 7];
 				command[0] = this.executive.getPath();
-				command[1] = "-i";
+				command[1] = "-query";
 				command[2] = this.inputFile.getPath();
-				command[3] = "-o";
+				command[3] = "-out";
 				command[4] = this.outputFile.getPath();
 				command[5] = "-outfmt";
 				command[6] = "5";
@@ -83,23 +85,31 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 				Process p = Runtime.getRuntime().exec(command);
 				p.waitFor();
 				String s;
+
+				BufferedReader stdNorm = new BufferedReader(
+						new InputStreamReader(p.getInputStream()));
+				while ((s = stdNorm.readLine()) != null) {
+					System.out.println("STD:> " + s);
+				}
 				// In case of an error - try to recover
 				BufferedReader stdError = new BufferedReader(
 						new InputStreamReader(p.getErrorStream()));
 				while ((s = stdError.readLine()) != null) {
+					System.out.println("ERR:> " + s);
 					if (s.contains("Cannot memory map file")) {
 						this.BLAST();
 					}
 				}
 				// Suck in the output
-				this.blastOutput = NCBI_Q_BLAST_Helper
+				this.blastOutput = NCBI_BLAST_OutputHelper
 						.catchBLASTOutput(this.fileOperator
 								.readOutputXML(this.outputFile));
 				// Cleanup
 				this.inputFile.delete();
-                this.outputFile.delete();
-                //Note: temp directory will be removed only if not used by any other parallel process
-                this.tempDir.delete();
+				this.outputFile.delete();
+				// Note: temp directory will be removed only if not used by any
+				// other parallel process
+				this.tempDir.delete();
 			}
 		};
 	}
