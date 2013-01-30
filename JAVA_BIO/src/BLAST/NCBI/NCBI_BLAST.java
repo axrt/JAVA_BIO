@@ -3,7 +3,6 @@
  */
 package BLAST.NCBI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import format.fasta.Fasta;
@@ -66,35 +65,8 @@ public abstract class NCBI_BLAST extends BLAST {
 		this.BLASTed = false;
 	}
 
-//	/**
-//	 * Constructor
-//	 * 
-//	 * @param query
-//	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
-//	 *            records
-//	 */
-//	protected NCBI_BLAST(List<? extends Fasta> query) {
-//		super();
-//		this.query = query;
-//		this.query_IDs = new ArrayList<String>();
-//		this.BLASTed = false;
-//	}
-//	/**
-//	 * Constructor
-//	 * 
-//	 * @param query
-//	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
-//	 *            records
-//	 */
-//	protected NCBI_BLAST(List<String> queryIDs) {
-//		super();
-//		this.query = new ArrayList<Fasta>();
-//		this.query_IDs = queryIDs;
-//		this.BLASTed = false;
-//	}
-
 	/**
-	 * @return {@link List<Fasta>}the query
+	 * @return {@link List<Fasta>} the query
 	 */
 	public List<? extends Fasta> getQuery() {
 		return query;

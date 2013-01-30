@@ -18,24 +18,30 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-//TODO: document
 /**
  * @author axrt
  * 
  */
 public enum NCBI_BLAST_OutputHelper {
+	// Singleton-enforcing instance
 	Instance;
-	
-	private NCBI_BLAST_OutputHelper(){
-		
+    /**
+     * Constructor
+     */
+	private NCBI_BLAST_OutputHelper() {
+
 	}
+
 	/**
-	 * Return a {@code BlastOutput} from an {@code InputStream}. Used by: 1.
-	 * {@code NCBI_BLAST} to get the output
+	 * Return a {@link BlastOutput} from an {@code InputStream}. Used by
+	 * {@link NCBI_BLAST} to get the output. Being produced in such a form, it
+	 * allows to store the schemas in the same package as the
+	 * {@link BlastOutput}, thereby allowing to make it obscure from the user
+	 * within the package
 	 * 
 	 * @param in
-	 *            :{@code InputStream } from a URL or other type of connection
-	 * @return {@code BlastOutput}
+	 *            :{@link InputStream } from a URL or other type of connection
+	 * @return {@link BlastOutput}
 	 * @throws JAXBException
 	 * @throws Exception
 	 */

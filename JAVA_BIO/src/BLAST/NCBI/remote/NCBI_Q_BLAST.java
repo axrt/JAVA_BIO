@@ -8,22 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 import BLAST.NCBI.NCBI_BLAST;
-import BLAST.NCBI.output.BlastOutput;
-import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter.CMD_PARAM;
 import format.fasta.Fasta;
-import format.fasta.ProteinFasta;
 
 /**
- * @author axrt <br>
- * <br>
- *         A generalized abstraction of a QBLAST service at
- *         https://www.ncbi.nlm.nih.gov/Web/Newsltr/Summer99/qblast.html, which
- *         provides a simple query line web interface for BLAST task execution
- *         at the NCBI server via the latest databases
+ * A generalized abstraction of a QBLAST service at
+ * https://www.ncbi.nlm.nih.gov/Web/Newsltr/Summer99/qblast.html, which provides
+ * a simple query line web interface for BLAST task execution at the NCBI server
+ * via the latest databases
+ * 
+ * @author axrt
+ * 
  */
 public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 
@@ -43,7 +40,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * A set of parameters to generate a request with
 	 */
 	protected NCBI_Q_BLAST_ParameterSet request_parameters;
-	
+
 	/**
 	 * A list of allowed parameter names
 	 */
@@ -58,21 +55,19 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param {@link List<Fasta> query} - a list of query fasta records
-	 * @param {@link List<String> query_IDs} - - a list of query fasta record IDs
+	 * @param {@link List<String> query_IDs} - - a list of query fasta record
+	 *        IDs
 	 */
 	protected NCBI_Q_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
 	}
-//	/**
-//	 * @param {@link Fasta} - a query record
-//	 *
-//	 */
-//	protected NCBI_Q_BLAST(List<? extends Fasta> query) {
-//		super(query);
-//	}
 
 	/**
+	 * Adds another {@link NCBI_Q_BLAST_Parameter} to a NCBI QBLAST parameter
+	 * list
+	 * 
 	 * @param {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
 	 *        to add
 	 * @return {@code true} is successfully added, {@link false} elsewise
@@ -81,7 +76,8 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter)
 			throws Bad_Q_BLAST_Parameter_Exception {
-		// In this abstraction is's all about a certain implementation, so it has been set in the
+		// In this abstraction is's all about a certain implementation, so it
+		// has been set in the
 		// constructor already and any change of the
 		// "PROGRAM" is forbidden, though, the parameter itself is ok.
 		if (parameter.getKey().equals(NCBI_Q_BLAST_Helper.PROGRAM)) {
@@ -129,7 +125,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	protected void sendBLASTRequest() throws IOException {
 		// Make the CMD=Put
-		//TODO: get rid of put in implementations and make it hardcoded here
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.CMD(NCBI_Q_BLAST_Parameter.CMD_PARAM.Put));
 		BufferedReader br = null;
@@ -253,10 +248,9 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
+	/**
+	 * Combines the formQuery() sendBLASTRequest() extractRID() and
+	 * retrieveResult() in order to finish the Q_BLAST with NCBI
 	 */
 	@Override
 	public void run() {
@@ -264,17 +258,23 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 			this.formQuery();
 			this.sendBLASTRequest();
 			this.extractRID();
-			//System.out.println("RID: "+this.getBLAST_RID());
+			// System.out.println("RID: "+this.getBLAST_RID());
 			while (!this.resultsReady()) {
-				//System.out.println("Waiting..");
+				// System.out.println("Waiting..");
 				Thread.sleep(3000);
 			}
 			this.retrieveResult();
-			this.BLASTed=true;
+			this.BLASTed = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Should determine the way that the output must be retrieved. The default
+	 * is always xml, however, html or asn.1 may be an option
+	 * 
+	 * @throws Exception
+	 */
 	protected abstract void retrieveResult() throws Exception;
 }

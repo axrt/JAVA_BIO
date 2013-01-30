@@ -3,7 +3,6 @@
  */
 package BLAST.NCBI.multithread;
 
-//TODO: document
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,44 +16,73 @@ import BLAST.event.BLAST_FinishedEvent;
 import BLAST.multithread.BLASTer;
 
 /**
+ * An abstract representation of how a {@link BLASTer} should look for the
+ * blast+ executables, provided by the <a
+ * href="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST">NCBI ftp.</a>
+ * 
  * @author axrt
  * 
  */
 public abstract class NCBI_EX_BLASTer extends BLASTer {
-
+	/**
+	 * A {@link List<NCBI_EX_BLAST>} of blasts that are currently being operated
+	 * upon (running) by the {@link NCBI_EX_BLASTer}. *<i><b>Is wrapped to a
+	 * synchronized implementation in the constructor</i></b>
+	 */
 	protected List<NCBI_EX_BLAST> blasts;
+	/**
+	 * {@link File} - A temporary directory that will be used to dump the input
+	 * and output files, that are used by the ncbi+ executable
+	 */
 	protected File tempDir;
-	protected File executive;
+	/**
+	 * A full path (or a valid alias) to a blast+ executable
+	 */
+	protected File executable;
+	/**
+	 * A list of parameters. Should maintain a certain order. {"<-command>",
+	 * "[value]"}, just the way if in the blast+ executable input
+	 * 
+	 */
 	protected String[] parameterList;
 
 	/**
 	 * @param queryList
+	 *            {@link List<Fasta>} - a list of query fasta records
 	 * @param numberOfThreads
+	 *            {@link int} a number of simultanious blasts running
 	 * @param batchSize
+	 *            {@link int} a number of fasta {@link Fasta} records in on
+	 *            single batch
 	 */
 	protected NCBI_EX_BLASTer(List<? extends Fasta> queryList,
 			List<String> queryListAC, int numberOfThreads, int batchSize,
 			File tempDir, File executive, String[] parameterList) {
 		super(queryList, queryListAC, numberOfThreads, batchSize);
+		// In order to push/pull the blasts from the list, the list should be
+		// synchronized
 		this.blasts = Collections
 				.synchronizedList(new ArrayList<NCBI_EX_BLAST>());
-        this.tempDir=tempDir;
-        this.executive=executive;
-        this.parameterList=parameterList;
+		this.tempDir = tempDir;
+		this.executable = executive;
+		this.parameterList = parameterList;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Allows to react to a {@link BLAST_FinishedEvent}. This should further be
+	 * overriden with a call to the method of a superclass. This implementation
+	 * deletes the calling "finished" balst instance form the tracking array
 	 * 
-	 * @see
-	 * BLAST.event.BLAST_TaskFinished_listener#handleAFinishedBLAST(BLAST.event
-	 * .BLAST_FinishedEvent)
+	 * @param {@link BLAST_FinishedEvent} an event wrapper to a blast that has
+	 *        finished the blast task
 	 */
 	@Override
 	public synchronized void handleAFinishedBLAST(BLAST_FinishedEvent event) {
-		  if(event.getSource() instanceof BLAST){
-			  BLAST blast=(BLAST)event.getSource();
-			  blast.removeListener(this);
-		  }
+		// Untracks the shot-off blast, leaving it to the GC in case no onther
+		// pointers are kept to the instance
+		if (event.getSource() instanceof BLAST) {
+			BLAST blast = (BLAST) event.getSource();
+			blast.removeListener(this);
+		}
 	}
 }
