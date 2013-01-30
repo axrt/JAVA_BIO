@@ -9,7 +9,6 @@ import java.util.List;
 import BLAST.event.BLAST_FinishedEvent;
 import BLAST.event.BLAST_TaskFinished_listener;
 
-//TODO: re-document
 /**
  * @author axrt A general abstraction, represents a
  *         "Basic Local Alignment Tool process" concept.
@@ -22,11 +21,12 @@ public abstract class BLAST implements Runnable {
 	 * Constructor
 	 */
 	protected BLAST() {
+		//Initialize a list of listeners
 		this.listeners = new ArrayList<BLAST_TaskFinished_listener>();
 	}
 
 	/**
-	 * Adds another listener
+	 * Adds another listener to a list of those being notified when the task finishes
 	 * 
 	 * @param {@link BLAST_TaskFinished_listener} listener
 	 */
@@ -35,7 +35,7 @@ public abstract class BLAST implements Runnable {
 	}
 
 	/**
-	 * Removes a certain listener
+	 * Removes a certain listener from a list of those being notified when the task finishes
 	 * 
 	 * @param {@link BLAST_TaskFinished_listener} listener to remove
 	 */

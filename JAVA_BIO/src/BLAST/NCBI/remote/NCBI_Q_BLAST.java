@@ -64,13 +64,13 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	protected NCBI_Q_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
 		super(query, query_IDs);
 	}
-	/**
-	 * @param {@link Fasta} - a query record
-	 *
-	 */
-	protected NCBI_Q_BLAST(List<? extends Fasta> query) {
-		super(query);
-	}
+//	/**
+//	 * @param {@link Fasta} - a query record
+//	 *
+//	 */
+//	protected NCBI_Q_BLAST(List<? extends Fasta> query) {
+//		super(query);
+//	}
 
 	/**
 	 * @param {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
@@ -187,7 +187,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 					// If no such line (containing RID exists),
 					// the page may have given some unexpected error
 				}
-				// TODO: improve the way the messages are being transferred in
 				// case of an error
 				// Otherwise print out the message within the exception message
 			} else if (line.contains(messageID)) {
@@ -198,7 +197,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 						"Request has failed due to: " + message);
 			} else {
 				throw new Bad_Q_BLAST_RequestException(
-						"Request failed with no specific error, please check parameters.");
+						"Request failed with no specific error, please check parameters (some may be lacking).");
 			}
 		}
 		// Checking for whether the RID has been extracted normally

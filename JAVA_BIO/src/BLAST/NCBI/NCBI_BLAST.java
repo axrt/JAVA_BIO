@@ -10,7 +10,6 @@ import format.fasta.Fasta;
 import BLAST.BLAST;
 import BLAST.NCBI.output.BlastOutput;
 
-//TODO: document
 /**
  * @author axrt A general abstraction of a "Basic Local Alignment Tool" service
  *         at http://blast.ncbi.nlm.nih.gov/Blast.cgi provided by NCBI
@@ -35,19 +34,31 @@ public abstract class NCBI_BLAST extends BLAST {
 	protected boolean BLASTed;
 
 	/**
-	 * @return the BLASTed
+	 * @return {@code boolean} BLASTed, presumably {@code true} if blasted,
+	 *         {@code false} elsewise
 	 */
 	protected boolean isBLASTed() {
 		return this.BLASTed;
 	}
 
 	/**
-	 * @return {@link BlastOutput}the blastOutput
+	 * @return {@link BlastOutput} blast output from as a current result,
+	 *         {@code null} if the blast has not been accomplished yet
 	 */
-	public BlastOutput getBlastOutput() {
+	public synchronized BlastOutput getBlastOutput() {
 		return this.blastOutput;
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param query
+	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
+	 *            records
+	 * @param query_IDs
+	 *            {@link List<String>} a list of AC numbers of sequences in a
+	 *            database
+	 */
 	protected NCBI_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
 		super();
 		this.query = query;
@@ -55,12 +66,32 @@ public abstract class NCBI_BLAST extends BLAST {
 		this.BLASTed = false;
 	}
 
-	protected NCBI_BLAST(List<? extends Fasta> query) {
-		super();
-		this.query = (List<Fasta>) query;
-		this.query_IDs = new ArrayList<String>();
-		this.BLASTed = false;
-	}
+//	/**
+//	 * Constructor
+//	 * 
+//	 * @param query
+//	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
+//	 *            records
+//	 */
+//	protected NCBI_BLAST(List<? extends Fasta> query) {
+//		super();
+//		this.query = query;
+//		this.query_IDs = new ArrayList<String>();
+//		this.BLASTed = false;
+//	}
+//	/**
+//	 * Constructor
+//	 * 
+//	 * @param query
+//	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
+//	 *            records
+//	 */
+//	protected NCBI_BLAST(List<String> queryIDs) {
+//		super();
+//		this.query = new ArrayList<Fasta>();
+//		this.query_IDs = queryIDs;
+//		this.BLASTed = false;
+//	}
 
 	/**
 	 * @return {@link List<Fasta>}the query
@@ -75,7 +106,5 @@ public abstract class NCBI_BLAST extends BLAST {
 	public List<String> getQuery_IDs() {
 		return query_IDs;
 	}
-	
-	
 
 }

@@ -24,13 +24,13 @@ public abstract class NCBI_JNI_BLAST extends NCBI_BLAST {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param query
-	 */
-	protected NCBI_JNI_BLAST(List<? extends Fasta> query) {
-		super(query);
-		// TODO Auto-generated constructor stub
-	}
+//	/**
+//	 * @param query
+//	 */
+//	protected NCBI_JNI_BLAST(List<? extends Fasta> query) {
+//		super(query);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	
 	

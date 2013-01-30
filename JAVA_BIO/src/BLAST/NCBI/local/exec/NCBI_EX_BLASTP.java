@@ -28,10 +28,10 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 		super(query, query_IDs, tempDir, executive, parameterList);
 	}
 
-	protected NCBI_EX_BLASTP(List<? extends ProteinFasta> query, File tempDir, File executive,
-			String[] parameterList) {
-		super(query, tempDir, executive, parameterList);
-	}
+//	protected NCBI_EX_BLASTP(List<? extends ProteinFasta> query, File tempDir, File executive,
+//			String[] parameterList) {
+//		super(query, tempDir, executive, parameterList);
+//	}
 
 	public static NCBI_EX_BLASTP newDefaultInstance(List<? extends ProteinFasta> query,
 			List<String> query_IDs, File tempDir, File executive,

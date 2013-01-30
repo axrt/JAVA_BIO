@@ -44,20 +44,20 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
 				+ "out_" + String.valueOf(this.hashCode()));
 	}
 
-	/**
-	 * @param query
-	 */
-	protected NCBI_EX_BLAST(List<? extends Fasta> query, File tempDir,File executive,String[] parameterList) {
-		super(query);
-		this.fileOperator = new NCBI_EX_BLAST_FileOperator();
-		this.tempDir = tempDir;
-		this.executive=executive;
-		this.parameterList=parameterList;
-		this.inputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
-				+ String.valueOf(this.hashCode()));
-		this.outputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
-				+ "out_" + String.valueOf(this.hashCode()));
-	}
+//	/**
+//	 * @param query
+//	 */
+//	protected NCBI_EX_BLAST(List<? extends Fasta> query, File tempDir,File executive,String[] parameterList) {
+//		super(query);
+//		this.fileOperator = new NCBI_EX_BLAST_FileOperator();
+//		this.tempDir = tempDir;
+//		this.executive=executive;
+//		this.parameterList=parameterList;
+//		this.inputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
+//				+ String.valueOf(this.hashCode()));
+//		this.outputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
+//				+ "out_" + String.valueOf(this.hashCode()));
+//	}
 
 	public abstract void BLAST() throws Exception;
     
