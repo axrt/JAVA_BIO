@@ -23,7 +23,7 @@ public abstract class NCBI_BLAST extends BLAST {
 	/**
 	 * A Fasta record, that contains the query
 	 */
-	protected final List<Fasta> query;
+	protected final List<? extends Fasta> query;
 	/**
 	 * A list of genbak/EMBL ids that shall be used for a BLAST search
 	 */
@@ -50,7 +50,7 @@ public abstract class NCBI_BLAST extends BLAST {
 
 	protected NCBI_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
 		super();
-		this.query = (List<Fasta>) query;
+		this.query = query;
 		this.query_IDs = query_IDs;
 		this.BLASTed = false;
 	}
@@ -61,5 +61,21 @@ public abstract class NCBI_BLAST extends BLAST {
 		this.query_IDs = new ArrayList<String>();
 		this.BLASTed = false;
 	}
+
+	/**
+	 * @return {@link List<Fasta>}the query
+	 */
+	public List<? extends Fasta> getQuery() {
+		return query;
+	}
+
+	/**
+	 * @return {@link List<String>} the query_IDs
+	 */
+	public List<String> getQuery_IDs() {
+		return query_IDs;
+	}
+	
+	
 
 }

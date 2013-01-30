@@ -53,6 +53,8 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 					this.BLAST();
 
 					this.BLASTed = true;
+
+					this.notifyListeners();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,11 +64,11 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
 			public void BLAST() throws IOException, InterruptedException,
 					JAXBException, SAXException {
 				// Create the tmp folder
-				this.fileOperator.createTMPFolder(tempDir);
+				this.fileOperator.createTMPFolder(this.tempDir);
 				// Flush down the query
-				this.fileOperator.writeFastaListToFile(query, this.inputFile);
+				this.fileOperator.writeFastaListToFile(this.query, this.inputFile);
 				// Crate the operating command string
-				String[] command = new String[parameterList.length + 7];
+				String[] command = new String[this.parameterList.length + 7];
 				command[0] = this.executive.getPath();
 				command[1] = "-query";
 				command[2] = this.inputFile.getPath();

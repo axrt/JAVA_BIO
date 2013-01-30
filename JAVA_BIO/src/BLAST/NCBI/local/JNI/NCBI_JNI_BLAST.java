@@ -3,6 +3,9 @@
  */
 package BLAST.NCBI.local.JNI;
 
+import java.util.List;
+//TODO: document
+import format.fasta.Fasta;
 import BLAST.NCBI.NCBI_BLAST;
 
 /**
@@ -12,4 +15,23 @@ import BLAST.NCBI.NCBI_BLAST;
  */
 public abstract class NCBI_JNI_BLAST extends NCBI_BLAST {
 
+	/**
+	 * @param query
+	 * @param query_IDs
+	 */
+	protected NCBI_JNI_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
+		super(query, query_IDs);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param query
+	 */
+	protected NCBI_JNI_BLAST(List<? extends Fasta> query) {
+		super(query);
+		// TODO Auto-generated constructor stub
+	}
+
+	
+	
 }

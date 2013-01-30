@@ -15,6 +15,6 @@ import BLAST.BLAST;
  */
 public interface BLAST_TaskFinished_listener extends EventListener {
     
-	public void handleAFinishedBLAST(BLAST_FinishedEvent event) throws Exception;
+	public void handleAFinishedBLAST(BLAST_FinishedEvent event);
 	
 }

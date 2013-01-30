@@ -21,7 +21,7 @@ public class NCBI_EX_BLAST_FileOperator extends UtilFileOperator {
 		super();
 	}
 
-	protected void writeFastaListToFile(List<Fasta> fastaList, File outputFile)
+	protected void writeFastaListToFile(List<? extends Fasta> fastaList, File outputFile)
 			throws IOException {
 
 		if (!outputFile.exists()) {

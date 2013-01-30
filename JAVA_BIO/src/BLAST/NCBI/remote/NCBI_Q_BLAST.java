@@ -48,12 +48,6 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * A list of allowed parameter names
 	 */
 	protected String[] allowedParametersList;
-	/**
-	 * @return the query
-	 */
-	public String getQuery() {
-		return query.toString();
-	}
 
 	/**
 	 * @return {@link String} the BLAST_RID
