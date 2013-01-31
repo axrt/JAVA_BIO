@@ -14,19 +14,23 @@ import BLAST.event.BLAST_TaskFinished_listener;
  *         "Basic Local Alignment Tool process" concept.
  */
 public abstract class BLAST implements Runnable {
-	
+	/**
+	 * A list of {@link BLAST_TaskFinished_listener}-implementing modules that
+	 * get notified when a BLAST finishes a task
+	 */
 	private List<BLAST_TaskFinished_listener> listeners;
 
 	/**
 	 * Constructor
 	 */
 	protected BLAST() {
-		//Initialize a list of listeners
+		// Initialize a list of listeners
 		this.listeners = new ArrayList<BLAST_TaskFinished_listener>();
 	}
 
 	/**
-	 * Adds another listener to a list of those being notified when the task finishes
+	 * Adds another listener to a list of those being notified when the task
+	 * finishes
 	 * 
 	 * @param {@link BLAST_TaskFinished_listener} listener
 	 */
@@ -35,7 +39,8 @@ public abstract class BLAST implements Runnable {
 	}
 
 	/**
-	 * Removes a certain listener from a list of those being notified when the task finishes
+	 * Removes a certain listener from a list of those being notified when the
+	 * task finishes
 	 * 
 	 * @param {@link BLAST_TaskFinished_listener} listener to remove
 	 */

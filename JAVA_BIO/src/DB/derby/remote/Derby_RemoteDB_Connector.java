@@ -9,7 +9,7 @@ import java.util.Properties;
 public abstract class Derby_RemoteDB_Connector {
 
 	/**
-	 * The derby url, jdbc:derby:microblasterDB by default
+	 * The derby url
 	 */
 	protected final String derbyURL;
 	/**

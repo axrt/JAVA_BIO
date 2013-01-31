@@ -13,6 +13,7 @@ import format.fasta.Fasta;
 import BLAST.BLAST;
 import BLAST.NCBI.local.exec.NCBI_EX_BLAST;
 import BLAST.event.BLAST_FinishedEvent;
+import BLAST.event.BLAST_TaskFinished_listener;
 import BLAST.multithread.BLASTer;
 
 /**
@@ -45,6 +46,7 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 	 * 
 	 */
 	protected String[] parameterList;
+	
 
 	/**
 	 * @param queryList
@@ -85,4 +87,5 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 			blast.removeListener(this);
 		}
 	}
+
 }
