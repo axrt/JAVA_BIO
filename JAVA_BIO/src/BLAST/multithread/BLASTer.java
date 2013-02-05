@@ -63,11 +63,6 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * prevent illegal state calls)
 	 */
 	protected boolean working;
-	/**
-	 * A list of {@link NCBI_EX_BLASTer_TaskFinished_listener}-implementing
-	 * modules that get notified when a BLASTer finishes a task
-	 */
-	private List<NCBI_EX_BLASTer_TaskFinished_listener> listeners;
 
 	/**
 	 * Constructor
@@ -99,7 +94,6 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 				.newFixedThreadPool(this.numberOfThereds);
 		// Indicate as not working
 		this.working = false;
-		this.listeners = new ArrayList<NCBI_EX_BLASTer_TaskFinished_listener>();
 	}
 
 	/**
@@ -193,35 +187,4 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 		this.executorService.shutdown();
 	}
 
-	/**
-	 * Adds another listener to a list of those being notified when the task
-	 * finishes
-	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener
-	 */
-	public synchronized void addListener(
-			NCBI_EX_BLASTer_TaskFinished_listener listener) {
-		this.listeners.add(listener);
-	}
-
-	/**
-	 * Removes a certain listener from a list of those being notified when the
-	 * task finishes
-	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener to remove
-	 */
-	public synchronized void removeListener(
-			NCBI_EX_BLASTer_TaskFinished_listener listener) {
-		this.listeners.remove(listener);
-	}
-
-	/**
-	 * Notifies all the listening modules form the list of listeners
-	 */
-	protected void notifyListeners() {
-		for (int i = 0; i < this.listeners.size(); i++) {
-			this.listeners.get(i).handleAFinishedBLASTer(
-					new NCBI_EX_BLASTer_FinishedEvent(this));
-		}
-	}
 }

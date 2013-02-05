@@ -15,11 +15,10 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import BLAST.NCBI.output.BlastOutput;
 
-public enum NCBI_Q_BLAST_Helper {
+public class NCBI_Q_BLAST_Helper {
 
-	Instance;
 	private NCBI_Q_BLAST_Helper() {
-
+		throw new AssertionError();
 	}
 
 	/**

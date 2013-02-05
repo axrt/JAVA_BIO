@@ -15,6 +15,11 @@ package BLAST.NCBI.remote;
  *         &sig2=Kq_j1KT32l1ERD-NTtkOkQ">this</a>.
  */
 public class NCBI_Q_BLAST_EscapeSymbols {
+
+	private NCBI_Q_BLAST_EscapeSymbols() {
+		throw new AssertionError();
+	}
+
 	/**
 	 * The ' ' symbol is escaped with '+'
 	 */

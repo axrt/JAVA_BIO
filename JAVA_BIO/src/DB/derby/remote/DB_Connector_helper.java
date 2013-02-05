@@ -9,16 +9,13 @@ package DB.derby.remote;
  * @author axrt
  * 
  */
-public enum DB_Connector_helper {
-
-	// Singleton instance
-	Instance;
+public class DB_Connector_helper {
 
 	/**
 	 * Private constructor prevents instantiation
 	 */
 	private DB_Connector_helper() {
-		//
+		throw new AssertionError();
 	}
 
 	/**

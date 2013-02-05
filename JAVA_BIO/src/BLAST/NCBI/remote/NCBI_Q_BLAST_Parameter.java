@@ -8,28 +8,6 @@ package BLAST.NCBI.remote;
  */
 public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 
-	public class Bad_Q_BLAST_Parameter extends Exception {
-
-		public Bad_Q_BLAST_Parameter() {
-		}
-
-		public Bad_Q_BLAST_Parameter(String arg0) {
-			super(arg0);
-
-		}
-
-		public Bad_Q_BLAST_Parameter(Throwable arg0) {
-			super(arg0);
-
-		}
-
-		public Bad_Q_BLAST_Parameter(String arg0, Throwable arg1) {
-			super(arg0, arg1);
-
-		}
-
-	}
-
 	protected static final char equals = '=';
 
 	/**
