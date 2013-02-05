@@ -12,6 +12,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import BLAST.BLAST;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer_FinishedEvent;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer_TaskFinished_listener;
@@ -60,48 +61,42 @@ public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable,
 	/**
 	 * 
 	 */
-	public void selfDeploy() {
-		try {
-			System.setProperty("java.rmi.server.hostname", this.uri);
-			RemoteBLASTer thisStub = (RemoteBLASTer) UnicastRemoteObject
-					.exportObject(this, 9531);
-			Registry registry = LocateRegistry.createRegistry(this.port);
-			registry.rebind(this.name, thisStub);
-			//
-			this.blaster.addListener(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
+	public void selfDeploy() throws Exception {
+
+		System.setProperty(RemoteBLASTer_Helper.rmi_sever_hostname, this.uri);
+		RemoteBLASTer thisStub = (RemoteBLASTer) UnicastRemoteObject
+				.exportObject(this, this.port);
+		Registry registry = LocateRegistry.createRegistry(this.port);
+		registry.rebind(this.name, thisStub);
+		//
+		this.blaster.addListener(this);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public abstract boolean hasNessessaryDataBase(String databaseName);
+
+	/**
+	 * 
+	 */
+	@Override
+	public abstract void deployAbsentDataBase(OutputStream databaseStream);
+
+	/**
+	 * 
+	 */
+	@Override
+	public synchronized List<? extends BLAST> processDelegatedBLASTBatch(
+			List<? extends Fasta> queryList) throws Exception {
+		this.blaster.appendFasta(queryList);
+		if (!this.blaster.isWorking()) {
+			this.blaster.launch();
 		}
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public boolean hasNessessaryDataBase(String databaseName) {
-
-		return false;
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void deployAbsentDataBase(OutputStream databaseStream) {
-
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public synchronized List<? extends NCBI_EX_BLASTer> processDelegatedBLASTBatch(
-			List<? extends Fasta> queryList) throws InterruptedException {
 		//
 		wait();
-
-		return null;
+		return this.blaster.getFinishedBLASTs();
 	}
 
 	@Override

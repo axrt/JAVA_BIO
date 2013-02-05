@@ -10,7 +10,7 @@ import java.util.List;
 
 import format.fasta.Fasta;
 
-import BLAST.NCBI.multithread.NCBI_EX_BLASTer;
+import BLAST.BLAST;
 
 /**
  * Adds to an implementing class ability to get a remote BLAST task from a
@@ -27,7 +27,7 @@ public interface RemoteBLASTer extends Remote {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public List<? extends NCBI_EX_BLASTer> processDelegatedBLASTBatch(
+	public List<? extends BLAST> processDelegatedBLASTBatch(
 			List<? extends Fasta> queryList) throws Exception;
 
 	/**

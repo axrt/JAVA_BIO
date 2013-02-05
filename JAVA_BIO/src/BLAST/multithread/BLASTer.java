@@ -34,7 +34,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * Private executor service, only allows {@link BLAST} tasks via
 	 * submitBLAST(BLAST blast);
 	 */
-	private ExecutorService executorService;
+	private final ExecutorService executorService;
 	/**
 	 * number of parallel runs, ideally is the same as the number of cores of
 	 * the processor
@@ -54,6 +54,10 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * blast search
 	 */
 	private Queue<String> queryListACs;
+	/**
+	 * A que of finished blasts, ready to return their results
+	 */
+	private Queue<? extends BLAST> finishedBLASTs;
 	/**
 	 * A flag, that indicates that the task is being performed (in order to
 	 * prevent illegal state calls)
@@ -86,6 +90,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 		this.queryList = new ConcurrentLinkedQueue<Fasta>(queryList);
 		// A list of query AC numbers must handle operations atomically
 		this.queryListACs = new ConcurrentLinkedQueue<String>(queryListACs);
+		this.finishedBLASTs = new ConcurrentLinkedQueue<BLAST>();
 		// The rest of constructor
 		this.numberOfThereds = numberOfThreads;
 		this.batchSize = batchSize;
@@ -95,6 +100,29 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 		// Indicate as not working
 		this.working = false;
 		this.listeners = new ArrayList<NCBI_EX_BLASTer_TaskFinished_listener>();
+	}
+
+	/**
+	 * Returns a list of finished BLASTs that are awaiting processing of their
+	 * results.
+	 * 
+	 * @return {@link List} {@link BLAST}s
+	 */
+	public List<BLAST> getFinishedBLASTs() {
+		List<BLAST> fBLASTs = new ArrayList<BLAST>();
+		while (!this.finishedBLASTs.isEmpty()) {
+			fBLASTs.add(this.finishedBLASTs.poll());
+		}
+		return fBLASTs;
+	}
+
+	/**
+	 * Returs working. Allows to chech whether the BLASTer is working or not.
+	 * 
+	 * @return {@code true} if so, else - {@code false}
+	 */
+	public synchronized boolean isWorking() {
+		return working;
 	}
 
 	/**
@@ -119,8 +147,17 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * 
 	 * @return a next {@link Fasta} query record
 	 */
-	protected synchronized Fasta pollFasta() {
+	protected Fasta pollFasta() {
 		return this.queryList.poll();
+	}
+
+	/**
+	 * Allows to add additional fasta-formatted records on the fly.
+	 * 
+	 * @param {@link List} fastas
+	 */
+	public void appendFasta(List<? extends Fasta> fastas) {
+		this.queryList.addAll(fastas);
 	}
 
 	/**
@@ -128,7 +165,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * 
 	 * @return a next {@link String} query record
 	 */
-	protected synchronized String pollAC() {
+	protected String pollAC() {
 		return this.queryListACs.poll();
 	}
 
