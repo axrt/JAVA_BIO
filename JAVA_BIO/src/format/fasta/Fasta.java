@@ -1,5 +1,6 @@
 package format.fasta;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Set;
  * 
  * @author axrt
  */
-public abstract class Fasta {
+public abstract class Fasta implements Serializable{
 	/**
 	 * A {@link String} representation of an abstract fasta-formatted sequence.
 	 */

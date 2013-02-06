@@ -29,18 +29,9 @@ public interface RemoteBLASTer extends Remote {
 	 */
 	public List<? extends BLAST> processDelegatedBLASTBatch(
 			List<? extends Fasta> queryList) throws Exception;
-
-	/**
-	 * 
-	 * @param databaseName
-	 * @return
-	 */
-	public boolean hasNessessaryDataBase(String databaseName);
-
-	/**
-	 * 
-	 * @param databaseStream
-	 */
-	public void deployAbsentDataBase(OutputStream databaseStream);
-
+    /**
+     * Returns a number of query fastas per one batch
+     * @return {@code int} number of query records
+     */
+    public int preferredBatchSize() throws Exception;
 }

@@ -57,7 +57,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	/**
 	 * A que of finished blasts, ready to return their results
 	 */
-	private Queue<? extends BLAST> finishedBLASTs;
+	private Queue<BLAST> finishedBLASTs;
 	/**
 	 * A flag, that indicates that the task is being performed (in order to
 	 * prevent illegal state calls)
@@ -141,7 +141,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * 
 	 * @return a next {@link Fasta} query record
 	 */
-	protected Fasta pollFasta() {
+	public Fasta pollFasta() {
 		return this.queryList.poll();
 	}
 
@@ -185,6 +185,24 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 */
 	public void stop() {
 		this.executorService.shutdown();
+	}
+
+	/**
+	 * Allows to store finished {@link BLAST}s in a queue.
+	 * 
+	 * @param {@link BLAST} blast
+	 */
+	protected void storeAFinishedBLAST(BLAST blast) {
+		this.finishedBLASTs.add(blast);
+	}
+
+	/**
+	 * Allows to ask whether the queue for fasta-formatted records has more
+	 * 
+	 * @return {@code true} if is, {@code false}
+	 */
+	public boolean hasMoreTasksForQuery() {
+		return !this.queryList.isEmpty();
 	}
 
 }

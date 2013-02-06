@@ -7,6 +7,7 @@ import format.fasta.Fasta;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -29,9 +30,6 @@ public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable {
 	protected int port;
 	protected String uri;
 	protected int blastBatchSize;
-	protected File executable;
-	protected File tmpDir;
-	protected File databaseDir;
 
 	/**
 	 * @param name
@@ -43,22 +41,19 @@ public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable {
 	 * @param tmpDir
 	 * @param databaseDir
 	 */
-	protected RemoteBLASTSprite(String name, int port, String uri,
-			int blastBatchSize, File executable, File tmpDir, File databaseDir) {
+	protected RemoteBLASTSprite(String name, int port, String uri, int blastBatchSize) {
 		super();
 		this.name = name;
 		this.port = port;
 		this.uri = uri;
-		this.blastBatchSize = blastBatchSize;
-		this.executable = executable;
-		this.tmpDir = tmpDir;
-		this.databaseDir = databaseDir;
+		this.blastBatchSize=blastBatchSize;
 	}
 
 	/**
+	 * @throws RemoteException
 	 * 
 	 */
-	public void selfDeploy() throws Exception {
+	public void selfDeploy() throws RemoteException {
 
 		System.setProperty(RemoteBLASTer_Helper.rmi_sever_hostname, this.uri);
 		RemoteBLASTer thisStub = (RemoteBLASTer) UnicastRemoteObject
@@ -67,18 +62,6 @@ public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable {
 		registry.rebind(this.name, thisStub);
 		//
 	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public abstract boolean hasNessessaryDataBase(String databaseName);
-
-	/**
-	 * 
-	 */
-	@Override
-	public abstract void deployAbsentDataBase(OutputStream databaseStream);
 
 	/**
 	 * 

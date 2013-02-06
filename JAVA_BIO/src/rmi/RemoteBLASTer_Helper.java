@@ -19,7 +19,8 @@ public class RemoteBLASTer_Helper {
 	}
 
 	public static final String rmi_sever_hostname = "java.rmi.server.hostname";
-
+    
+	
 	public static List<String> checkDatabaseFiles(
 			Map<String, String> MD5FileMap, File dbDirectory)
 			throws NoSuchAlgorithmException, IOException {

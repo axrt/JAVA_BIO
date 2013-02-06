@@ -3,7 +3,7 @@ package format.fasta;
 import java.io.Serializable;
 import java.util.HashSet;
 
-public class ProteinFasta extends Fasta implements Serializable {
+public class ProteinFasta extends Fasta {
 
 	static {
 		// Initializing the legal character set for a protein sequence

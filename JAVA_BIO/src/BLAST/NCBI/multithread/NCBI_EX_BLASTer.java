@@ -16,6 +16,7 @@ import BLAST.event.BLAST_FinishedEvent;
 import BLAST.event.BLAST_TaskFinished_listener;
 import BLAST.multithread.BLASTer;
 
+//TODO: change the "executive" to "executable"
 /**
  * An abstract representation of how a {@link BLASTer} should look for the
  * blast+ executables, provided by the <a
@@ -30,27 +31,27 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 	 * upon (running) by the {@link NCBI_EX_BLASTer}. *<i><b>Is wrapped to a
 	 * synchronized implementation in the constructor</i></b>
 	 */
-	protected List<NCBI_EX_BLAST> blasts;
+	protected final List<NCBI_EX_BLAST> blasts;
 	/**
 	 * {@link File} - A temporary directory that will be used to dump the input
 	 * and output files, that are used by the ncbi+ executable
 	 */
-	protected File tempDir;
+	protected final File tempDir;
 	/**
 	 * A full path (or a valid alias) to a blast+ executable
 	 */
-	protected File executable;
+	protected final File executable;
 	/**
 	 * A list of parameters. Should maintain a certain order. {"<-command>",
 	 * "[value]"}, just the way if in the blast+ executable input
 	 * 
 	 */
-	protected String[] parameterList;
+	protected final String[] parameterList;
 	/**
 	 * A list of {@link NCBI_EX_BLASTer_TaskFinished_listener}-implementing
 	 * modules that get notified when a BLASTer finishes a task
 	 */
-	private List<NCBI_EX_BLASTer_TaskFinished_listener> listeners;
+	private final List<NCBI_EX_BLASTer_TaskFinished_listener> listeners;
 
 	/**
 	 * @param queryList
@@ -92,6 +93,7 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 			blast.removeListener(this);
 		}
 	}
+
 	/**
 	 * Adds another listener to a list of those being notified when the task
 	 * finishes

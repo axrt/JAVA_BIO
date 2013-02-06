@@ -3,16 +3,15 @@
  */
 package rmi.NCBI;
 
-import java.io.File;
+import java.rmi.RemoteException;
 import java.util.List;
 
-import format.fasta.Fasta;
-
+import rmi.RemoteBLASTSprite;
 import BLAST.BLAST;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer_FinishedEvent;
 import BLAST.NCBI.multithread.NCBI_EX_BLASTer_TaskFinished_listener;
-import rmi.RemoteBLASTSprite;
+import format.fasta.Fasta;
 
 /**
  * @author axrt
@@ -32,31 +31,29 @@ public abstract class Remote_NCBI_EX_BLAST_Sprite extends RemoteBLASTSprite
 	 * @param tmpDir
 	 * @param databaseDir
 	 */
-	public Remote_NCBI_EX_BLAST_Sprite(String name, int port, String uri,
-			NCBI_EX_BLASTer blaster, int blastBatchSize, File executable,
-			File tmpDir, File databaseDir) {
-		super(name, port, uri, blastBatchSize, executable, tmpDir, databaseDir);
+	protected Remote_NCBI_EX_BLAST_Sprite(String name, int port, String uri,
+			NCBI_EX_BLASTer blaster,int blastBatchSize) {
+		super(name, port, uri,blastBatchSize);
 		this.blaster = blaster;
 	}
 
 	@Override
-	public void selfDeploy() throws Exception {
+	public void selfDeploy() throws RemoteException {
 		super.selfDeploy();
 		this.blaster.addListener(this);
 	}
 
 	@Override
-	public List<? extends BLAST> processDelegatedBLASTBatch(
-			List<? extends Fasta> queryList) throws Exception {
-		{
-			this.blaster.appendFasta(queryList);
-			if (!this.blaster.isWorking()) {
-				this.blaster.launch();
-			}
+	public synchronized List<? extends BLAST> processDelegatedBLASTBatch(
+			List<? extends Fasta> queryList) throws InterruptedException {	
+			
+		    this.blaster.appendFasta(queryList);
+
+			this.blaster.launch();
+
 			//
 			wait();
 			return this.blaster.getFinishedBLASTs();
-		}
 	}
 
 	@Override
