@@ -1,4 +1,4 @@
-package format.fasta;
+package format.fasta.protein;
 
 import format.BadFromatException;
 

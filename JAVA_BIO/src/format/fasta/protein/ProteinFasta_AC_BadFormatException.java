@@ -1,4 +1,4 @@
-package format.fasta;
+package format.fasta.protein;
 
 import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter;
 import format.BadFromatException;

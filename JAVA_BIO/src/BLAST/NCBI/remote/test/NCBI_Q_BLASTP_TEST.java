@@ -6,11 +6,8 @@ package BLAST.NCBI.remote.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import format.fasta.Fasta;
-import format.fasta.ProteinFasta;
-import BLAST.NCBI.remote.NCBI_Q_BLASTP;
+import format.fasta.protein.ProteinFasta;
 import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter;
-import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter.DATABASE_PARAM;
 import BLAST.NCBI.remote.NCBI_Q_TBLASTN;
 
 /**

@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -18,8 +16,7 @@ import org.xml.sax.SAXException;
 
 import BLAST.NCBI.output.NCBI_BLAST_OutputHelper;
 
-import format.fasta.Fasta;
-import format.fasta.ProteinFasta;
+import format.fasta.protein.ProteinFasta;
 
 /**
  * An abstraction of a BLATP from NCBI, which defines which parameters may be

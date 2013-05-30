@@ -3,10 +3,7 @@ package BLAST.NCBI.multithread;
 import java.io.File;
 import java.util.List;
 
-import BLAST.event.BLAST_FinishedEvent;
-
-import format.fasta.Fasta;
-import format.fasta.ProteinFasta;
+import format.fasta.protein.ProteinFasta;
 
 public abstract class NCBI_EX_BLASTer_P extends NCBI_EX_BLASTer {
 
