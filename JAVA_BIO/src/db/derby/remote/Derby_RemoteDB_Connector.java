@@ -1,4 +1,6 @@
-package DB.derby.remote;
+package db.derby.remote;
+
+import db.Connector;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -6,38 +8,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public abstract class Derby_RemoteDB_Connector {
+public abstract class Derby_RemoteDB_Connector extends Connector {
 
-	/**
-	 * The derby url
-	 */
-	protected final String derbyURL;
-	/**
-	 * User, used as a user name when connecting the derby database
-	 */
-	protected final String user;
-	/**
-	 * Password, used as a password when connecting the derby database
-	 */
-	protected final String password;
 	/**
 	 * Create, used to set the create database (if db not exists yet) when
 	 * connecting the derby database
 	 */
 	protected final String create;
-	/**
-	 * Database connection
-	 */
-	protected Connection connection;
-	/**
-	 * Properties to connect the database
-	 */
-	private Properties derbyConnectionProperties;
-	/**
-	 * A flag to track whether the connection to the database has been
-	 * established
-	 */
-	protected boolean connected = false;
 
 	/**
 	 * @param derbyURL
@@ -52,15 +29,12 @@ public abstract class Derby_RemoteDB_Connector {
 	 */
 	protected Derby_RemoteDB_Connector(String derbyURL, String user,
 			String password, String create) {
-		super();
-		this.derbyURL = derbyURL;
-		this.user = user;
-		this.password = password;
-		this.create = ";" + DB_Connector_helper.create + "=" + create;
+		super(derbyURL,user,password);
+		this.create = ";" + create + "=" + create;
 		// Initializing and assembling properties
-		this.derbyConnectionProperties = new Properties();
-		this.derbyConnectionProperties.put(DB_Connector_helper.user, this.user);
-		this.derbyConnectionProperties.put(DB_Connector_helper.password,
+		this.connectionProperties = new Properties();
+		this.connectionProperties.put(user, this.user);
+		this.connectionProperties.put(password,
 				this.password);
 	}
 
@@ -78,26 +52,25 @@ public abstract class Derby_RemoteDB_Connector {
 	protected static final String derbyRemoteDriver = "org.apache.derby.jdbc.ClientDriver";
 
 	/**
-	 * Loads a driver for the embedded derby database
+	 * Loads a driver for the remote derby database
 	 */
-	protected static boolean loadDerbyDriver() throws ClassNotFoundException {
+	protected boolean loadDriver() throws ClassNotFoundException {
 		// Dynamic class load the driver from the library
 		Class.forName(Derby_RemoteDB_Connector.derbyRemoteDriver);
 		return true;
-
 	}
 
 	/**
-	 * Connects to the embedded derby database
+	 * Connects to the remote derby database
 	 * 
 	 * @return {@code true} if connected, {@code false} if smth went wrong
 	 * @throws SQLException
 	 */
-	public boolean connectToRemoteDerbyDatabase() throws SQLException,
+	public boolean connectToDatabase() throws SQLException,
 			ClassNotFoundException {
-		if (Derby_RemoteDB_Connector.loadDerbyDriver()) {
-			this.connection = DriverManager.getConnection(this.derbyURL
-					+ this.create, this.derbyConnectionProperties);
+		if (this.loadDriver()) {
+			this.connection = DriverManager.getConnection(this.URL
+					+ this.create, this.connectionProperties);
 			return (this.connected = true);
 		} else {
 			return (this.connected = false);

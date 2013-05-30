@@ -1,7 +1,6 @@
-/**
+package db.derby.remote; /**
  * 
  */
-package DB.derby.remote;
 
 import java.sql.Connection;
 

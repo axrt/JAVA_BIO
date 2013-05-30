@@ -89,7 +89,7 @@ public class NculeotideFasta extends Fasta {
         String[] splitter = fastaRecord.split("\n");
         if (splitter.length < 2) {
             throw new NucleotideFasta_BadFromat_Exception(
-                    "Protein Fasta record: bad format; represented by a single line.");
+                    "Nucleotide Fasta record: bad format; represented by a single line.");
         } else {
             // Prepare a StringBuilder of a proper (at least close to proper)
             // size

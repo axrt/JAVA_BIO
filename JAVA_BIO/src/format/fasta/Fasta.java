@@ -12,11 +12,11 @@ public abstract class Fasta implements Serializable{
 	/**
 	 * A {@link String} representation of an abstract fasta-formatted sequence.
 	 */
-	protected String sequence;
+	protected final String sequence;
 	/**
 	 * A {@link String} representation of an abstract fasta record <u>A</u>ccession <u>N</u>umber.
 	 */
-	protected String AC;
+	protected final String AC;
 	/**
 	 * Represents a set of valid characters
 	 */
@@ -24,7 +24,7 @@ public abstract class Fasta implements Serializable{
 	/**
 	 * Fasta format starter character
 	 */
-	protected static final String fastaStart = ">";
+	public static final String fastaStart = ">";
 	/**
 	 * A conventional number of characters within a fasta-fromatted file
 	 */
