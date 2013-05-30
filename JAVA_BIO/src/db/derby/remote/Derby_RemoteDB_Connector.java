@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public abstract class Derby_RemoteDB_Connector extends Connector {
+public class Derby_RemoteDB_Connector extends Connector {
 
 	/**
 	 * Create, used to set the create database (if db not exists yet) when
@@ -39,21 +39,14 @@ public abstract class Derby_RemoteDB_Connector extends Connector {
 	}
 
 	/**
-	 * 
-	 * @return {@link Connection} connection to the database
-	 */
-	public Connection getConnection() {
-		return connection;
-	}
-
-	/**
-	 * The embedded driver, org.apache.derby.jdbc.EmbeddedDriver
+	 * The remote driver, org.apache.derby.jdbc.EmbeddedDriver
 	 */
 	protected static final String derbyRemoteDriver = "org.apache.derby.jdbc.ClientDriver";
 
 	/**
 	 * Loads a driver for the remote derby database
 	 */
+    @Override
 	protected boolean loadDriver() throws ClassNotFoundException {
 		// Dynamic class load the driver from the library
 		Class.forName(Derby_RemoteDB_Connector.derbyRemoteDriver);
@@ -66,6 +59,7 @@ public abstract class Derby_RemoteDB_Connector extends Connector {
 	 * @return {@code true} if connected, {@code false} if smth went wrong
 	 * @throws SQLException
 	 */
+    @Override
 	public boolean connectToDatabase() throws SQLException,
 			ClassNotFoundException {
 		if (this.loadDriver()) {
@@ -75,15 +69,6 @@ public abstract class Derby_RemoteDB_Connector extends Connector {
 		} else {
 			return (this.connected = false);
 		}
-	}
-
-	/**
-	 * 
-	 * @return {@code true} in case the database connection has been
-	 *         established, {@code false} otherwise
-	 */
-	public boolean isConnected() {
-		return this.connected;
 	}
 
 	/**
