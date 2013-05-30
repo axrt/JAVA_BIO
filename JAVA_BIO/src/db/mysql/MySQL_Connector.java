@@ -35,12 +35,17 @@ public class MySQL_Connector extends Connector {
         return true;
     }
 
+    /**
+     * Connects to the remote derby database
+     *
+     * @return {@code true} if connected, {@code false} if smth went wrong
+     * @throws SQLException
+     */
     @Override
     public boolean connectToDatabase() throws SQLException,
             ClassNotFoundException  {
         if (this.loadDriver()) {
-            this.connection = DriverManager.getConnection(this.URL
-                   , this.connectionProperties);
+            this.connection = DriverManager.getConnection(this.URL, this.connectionProperties);
             return (this.connected = true);
         } else {
             return (this.connected = false);
@@ -49,10 +54,10 @@ public class MySQL_Connector extends Connector {
 
     /**
      *
-     * @param URL
-     * @param user
-     * @param password
-     * @return
+     * @param URL {@link String} of the database
+     * @param user  {@link String} user name for the database
+     * @param password  {@link String} password for the given user
+     * @return a new instance of {@link MySQL_Connector} with a user name and password
      */
     public static MySQL_Connector newDefaultInstance(String URL,String user, String password){
         return new MySQL_Connector(URL,user,password);

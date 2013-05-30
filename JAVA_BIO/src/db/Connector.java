@@ -50,8 +50,8 @@ public abstract class Connector {
 
         // Initializing and assembling properties
         this.connectionProperties = new Properties();
-        this.connectionProperties.put(user, this.user);
-        this.connectionProperties.put(password,
+        this.connectionProperties.put(ConnectorHelper.user, this.user);
+        this.connectionProperties.put(ConnectorHelper.password,
                 this.password);
     }
 
