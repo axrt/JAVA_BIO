@@ -13,7 +13,8 @@ public class MySQL_ConnectorTest {
     @Test
     public void testMySQL_Connector() {
         System.out.println("Starting test");
-        MySQL_Connector mySQL_connector = MySQL_Connector.newDefaultInstance("jdbc:mysql://localhost/", "test", "test");
+        MySQL_Connector mySQL_connector = MySQL_Connector.newDefaultInstance("jdbc:mysql://localhost/", "ocular", "ocular");
+
         try {
             assertTrue(mySQL_connector.connectToDatabase());
         } catch (Exception e) {
