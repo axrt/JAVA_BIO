@@ -3,14 +3,21 @@
  */
 package BLAST.NCBI.local.exec;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
+import BLAST.NCBI.output.NCBI_BLAST_OutputHelper;
+import org.xml.sax.SAXException;
 import util.SystemUtil;
 
 import format.fasta.Fasta;
 
 import BLAST.NCBI.NCBI_BLAST;
+
+import javax.xml.bind.JAXBException;
 
 /**
  * A generalized abstraction of an NCBI BLAST process that is performed locally
@@ -85,13 +92,5 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
 		this.outputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
 				+ "out_" + String.valueOf(this.hashCode()));
 	}
-
-	/**
-	 * Should launch the blast process. In case a separate thread is created
-	 * alongside the main thread, this should be called within the run()
-	 * 
-	 * @throws Exception
-	 */
-	public abstract void BLAST() throws Exception;
 
 }

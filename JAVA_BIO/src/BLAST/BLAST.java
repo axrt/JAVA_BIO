@@ -57,4 +57,12 @@ public abstract class BLAST implements Runnable {
 					new BLAST_FinishedEvent(this));
 		}
 	}
+    /**
+     * Should launch the blast process. In case a separate thread is created
+     * alongside the main thread, this should be called within the run()
+     *
+     * @throws Exception
+     */
+
+    protected abstract void BLAST() throws Exception;
 }

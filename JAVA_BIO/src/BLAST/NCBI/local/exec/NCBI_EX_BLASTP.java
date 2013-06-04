@@ -32,7 +32,7 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
      *                      executable
-     * @param executive     {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
+     * @param executable    {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
      * @param parameterList {@link String[]} A list of parameters. Should maintain a
@@ -40,9 +40,9 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
      *                      the blast+ executable input
      */
     protected NCBI_EX_BLASTP(List<? extends ProteinFasta> query,
-                             List<String> query_IDs, File tempDir, File executive,
+                             List<String> query_IDs, File tempDir, File executable,
                              String[] parameterList) {
-        super(query, query_IDs, tempDir, executive, parameterList);
+        super(query, query_IDs, tempDir, executable, parameterList);
     }
 
     /**
@@ -75,23 +75,8 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
         return new NCBI_EX_BLASTP(query, query_IDs, tempDir, executive,
                 parameterList) {
 
-            @Override
-            public void run() {
-                try {
-                    // This default instance must first blast the query,
-                    this.BLAST();
-                    // Indicate that it has finished
-                    this.BLASTed = true;
-                    // Notify all of the listening modules of that it has
-                    // finished
-                    this.notifyListeners();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
             /**
-             * Performs the BLASTP on a local machine throught blastp executable
+             * Performs the BLAST on a local machine throught blast-executable
              * against a local database
              */
             @Override
@@ -127,7 +112,7 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
                     while ((s = stdNorm.readLine()) != null) {
                         System.out.println("STD:> " + s);
                     }
-                }catch (IOException ioe){
+                } catch (IOException ioe) {
                     throw ioe;
                 }
                 // In case of an error - try to recover
@@ -140,7 +125,7 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
                             this.BLAST();
                         }
                     }
-                }catch (IOException ioe){
+                } catch (IOException ioe) {
                     throw ioe;
                 }
                 // Suck in the output
@@ -154,6 +139,21 @@ public abstract class NCBI_EX_BLASTP extends NCBI_EX_BLAST {
                 // other parallel process
                 this.tempDir.delete();
 
+            }
+
+            @Override
+            public void run() {
+                try {
+                    // This default instance must first blast the query,
+                    this.BLAST();
+                    // Indicate that it has finished
+                    this.BLASTed = true;
+                    // Notify all of the listening modules of that it has
+                    // finished
+                    this.notifyListeners();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
     }

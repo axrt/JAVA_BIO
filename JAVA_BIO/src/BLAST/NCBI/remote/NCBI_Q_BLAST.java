@@ -155,7 +155,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * been successful, otherwise throws BadQBLASTRequestException, which
 	 * contains the error/reason in its message.
 	 * 
-	 * @throws BadQBLASTRequestException
+	 * @throws Bad_Q_BLAST_RequestException
 	 */
 	protected void extractRID() throws Bad_Q_BLAST_RequestException {
 		// Checking whether the request has been accepted correctly
@@ -248,27 +248,28 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		return false;
 	}
 
-	/**
-	 * Combines the formQuery() sendBLASTRequest() extractRID() and
-	 * retrieveResult() in order to finish the Q_BLAST with NCBI
-	 */
-	@Override
-	public void run() {
-		try {
-			this.formQuery();
-			this.sendBLASTRequest();
-			this.extractRID();
-			// System.out.println("RID: "+this.getBLAST_RID());
-			while (!this.resultsReady()) {
-				// System.out.println("Waiting..");
-				Thread.sleep(3000);
-			}
-			this.retrieveResult();
-			this.BLASTed = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @Override
+    protected void BLAST() throws Exception {
+        this.formQuery();
+        try {
+            this.sendBLASTRequest();
+            this.extractRID();
+            // System.out.println("RID: "+this.getBLAST_RID());
+            while (!this.resultsReady()) {
+                // System.out.println("Waiting..");
+                Thread.sleep(3000);
+            }
+            this.retrieveResult();
+        } catch (IOException ioe) {
+            throw ioe;
+        } catch (Bad_Q_BLAST_RequestException bqre) {
+            throw bqre;
+        } catch (InterruptedException ie) {
+            throw ie;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
 	/**
 	 * Should determine the way that the output must be retrieved. The default
