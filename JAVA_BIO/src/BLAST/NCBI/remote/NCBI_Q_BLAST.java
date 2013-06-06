@@ -249,7 +249,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	}
 
     @Override
-    protected void BLAST() throws Exception {
+    protected void BLAST() throws IOException,Bad_Q_BLAST_RequestException,InterruptedException {
         this.formQuery();
         try {
             this.sendBLASTRequest();
@@ -259,15 +259,12 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
                 // System.out.println("Waiting..");
                 Thread.sleep(3000);
             }
-            this.retrieveResult();
         } catch (IOException ioe) {
             throw ioe;
         } catch (Bad_Q_BLAST_RequestException bqre) {
             throw bqre;
         } catch (InterruptedException ie) {
             throw ie;
-        } catch (Exception e) {
-            throw e;
         }
     }
 

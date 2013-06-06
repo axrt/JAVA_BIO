@@ -131,7 +131,16 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
             public void run() {
                 try {
                     this.BLAST();
-                } catch (Exception e) {
+                    this.retrieveResult();
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (Bad_Q_BLAST_RequestException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (InterruptedException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (SAXException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (JAXBException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
                 this.BLASTed = true;
