@@ -36,7 +36,15 @@ public class SystemUtil {
     /**
      * Archive format suffix
      */
+    public static final String TAR_SUF = ".tar";
+    /**
+     * Tar format suffix
+     */
     public static final String ARCH_SUF = ".gz";
+    /**
+     * Tar.GZ format suffix
+     */
+    public static final String TAR_GZ_SUF = SystemUtil.TAR_SUF+SystemUtil.ARCH_SUF;
     /**
      * Perfix for the gi_taxid database dump
      */
@@ -49,6 +57,10 @@ public class SystemUtil {
      * GI_TAXID dump file name
      */
     public static final String GI_TAXID_FILE = "gi_taxid" + SystemUtil.DMP_SUF;
+    /**
+     * GI_TAXID updates dump archive file name
+     */
+    public static final String GI_TAXID_UPD_FILE_ARCH = SystemUtil.GI_TAXID+"_nucl_diff" + SystemUtil.DMP_SUF+SystemUtil.ARCH_SUF;
     /**
      * Perfix for the nodes database dump
      */
@@ -65,7 +77,14 @@ public class SystemUtil {
      * Nodes dump file name
      */
     public static final String NAMES_FILE = "names" + SystemUtil.DMP_SUF;
-
+    /**
+     * Taxdump name
+     */
+    public static final String TAXDUMP = "taxdump";
+    /**
+     * Taxdump archive file name
+     */
+    public static final String TAXDUMP_ARCH = SystemUtil.TAXDUMP +SystemUtil.TAR_GZ_SUF;
     /**
      * Constructor prevents instantiation
      */
@@ -104,8 +123,10 @@ public class SystemUtil {
      * @param archiveFile {@link File} tar.gz file to extract
      * @param outputDir   {@link File} a directory to extract to
      * @throws IOException in case something goes wrong during file extract
+     * @return {@link File} an abstract path of the directory where the archive
+     * has been extracted
      */
-    public static void unArchiveTarGZFile(final File archiveFile, File outputDir) throws IOException {
+    public static File unArchiveTarGZFile(final File archiveFile, File outputDir) throws IOException {
         InputStream inputStream = null;
         OutputStream fileOutputStream = null;
         TarInputStream tarInputStream = null;
@@ -146,6 +167,7 @@ public class SystemUtil {
             if (tarInputStream != null) {
                 tarInputStream.close();
             }
+            return outputDir;
         }
     }
 
@@ -155,8 +177,10 @@ public class SystemUtil {
      * @param archiveFile {@link File} tar.gz file to extract
      * @param outputDir   {@link File} a directory to extract to
      * @throws IOException in case something goes wrong during file extract
+     * @return {@link File} an abstract path of the directory where the archive
+     * has been extracted
      */
-    public static void unArchiveGZFile(final File archiveFile, File outputDir) throws IOException {
+    public static File unArchiveGZFile(final File archiveFile, File outputDir) throws IOException {
 
         InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -182,6 +206,7 @@ public class SystemUtil {
             if(outputStream!=null){
                 IOUtils.closeQuietly(outputStream);
             }
+            return outputDir;
         }
     }
 
@@ -215,7 +240,7 @@ public class SystemUtil {
             final boolean cwd = ftpClient.changeWorkingDirectory(subDir.getAbsolutePath());
             //Prepare the outputstream to save the file
             System.out.print(ftpClient.getReplyString());
-            outputStream = new FileOutputStream(new File(tmpDownloadDir, fileName.getName()));
+            outputStream = new FileOutputStream(outputFile=new File(tmpDownloadDir, fileName.getName()));
             System.out.print(ftpClient.getReplyString());
             inputStream = ftpClient.retrieveFileStream(fileName.getName());
             System.out.print(ftpClient.getReplyString());

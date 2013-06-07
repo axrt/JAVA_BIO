@@ -24,12 +24,12 @@ public class SystemUtilTest {
 
     }
 
-    //@Test
+    @Test
     public void downloadFileFromNCBIFTPTest() {
 
         final File tmpDownloadDir =  new File("/home/alext/Downloads/tmp");
         final File subDir  = new File(SystemUtil.NCBI_TAXONOMY);
-        final File fileName = new File(SystemUtil.GI_TAXID_ARCH);
+        final File fileName = new File(SystemUtil.TAXDUMP_ARCH);
 
         try {
             SystemUtil.downloadFileFromNCBIFTP(tmpDownloadDir,subDir,fileName);
