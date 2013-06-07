@@ -92,6 +92,11 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
     /**
      * Performs the BLAST on a local machine throught blast-executable
      * against a local database
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws JAXBException
+     * @throws SAXException
      */
     @Override
     public void BLAST() throws IOException, InterruptedException,
@@ -102,7 +107,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
         this.fileOperator.writeFastaListToFile(this.query,
                 this.inputFile);
         // Crate the operating command string
-        String[] command = new String[this.parameterList.length + 7];
+        final String[] command = new String[this.parameterList.length + 7];
         command[0] = this.executable.getPath();
         command[1] = "-query";
         command[2] = this.inputFile.getPath();
@@ -115,7 +120,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
             command[i] = parameterList[i - 7];
         }
         // Build a process
-        Process p = Runtime.getRuntime().exec(command);
+        final Process p = Runtime.getRuntime().exec(command);
         p.waitFor();
 
         String s;

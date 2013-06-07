@@ -1,137 +1,264 @@
 package util;
 
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.zip.GZIPInputStream;
+
+import com.ice.tar.TarInputStream;
+import com.ice.tar.TarEntry;
+import org.apache.commons.net.ftp.FTPFile;
 
 public class SystemUtil {
     /**
      * NCBI FTP server address
      */
-    private static String NCBI_FTP = "ftp.ncbi.nlm.nih.gov";
+    public static final String NCBI_FTP = "ftp.ncbi.nlm.nih.gov";
     /**
      * Anonymous ftp login/password
      */
-    private static String ANONYMOUS = "anonymous";
+    public static final String ANONYMOUS = "anonymous";
     /**
      * NCBI FTP server taxonomy subfolder
      */
-    private static String NCBI_TAXONOMY = "/pub/taxonomy/";
+    public static final String NCBI_TAXONOMY = "/pub/taxonomy/";
     /**
      * NCBI FTP server address for taxonomy files
      */
-    private static String NCBI_TAXONOMY_FTP = SystemUtil.NCBI_FTP + SystemUtil.NCBI_TAXONOMY;
+    public static final String NCBI_TAXONOMY_FTP = SystemUtil.NCBI_FTP + SystemUtil.NCBI_TAXONOMY;
     /**
      * Dump file .dmp extension
      */
-    private static String DMP_SUF = ".dmp";
+    public static final String DMP_SUF = ".dmp";
     /**
      * Archive format suffix
      */
-    private static String ARCH_SUF = ".gz";
+    public static final String ARCH_SUF = ".gz";
     /**
      * Perfix for the gi_taxid database dump
      */
-    private static String GI_TAXID = "gi_taxid";
+    public static final String GI_TAXID = "gi_taxid";
     /**
      * GI_TAXID dump file archive name
      */
-    private static String GI_TAXID_ARCH = SystemUtil.GI_TAXID + "_nucl_diff" + SystemUtil.DMP_SUF + SystemUtil.ARCH_SUF;
+    public static final String GI_TAXID_ARCH = SystemUtil.GI_TAXID + "_nucl_diff" + SystemUtil.DMP_SUF + SystemUtil.ARCH_SUF;
     /**
      * GI_TAXID dump file name
      */
-    private static String GI_TAXID_FILE = "gi_taxid" + SystemUtil.DMP_SUF;
+    public static final String GI_TAXID_FILE = "gi_taxid" + SystemUtil.DMP_SUF;
     /**
      * Perfix for the nodes database dump
      */
-    private static String NODES = "nodes";
+    public static final String NODES = "nodes";
     /**
      * Nodes dump file name
      */
-    private static String NODES_FILE = "nodes" + SystemUtil.DMP_SUF;
+    public static final String NODES_FILE = "nodes" + SystemUtil.DMP_SUF;
     /**
      * Perfix for the nodes database dump
      */
-    private static String NAMES = "names";
+    public static final String NAMES = "names";
     /**
      * Nodes dump file name
      */
-    private static String NAMES_FILE = "names" + SystemUtil.DMP_SUF;
+    public static final String NAMES_FILE = "names" + SystemUtil.DMP_SUF;
+
     /**
      * Constructor prevents instantiation
      */
-	private SystemUtil() {
-		throw new AssertionError();
-	}
+    private SystemUtil() {
+        throw new AssertionError();
+    }
 
-	/**
-	 * System file system path separator
-	 */
-	public static final String SysFS = System.getProperty("file.separator");
-	/**
-	 * User home directory
-	 */
-	public static final String userHomeDir = System.getProperty("user.home",
-			".");
-	/**
-	 * Platform (OS) name
-	 */
-	public static final String platform = System.getProperty("os.name");
-	/**
-	 * Capacity here is "32/64 bit" feature of the OS
-	 */
-	public static final String capacity = System
-			.getProperty("sun.arch.data.model");
-	/**
-	 * A path to the jar that is being executed
-	 */
-	public static final String jarPath = new File(SystemUtil.class
-			.getProtectionDomain().getCodeSource().getLocation().getPath())
-			.getParentFile().getParent();
+    /**
+     * System file system path separator
+     */
+    public static final String SysFS = System.getProperty("file.separator");
+    /**
+     * User home directory
+     */
+    public static final String userHomeDir = System.getProperty("user.home",
+            ".");
+    /**
+     * Platform (OS) name
+     */
+    public static final String platform = System.getProperty("os.name");
+    /**
+     * Capacity here is "32/64 bit" feature of the OS
+     */
+    public static final String capacity = System
+            .getProperty("sun.arch.data.model");
+    /**
+     * A path to the jar that is being executed
+     */
+    public static final String jarPath = new File(SystemUtil.class
+            .getProtectionDomain().getCodeSource().getLocation().getPath())
+            .getParentFile().getParent();
 
+    /**
+     * Extracts a given tar.gz file into a given directory
+     *
+     * @param archiveFile {@link File} tar.gz file to extract
+     * @param outputDir   {@link File} a directory to extract to
+     * @throws IOException in case something goes wrong during file extract
+     */
+    public static void unArchiveTarGZFile(final File archiveFile, File outputDir) throws IOException {
+        InputStream inputStream = null;
+        OutputStream fileOutputStream = null;
+        TarInputStream tarInputStream = null;
 
+        outputDir=SystemUtil.createASubDirFromFileName(archiveFile, outputDir);
+        outputDir.mkdir();
 
+        try {
+            inputStream = new FileInputStream(archiveFile);
+            inputStream = new GZIPInputStream(inputStream);
+            tarInputStream = new TarInputStream(inputStream);
+            TarEntry tarEntry;
+            byte[] buff = new byte[1024];
+            while (null != (tarEntry = tarInputStream.getNextEntry())) {
+                final File next = new File(outputDir, tarEntry.getName());
+                int bytesRead;
+                if (tarEntry.isDirectory()) {
+                    if (!next.exists()) {
+                        if (!next.mkdirs()) {
+                            throw new IllegalStateException("Could not create a directory..");
+                        }
+                    }
+                } else {   //TODO: correct this to IOUtils copy
+                    fileOutputStream = new FileOutputStream(next);
+                    while ((bytesRead = tarInputStream.read(buff, 0, 1024)) > -1) {
+                        fileOutputStream.write(buff, 0, 1024);
+                    }
+                }
+            }
+        } catch (FileNotFoundException fnfe) {
+            throw fnfe;
+        } catch (IOException ioe) {
+            throw ioe;
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (tarInputStream != null) {
+                tarInputStream.close();
+            }
+        }
+    }
+
+    /**
+     * Extracts a given .gz file into a given directory
+     *
+     * @param archiveFile {@link File} tar.gz file to extract
+     * @param outputDir   {@link File} a directory to extract to
+     * @throws IOException in case something goes wrong during file extract
+     */
+    public static void unArchiveGZFile(final File archiveFile, File outputDir) throws IOException {
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        outputDir=SystemUtil.createASubDirFromFileName(archiveFile, outputDir);
+        outputDir.mkdir();
+
+        try {
+            inputStream = new FileInputStream(archiveFile);
+            inputStream = new BufferedInputStream(inputStream);
+            inputStream=new GzipCompressorInputStream(inputStream);
+            final String[] split=archiveFile.getName().split("\\.gz");
+            outputStream=new FileOutputStream(new File(outputDir,split[0]));
+            IOUtils.copy(inputStream, outputStream);
+        } catch (FileNotFoundException fnfe) {
+           throw fnfe;
+        } catch (IOException ioe) {
+            throw ioe;
+        }  finally {
+            if(inputStream!=null){
+               IOUtils.closeQuietly(inputStream);
+            }
+            if(outputStream!=null){
+                IOUtils.closeQuietly(outputStream);
+            }
+        }
+    }
 
     /**
      * Downloads a file for a given file name from the NCBI FTP (Taxonomy directory) server
+     *
      * @param tmpDownloadDir {@link File} a temporary directory to store the files downloaded
-     * @param fileName {@link String} requested file name
-     * @param subDir {@link File} a subdirectory to download file from
+     * @param subDir         {@link File} a subdirectory of the NCBI FTP to download file from
+     * @param fileName       {@link File} requested file name
      * @return {@link File} pointer to the file that has been retrieved and saved locally to the temporary folder
      * @throws java.io.IOException in case anything goes wrong during the ftp communication of file saving locally
      */
-    public static File downloadFileFromNCBIFTP(File tmpDownloadDir,File subDir, String fileName) throws IOException {
-
+    public static File downloadFileFromNCBIFTP(final File tmpDownloadDir, final File subDir, final File fileName) throws IOException {
+        //TODO: create a separate utility class, make it extendable and make a more general abstraction for ftp downloads, remove all the printouts
         //Prepare an FTP client
-        FTPClient ftpClient = new FTPClient();
-        FileOutputStream fileOutputStream = null;
+        final FTPClient ftpClient = new FTPClient();
+        OutputStream outputStream = null;
+        InputStream inputStream = null;
         File outputFile = null;
 
         try {
             //Connect to the server
-            ftpClient.connect(SystemUtil.NCBI_FTP);
+            ftpClient.connect(SystemUtil.NCBI_FTP, 21);
+            ftpClient.enterLocalPassiveMode();
             //Login
-            ftpClient.login(SystemUtil.ANONYMOUS, SystemUtil.ANONYMOUS);
+            final boolean login = ftpClient.login(SystemUtil.ANONYMOUS, "");
+            System.out.print(ftpClient.getReplyString());
             //Set binary mode
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            //Change the directory to the one that contains taxonomic infomation
-            ftpClient.cwd(subDir.getAbsolutePath());
+            //Change the directory to the one that contains taxonomic information
+            final boolean cwd = ftpClient.changeWorkingDirectory(subDir.getAbsolutePath());
             //Prepare the outputstream to save the file
-            fileOutputStream = new FileOutputStream(outputFile = new File(tmpDownloadDir.getAbsoluteFile() + SystemUtil.SysFS + fileName));
-            //Download the required file
-            ftpClient.retrieveFile(fileName, fileOutputStream);
-
+            System.out.print(ftpClient.getReplyString());
+            outputStream = new FileOutputStream(new File(tmpDownloadDir, fileName.getName()));
+            System.out.print(ftpClient.getReplyString());
+            inputStream = ftpClient.retrieveFileStream(fileName.getName());
+            System.out.print(ftpClient.getReplyString());
+            IOUtils.copy(inputStream, outputStream);
         } catch (IOException ioe) {
             throw ioe;
         } finally {
-            if(fileOutputStream!=null){
-                fileOutputStream.close();
+            if (outputStream != null) {
+                IOUtils.closeQuietly(outputStream);
             }
+            if (inputStream != null) {
+                IOUtils.closeQuietly(inputStream);
+            }
+            ftpClient.logout();
             ftpClient.disconnect();
         }
         return outputFile;
+    }
+
+    /**
+     * A utility method for the file unarchiving methods. In order to create a subdirectory to unarchive
+     * a file it makes sense to create a name that is derivend from the archive file name. This method
+     * tries to cut off everything form the beginning of the file (like tar.gz for example) and leaves only the name
+     * for the subdirectoryt naming
+     * @param file {@link File} to unarchive
+     * @param outputDir {@link File} directory where the archive is destined to be uncompressed
+     * @return {@link File} an abstract path to the subdirectory where the archive is being uncompressed
+     */
+    private static File createASubDirFromFileName(final File file, File outputDir) {
+        //Create a subdirectory to store the files, which corresponds to the name of the archive
+        String[] split = file.getName().split("\\.");
+        if (split.length > 1) {
+            //Checking for whether the file was a hidden by a dot in the beginning of the filename
+            if(split[0].length()>0){
+                outputDir = new File(outputDir, split[0]);
+            }else{
+                outputDir = new File(outputDir, split[1]);
+            }
+
+        } else {
+            outputDir = new File(outputDir, file.getName() + "_dir");
+        }
+        outputDir.mkdir();
+        return outputDir;
     }
 }

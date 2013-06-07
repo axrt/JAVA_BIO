@@ -74,7 +74,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @throws {@link Bad_Q_BLAST_Parameter_Exception} in case a forbidden
 	 *         parameters is attempted to insert
 	 */
-	public boolean addRequestParameter(NCBI_Q_BLAST_Parameter parameter)
+	public boolean addRequestParameter(final NCBI_Q_BLAST_Parameter parameter)
 			throws Bad_Q_BLAST_Parameter_Exception {
 		// In this abstraction is's all about a certain implementation, so it
 		// has been set in the
@@ -100,7 +100,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	protected void formQuery() {
 		// For each Fasta in the query list - add it to a single string
-		StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < this.query.size(); i++) {
 			sb.append(this.query.get(i).toString());
 			sb.append('\n');
@@ -129,16 +129,16 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 				.CMD(NCBI_Q_BLAST_Parameter.CMD_PARAM.Put));
 		BufferedReader br = null;
 		// Generates a request
-		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
+        final URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
 		System.out.println(request);
 		// Opens a connection to send the request to the server
-		URLConnection connection = request.openConnection();
+        final URLConnection connection = request.openConnection();
 		// Gets the text output, which is actually an HTML page
 		br = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
 		// Creates a StringBuilder in order to collect the output HTML
-		StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 		String inputLine;
 		while ((inputLine = br.readLine()) != null) {
 			sb.append(inputLine);
@@ -162,21 +162,21 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		// In case the output contains the keywords for the QBLAST comment tag,
 		// it either has error message, or everything went well and the RID can
 		// be extracted
-		String[] requestAcceptedPageLines = this.requestAcceptedPage
+        final String[] requestAcceptedPageLines = this.requestAcceptedPage
 				.split(String.valueOf('\n'));
 		// If an error message occurs, it is always contained by
 		// the <p class="error">Message ID#....</p></li></ul> tag
-		String messageID = "Message ID#";
-		String messageID_tail = "</p></li></ul>";
-		String class_error = "class=\"error\"";
-		String RID_equals = "RID = ";
+		final String messageID = "Message ID#";
+        final String messageID_tail = "</p></li></ul>";
+        final String class_error = "class=\"error\"";
+        final String RID_equals = "RID = ";
 		// Browsing through the output html line by line
 		for (String line : requestAcceptedPageLines) {
 			// If no error has occurred
 			if (!line.contains(class_error)) {
 				// Normally the output contains a line with the RID
 				if (line.contains(RID_equals)) {
-					String[] RIDSetter = line.split(" = ");
+                    final String[] RIDSetter = line.split(" = ");
 					// Not sure if the trim is really needed here
 					this.BLAST_RID = RIDSetter[1].trim();
 					// If no such line (containing RID exists),
@@ -217,13 +217,13 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 			Bad_Q_BLAST_RequestException {
 		BufferedReader br = null;
 		// Generates a status request
-		String statusRequest = NCBI_Q_BLAST_Parameter.CMD(
+		final String statusRequest = NCBI_Q_BLAST_Parameter.CMD(
 				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
 				+ NCBI_Q_BLAST_ParameterSet.ampersand
 				+ NCBI_Q_BLAST_Parameter.RID(this.BLAST_RID).toString();
-		URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL + statusRequest);
+		final URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL + statusRequest);
 		// Opens a connection
-		URLConnection connection = request.openConnection();
+        final URLConnection connection = request.openConnection();
 		// Gets the text output
 		br = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
