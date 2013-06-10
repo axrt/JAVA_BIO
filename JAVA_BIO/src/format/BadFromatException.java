@@ -1,6 +1,6 @@
 package format;
 
-public abstract class BadFromatException extends Exception {
+public class BadFromatException extends Exception {
 
 	public BadFromatException() {
 	}
