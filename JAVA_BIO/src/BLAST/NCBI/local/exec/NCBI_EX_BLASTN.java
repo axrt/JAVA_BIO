@@ -1,8 +1,6 @@
 package BLAST.NCBI.local.exec;
 
-import format.fasta.Fasta;
-import format.fasta.nucleotide.NculeotideFasta;
-import format.fasta.protein.ProteinFasta;
+import format.fasta.nucleotide.NucleotideFasta;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,11 +25,11 @@ public abstract class NCBI_EX_BLASTN extends NCBI_EX_BLAST {
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      */
-    protected NCBI_EX_BLASTN(List<? extends NculeotideFasta> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList) {
+    protected NCBI_EX_BLASTN(List<? extends NucleotideFasta> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList) {
         super(query, query_IDs, tempDir, executive, parameterList);
     }
     /**
-     * @param query         {@link List<? extends  format.fasta.nucleotide.NculeotideFasta >} a list of query
+     * @param query         {@link List<? extends   format.fasta.nucleotide.NucleotideFasta  >} a list of query
      *                      fasta-formatted records
      * @param query_IDs     {@link List<String>} a list of AC numbers of sequences in a
      *                      database
@@ -48,13 +46,13 @@ public abstract class NCBI_EX_BLASTN extends NCBI_EX_BLAST {
      *         parameters
      */
     public static NCBI_EX_BLASTN newDefaultInstance(
-            List<? extends NculeotideFasta> query, List<String> query_IDs,
+            List<? extends NucleotideFasta> query, List<String> query_IDs,
             File tempDir, File executive, String[] parameterList) {
         if (query_IDs == null) {
             query_IDs = new ArrayList<String>();
         }
         if (query == null) {
-            query = new ArrayList<NculeotideFasta>();
+            query = new ArrayList<NucleotideFasta>();
         }
         // TODO: input a check for whether both lists are empty or declared null
         return new NCBI_EX_BLASTN(query, query_IDs, tempDir, executive,

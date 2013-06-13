@@ -1,21 +1,19 @@
 package format.fasta.nucleotide;
 
 import format.fasta.Fasta;
-import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFromatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+
 import java.util.HashSet;
 
 /**
  * A class that represents a nucleotide fasta record
  */
-public class NculeotideFasta extends Fasta {
+public class NucleotideFasta extends Fasta {
 
     static {
         allowedChars = new HashSet<Character>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '\n', '/'}));
     }
 
-    protected NculeotideFasta(String AC, String sequence)
+    protected NucleotideFasta(String AC, String sequence)
             throws NucleotideFasta_AC_BadFormatException, NucleotideFasta_Sequence_BadFromatException {
         super(AC, sequence);
         // Enforce uppercase
@@ -50,30 +48,30 @@ public class NculeotideFasta extends Fasta {
         }
     }
     /**
-     * A static factory to assemble a {@link NculeotideFasta} from AC and a
+     * A static factory to assemble a {@link NucleotideFasta} from AC and a
      * sequence.
      *
      * @param {@link String} AC
      * @param {@link String} sequence
-     * @return a new instance of a {@link NculeotideFasta}
+     * @return a new instance of a {@link NucleotideFasta}
      * @throws NucleotideFasta_AC_BadFormatException
      *          in case smth is not all right with the AC
      * @throws NucleotideFasta_Sequence_BadFromatException
      *          in case smth is not all right with the sequence
      */
-    public static NculeotideFasta newInstanceFromParts(String AC, String sequence)
+    public static NucleotideFasta newInstanceFromParts(String AC, String sequence)
             throws NucleotideFasta_AC_BadFormatException,
             NucleotideFasta_Sequence_BadFromatException {
 
-        // If all goes well, return a new NculeotideFasta record object.
-        return new NculeotideFasta(AC, sequence);
+        // If all goes well, return a new NucleotideFasta record object.
+        return new NucleotideFasta(AC, sequence);
     }
     /**
-     * A static factory to assemble a {@link NculeotideFasta} from a {@link String}
+     * A static factory to assemble a {@link NucleotideFasta} from a {@link String}
      * , that represents a fasta-fromatted record
      *
      * @param {@link String} fastaRecord
-     * @return a new instance of a {@link NculeotideFasta}
+     * @return a new instance of a {@link NucleotideFasta}
      * @throws NucleotideFasta_BadFromat_Exception
      *
      * @throws NucleotideFasta_AC_BadFormatException
@@ -81,7 +79,7 @@ public class NculeotideFasta extends Fasta {
      * @throws NucleotideFasta_Sequence_BadFromatException
      *
      */
-    public static NculeotideFasta newInstanceFromFromattedText(String fastaRecord)
+    public static NucleotideFasta newInstanceFromFromattedText(String fastaRecord)
             throws NucleotideFasta_BadFromat_Exception,
             NucleotideFasta_AC_BadFormatException,
             NucleotideFasta_Sequence_BadFromatException {
@@ -100,7 +98,7 @@ public class NculeotideFasta extends Fasta {
                 // Concatenate the sequence
                 sb.append(splitter[i].replaceAll(" ", ""));
             }
-            return NculeotideFasta.newInstanceFromParts(splitter[0],
+            return NucleotideFasta.newInstanceFromParts(splitter[0],
                     new String(sb));
             // TODO: this implementation may not be the fastest, see if smth
             // could be done

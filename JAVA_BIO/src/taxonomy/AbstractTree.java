@@ -12,18 +12,36 @@ import java.util.List;
  */
 public abstract class AbstractTree<T> {
 
-        private Node<T> root;
+        protected Node<T> root;
 
         public AbstractTree(T rootData) {
             root = new Node<T>();
             root.data = rootData;
-            root.children = new ArrayList<>();
         }
 
         public static class Node<T> {
-            private T data;
-            private Node<T> parent;
-            private List<Node<T>> children;
+            protected T data;
+            protected Node<T> parent;
+            protected List<Node<T>> children;
+
+            public Node() {
+                 this.children=new ArrayList<>();
+            }
+
+            public void setParent(Node<T> parent){
+                this.parent=parent;
+            }
+            public T getData() {
+                return data;
+            }
+
+            public Node<T> getParent() {
+                return parent;
+            }
+
+            public List<Node<T>> getChildren() {
+                return children;
+            }
         }
 
 }
