@@ -119,6 +119,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
         for (int i = 7; i < command.length; i++) {
             command[i] = parameterList[i - 7];
         }
+        try{
         // Build a process
         final Process p = Runtime.getRuntime().exec(command);
         p.waitFor();
@@ -131,8 +132,6 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
             while ((s = stdNorm.readLine()) != null) {
                 System.out.println("STD:> " + s);
             }
-        } catch (IOException ioe) {
-            throw ioe;
         }
         // In case of an error - try to recover
         try (BufferedReader stdError = new BufferedReader(
@@ -144,20 +143,19 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
                     this.BLAST();
                 }
             }
-        } catch (IOException ioe) {
-            throw ioe;
         }
         // Suck in the output
         this.blastOutput = NCBI_BLAST_OutputHelper
                 .catchBLASTOutput(this.fileOperator
                         .readOutputXML(this.outputFile));
-        // Cleanup
-        this.inputFile.delete();
-        this.outputFile.delete();
-        // Note: temp directory will be removed only if not used by any
-        // other parallel process
-        this.tempDir.delete();
-
+        }finally {
+            // Cleanup
+            this.inputFile.delete();
+            this.outputFile.delete();
+            // Note: temp directory will be removed only if not used by any
+            // other parallel process
+            this.tempDir.delete();
+        }
     }
 
 }
