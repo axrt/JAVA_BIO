@@ -156,19 +156,16 @@ public class SystemUtil {
                     }
                 }
             }
-        } catch (FileNotFoundException fnfe) {
-            throw fnfe;
-        } catch (IOException ioe) {
-            throw ioe;
-        } finally {
+        }  finally {
             if (inputStream != null) {
                 inputStream.close();
             }
             if (tarInputStream != null) {
                 tarInputStream.close();
             }
-            return outputDir;
+
         }
+        return outputDir;
     }
 
     /**
@@ -195,19 +192,16 @@ public class SystemUtil {
             final String[] split=archiveFile.getName().split("\\.gz");
             outputStream=new FileOutputStream(new File(outputDir,split[0]));
             IOUtils.copy(inputStream, outputStream);
-        } catch (FileNotFoundException fnfe) {
-           throw fnfe;
-        } catch (IOException ioe) {
-            throw ioe;
-        }  finally {
+        } finally {
             if(inputStream!=null){
                IOUtils.closeQuietly(inputStream);
             }
             if(outputStream!=null){
                 IOUtils.closeQuietly(outputStream);
             }
-            return outputDir;
+
         }
+        return outputDir;
     }
 
     /**
@@ -245,8 +239,6 @@ public class SystemUtil {
             inputStream = ftpClient.retrieveFileStream(fileName.getName());
             System.out.print(ftpClient.getReplyString());
             IOUtils.copy(inputStream, outputStream);
-        } catch (IOException ioe) {
-            throw ioe;
         } finally {
             if (outputStream != null) {
                 IOUtils.closeQuietly(outputStream);

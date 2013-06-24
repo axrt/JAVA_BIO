@@ -26,7 +26,7 @@ import javax.xml.bind.JAXBException;
  *
  * @author axrt
  */
-public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
+public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
     /**
      * A file that will automatically be created, fasta records from the batch
      * will then be dumped to the file, and then it will be used as an input to
@@ -51,7 +51,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
      * A {@link NCBI_EX_BLAST_FileOperator} that will allow to create an input
      * file as well as catch the blast output
      */
-    protected NCBI_EX_BLAST_FileOperator fileOperator;
+    protected final NCBI_EX_BLAST_FileOperator fileOperator;
     /**
      * A list of parameters. Should maintain a certain order. {"<-command>",
      * "[value]"}, just the way if in the blast+ executable input
@@ -59,7 +59,7 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
     protected String[] parameterList;
 
     /**
-     * @param {@link        List<Fasta>} - a list of query fasta records
+     * @param {@link        List<T>} - a list of query fasta records, where T exends {@link Fasta}
      * @param {@link        List<String>} - - a list of query fasta record IDs
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
@@ -70,12 +70,13 @@ public abstract class NCBI_EX_BLAST extends NCBI_BLAST {
      * @param parameterList {@link String[]} A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
+     * @param fileOperator {@link NCBI_EX_BLAST_FileOperator} to allow file load/save
      */
-    protected NCBI_EX_BLAST(List<? extends Fasta> query,
+    protected NCBI_EX_BLAST(List<T> query,
                             List<String> query_IDs, File tempDir, File executive,
-                            String[] parameterList) {
+                            String[] parameterList, NCBI_EX_BLAST_FileOperator fileOperator) {
         super(query, query_IDs);
-        this.fileOperator = new NCBI_EX_BLAST_FileOperator();
+        this.fileOperator = fileOperator;
         this.tempDir = tempDir;
         this.executable = executive;
         this.parameterList = parameterList;

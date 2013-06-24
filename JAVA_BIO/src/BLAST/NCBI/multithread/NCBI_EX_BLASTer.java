@@ -25,7 +25,7 @@ import BLAST.multithread.BLASTer;
  * @author axrt
  * 
  */
-public abstract class NCBI_EX_BLASTer extends BLASTer {
+public abstract class NCBI_EX_BLASTer<T> extends BLASTer {
 	/**
 	 * A {@link List<NCBI_EX_BLAST>} of blasts that are currently being operated
 	 * upon (running) by the {@link NCBI_EX_BLASTer}. *<i><b>Is wrapped to a
@@ -62,7 +62,7 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 	 *            {@link int} a number of fasta {@link Fasta} records in on
 	 *            single batch
 	 */
-	protected NCBI_EX_BLASTer(List<? extends Fasta> queryList,
+	protected NCBI_EX_BLASTer(List<T> queryList,
 			List<String> queryListAC, int numberOfThreads, int batchSize,
 			File tempDir, File executive, String[] parameterList) {
 		super(queryList, queryListAC, numberOfThreads, batchSize);
@@ -85,14 +85,7 @@ public abstract class NCBI_EX_BLASTer extends BLASTer {
 	 *        finished the blast task
 	 */
 	@Override
-	public synchronized void handleAFinishedBLAST(BLAST_FinishedEvent event) {
-		// Untracks the shot-off blast, leaving it to the GC in case no onther
-		// pointers are kept to the instance
-		if (event.getSource() instanceof BLAST) {
-			BLAST blast = (BLAST) event.getSource();
-			blast.removeListener(this);
-		}
-	}
+	public abstract void handleAFinishedBLAST(BLAST_FinishedEvent event);
 
 	/**
 	 * Adds another listener to a list of those being notified when the task

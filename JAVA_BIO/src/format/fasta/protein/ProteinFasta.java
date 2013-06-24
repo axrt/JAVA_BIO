@@ -95,8 +95,11 @@ public class ProteinFasta extends Fasta {
                                     + String.valueOf(AC.indexOf(Fasta.fastaStart))
                                     + '!');
                 } else {
-                    AC = AC.substring(1);
+                    AC = AC.trim().substring(1);
                 }
+            }else{
+                throw new ProteinFasta_AC_BadFormatException(
+                        "Error within the AC: wrong record start");
             }
             // Ac should also contain no new line symbols
             if (AC.contains("\n")) {

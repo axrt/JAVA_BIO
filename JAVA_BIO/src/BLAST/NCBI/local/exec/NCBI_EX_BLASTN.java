@@ -9,7 +9,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class NCBI_EX_BLASTN extends NCBI_EX_BLAST {
+public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_BLAST {
 
 
     /**
@@ -25,8 +25,8 @@ public abstract class NCBI_EX_BLASTN extends NCBI_EX_BLAST {
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      */
-    protected NCBI_EX_BLASTN(List<? extends NucleotideFasta> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList) {
-        super(query, query_IDs, tempDir, executive, parameterList);
+    protected NCBI_EX_BLASTN(List<T> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
+        super(query, query_IDs, tempDir, executive, parameterList,fileOperator);
     }
     /**
      * @param query         {@link List<? extends   format.fasta.nucleotide.NucleotideFasta  >} a list of query
@@ -45,18 +45,18 @@ public abstract class NCBI_EX_BLASTN extends NCBI_EX_BLAST {
      * @return a new instance of {@link NCBI_EX_BLASTN} from a given set of
      *         parameters
      */
-    public static NCBI_EX_BLASTN newDefaultInstance(
-            List<? extends NucleotideFasta> query, List<String> query_IDs,
-            File tempDir, File executive, String[] parameterList) {
+    public static <T extends NucleotideFasta>NCBI_EX_BLASTN newDefaultInstance(
+            List<T> query, List<String> query_IDs,
+            File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
         if (query_IDs == null) {
             query_IDs = new ArrayList<String>();
         }
         if (query == null) {
-            query = new ArrayList<NucleotideFasta>();
+            query = new ArrayList<T>();
         }
         // TODO: input a check for whether both lists are empty or declared null
         return new NCBI_EX_BLASTN(query, query_IDs, tempDir, executive,
-                parameterList) {
+                parameterList,fileOperator) {
 
             @Override
             public void run() {

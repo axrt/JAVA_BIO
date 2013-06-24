@@ -13,7 +13,7 @@ import BLAST.NCBI.output.BlastOutput;
  * @author axrt A general abstraction of a "Basic Local Alignment Tool" service
  *         at http://blast.ncbi.nlm.nih.gov/Blast.cgi provided by NCBI
  */
-public abstract class NCBI_BLAST extends BLAST {
+public abstract class NCBI_BLAST<T extends Fasta> extends BLAST {
 	/**
 	 * An object representation of the output, returned from the NCBI server
 	 */
@@ -21,11 +21,11 @@ public abstract class NCBI_BLAST extends BLAST {
 	/**
 	 * A Fasta record, that contains the query
 	 */
-	protected final List<? extends Fasta> query;
+	protected List<T> query;
 	/**
 	 * A list of genbak/EMBL ids that shall be used for a BLAST search
 	 */
-	protected final List<String> query_IDs;
+	protected List<String> query_IDs;
 	/**
 	 * A flag that indicates whether this instance has already been BLASTed or
 	 * not
@@ -52,13 +52,13 @@ public abstract class NCBI_BLAST extends BLAST {
 	 * Constructor
 	 * 
 	 * @param query
-	 *            {@link List<? extends Fasta>} a list of query fasta-formatted
+	 *            {@link List<T extends Fasta>} a list of query fasta-formatted
 	 *            records
 	 * @param query_IDs
 	 *            {@link List<String>} a list of AC numbers of sequences in a
 	 *            database
 	 */
-	protected NCBI_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
+	protected NCBI_BLAST(List<T> query, List<String> query_IDs) {
 		super();
 		this.query = query;
 		this.query_IDs = query_IDs;

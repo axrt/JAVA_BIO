@@ -28,36 +28,36 @@ import BLAST.event.BLAST_TaskFinished_listener;
  * @author axrt
  * 
  */
-public abstract class BLASTer implements BLAST_TaskFinished_listener {
+public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFinished_listener {
 
 	/**
 	 * Private executor service, only allows {@link BLAST} tasks via
 	 * submitBLAST(BLAST blast);
 	 */
-	private final ExecutorService executorService;
+	protected final ExecutorService executorService;
 	/**
 	 * number of parallel runs, ideally is the same as the number of cores of
 	 * the processor
 	 */
-	protected int numberOfThereds;
+	protected final int numberOfThereds;
 	/**
 	 * A number of sequence-queries in a batch being delegated to a blast run
 	 */
-	protected int batchSize;
+	protected final int batchSize;
 	/**
 	 * A list of queries in fasta format (represented by {@link Fasta} or
 	 * extending) that will be taken to perform the blast search
 	 */
-	private Queue<Fasta> queryList;
+    protected Queue<Fasta> queryList;
 	/**
 	 * A list of database ACs of sequences that will be taken to perform the
 	 * blast search
 	 */
-	private Queue<String> queryListACs;
+    protected Queue<String> queryListACs;
 	/**
 	 * A que of finished blasts, ready to return their results
 	 */
-	private Queue<BLAST> finishedBLASTs;
+    protected Queue<BLAST> finishedBLASTs;
 	/**
 	 * A flag, that indicates that the task is being performed (in order to
 	 * prevent illegal state calls)
@@ -67,14 +67,14 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	/**
 	 * Constructor
 	 */
-	protected BLASTer(List<? extends Fasta> queryList,
+	protected BLASTer(List<T> queryList,
 			List<String> queryListACs, int numberOfThreads, int batchSize) {
 		// TODO: think of smth less dumb, make a single batch, that allows
 		// mixing ACs with fasta records
 		// Initialize a list if null is passed in order to prevent falures
 		// (should be corrected)
 		if (queryList == null) {
-			queryList = new ArrayList<Fasta>();
+			queryList = new ArrayList<T>();
 		}
 		// Initialize a list if null is passed in order to prevent falures
 		// (should be corrected)
@@ -150,7 +150,7 @@ public abstract class BLASTer implements BLAST_TaskFinished_listener {
 	 * 
 	 * @param {@link List} fastas
 	 */
-	public void appendFasta(List<? extends Fasta> fastas) {
+	public void appendFasta(List<T> fastas) {
 		this.queryList.addAll(fastas);
 	}
 

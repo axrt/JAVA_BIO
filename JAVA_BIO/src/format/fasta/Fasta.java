@@ -45,7 +45,15 @@ public abstract class Fasta implements Serializable{
 		this.sequence = sequence;
 	}
 
-	/**
+    /**
+     * A getter for the AC
+     * @return {@link String} AC
+     */
+    public String getAC() {
+        return AC;
+    }
+
+    /**
 	 * Checks for whether a given String contains illegal characters (the ones
 	 * that do not correspond to any conventional abbreviation and some special
 	 * characters).
@@ -84,5 +92,4 @@ public abstract class Fasta implements Serializable{
         }
         return new String(sb);
 	}
-
 }
