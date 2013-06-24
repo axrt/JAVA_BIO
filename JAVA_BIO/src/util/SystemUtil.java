@@ -62,6 +62,10 @@ public class SystemUtil {
      */
     public static final String GI_TAXID_UPD_FILE_ARCH = SystemUtil.GI_TAXID+"_nucl_diff" + SystemUtil.DMP_SUF+SystemUtil.ARCH_SUF;
     /**
+     * GI_TAXID updates dump file name
+     */
+    public static final String GI_TAXID_UPD_FILE = SystemUtil.GI_TAXID+"_nucl_diff" + SystemUtil.DMP_SUF;
+    /**
      * Perfix for the nodes database dump
      */
     public static final String NODES = "nodes";
