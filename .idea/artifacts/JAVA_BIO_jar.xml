@@ -25,6 +25,8 @@
       <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-javadoc.jar" path-in-jar="/" />
       <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-sources.jar" path-in-jar="/" />
       <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-test-sources.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/src" />
+      <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/docs" />
     </root>
   </artifact>
 </component>
