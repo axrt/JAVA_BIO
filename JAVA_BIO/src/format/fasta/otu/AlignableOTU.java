@@ -33,9 +33,14 @@ public class AlignableOTU<N extends NucleotideFasta> extends OTU<N> {
             return this.get(1).getSequence();
         }
         if (this.otuConsensus == null) {
-            this.aligner.setSequences(AlignableOTU.reduceRedundantSequences(this));
-            this.aligner.align();
-            this.otuConsensus=this.aligner.getOutput().getConsensus(cutoff);
+            List<N> redundancyReducedSequences= AlignableOTU.reduceRedundantSequences(this);
+            if(redundancyReducedSequences.size()==1){
+                this.otuConsensus=redundancyReducedSequences.get(0).getSequence();
+            }else{
+                this.aligner.setSequences(redundancyReducedSequences);
+                this.aligner.align();
+                this.otuConsensus=this.aligner.getOutput().getConsensus(cutoff);
+            }
         }
         return otuConsensus;
     }
