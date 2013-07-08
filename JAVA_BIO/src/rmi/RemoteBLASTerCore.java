@@ -9,8 +9,8 @@ import java.util.List;
 import format.fasta.Fasta;
 //TODO: document
 
-import BLAST.BLAST;
-import BLAST.multithread.BLASTer;
+import blast.BLAST;
+import blast.multithread.BLASTer;
 
 /**
  * @author axrt

@@ -5,19 +5,13 @@ package rmi;
 
 import format.fasta.Fasta;
 
-import java.io.File;
-import java.io.OutputStream;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import BLAST.BLAST;
-import BLAST.NCBI.multithread.NCBI_EX_BLASTer;
-import BLAST.NCBI.multithread.NCBI_EX_BLASTer_FinishedEvent;
-import BLAST.NCBI.multithread.NCBI_EX_BLASTer_TaskFinished_listener;
-import BLAST.multithread.BLASTer;
+import blast.BLAST;
 
 //TODO: document
 /**

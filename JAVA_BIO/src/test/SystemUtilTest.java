@@ -17,7 +17,7 @@ public class SystemUtilTest {
 
     //@Test
     public void unArchiveTarGZFileTest() throws IOException {
-        final File inputTarGZFile= new File("/home/alext/Downloads/NCBI/taxdump.tar.gz");
+        final File inputTarGZFile= new File("/home/alext/Downloads/ncbi/taxdump.tar.gz");
         final File outputDir=new File("/home/alext/Downloads/tmp");
 
         SystemUtil.unArchiveTarGZFile(inputTarGZFile,outputDir);
@@ -41,7 +41,7 @@ public class SystemUtilTest {
 
     //@Test
     public void unArchiveGZFileTest() throws IOException {
-        final File inputGZFile= new File("/home/alext/Downloads/NCBI/gi_taxid_nucl.dmp.gz");
+        final File inputGZFile= new File("/home/alext/Downloads/ncbi/gi_taxid_nucl.dmp.gz");
         final File outputDir=new File("/home/alext/Downloads/tmp");
 
         SystemUtil.unArchiveGZFile(inputGZFile,outputDir);

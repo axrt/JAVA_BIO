@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ClustalW2AlnTest {
     @Test
     public void toStringTest(){
-        File alnFile=new File("/home/alext/Documents/tuit/OTU Seq90/test.aln");
+        File alnFile=new File("/home/alext/Documents/tuit/otu Seq90/test.aln");
         try {
             ClustalW2Aln clustalW2Aln=ClustalW2Aln.newInstaceFromFile(alnFile);
             //System.out.println(clustalW2Aln.toString());

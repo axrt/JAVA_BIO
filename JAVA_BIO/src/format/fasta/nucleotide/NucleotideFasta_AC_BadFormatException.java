@@ -3,8 +3,8 @@ package format.fasta.nucleotide;
 import format.BadFromatException;
 
 /**
- * This exception is thrown whenever a forbidden {@link BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter}
- * is being attempted to set for a BLAST
+ * This exception is thrown whenever a forbidden {@link blast.ncbi.remote.NCBI_Q_BLAST_Parameter}
+ * is being attempted to set for a blast
  *
  * @author axrt
  */

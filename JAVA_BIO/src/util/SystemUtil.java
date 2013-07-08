@@ -14,7 +14,7 @@ import org.apache.commons.net.ftp.FTPFile;
 
 public class SystemUtil {
     /**
-     * NCBI FTP server address
+     * ncbi FTP server address
      */
     public static final String NCBI_FTP = "ftp.ncbi.nlm.nih.gov";
     /**
@@ -22,11 +22,11 @@ public class SystemUtil {
      */
     public static final String ANONYMOUS = "anonymous";
     /**
-     * NCBI FTP server taxonomy subfolder
+     * ncbi FTP server taxonomy subfolder
      */
     public static final String NCBI_TAXONOMY = "/pub/taxonomy/";
     /**
-     * NCBI FTP server address for taxonomy files
+     * ncbi FTP server address for taxonomy files
      */
     public static final String NCBI_TAXONOMY_FTP = SystemUtil.NCBI_FTP + SystemUtil.NCBI_TAXONOMY;
     /**
@@ -213,10 +213,10 @@ public class SystemUtil {
     }
 
     /**
-     * Downloads a file for a given file name from the NCBI FTP (Taxonomy directory) server
+     * Downloads a file for a given file name from the ncbi FTP (Taxonomy directory) server
      *
      * @param tmpDownloadDir {@link File} a temporary directory to store the files downloaded
-     * @param subDir         {@link File} a subdirectory of the NCBI FTP to download file from
+     * @param subDir         {@link File} a subdirectory of the ncbi FTP to download file from
      * @param fileName       {@link File} requested file name
      * @return {@link File} pointer to the file that has been retrieved and saved locally to the temporary folder
      * @throws java.io.IOException in case anything goes wrong during the ftp communication of file saving locally

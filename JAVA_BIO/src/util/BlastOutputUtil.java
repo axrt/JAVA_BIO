@@ -1,10 +1,10 @@
 package util;
 
-import BLAST.NCBI.output.Hit;
+import blast.ncbi.output.Hit;
 import format.BadFromatException;
 
 /**
- * Contains utility methods for the {@link BLAST.NCBI.output.BlastOutput} processing
+ * Contains utility methods for the {@link blast.ncbi.output.BlastOutput} processing
  */
 public class BlastOutputUtil {
     /**

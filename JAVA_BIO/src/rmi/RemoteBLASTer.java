@@ -4,16 +4,15 @@
 package rmi;
 
 //TODO: document
-import java.io.OutputStream;
 import java.rmi.Remote;
 import java.util.List;
 
 import format.fasta.Fasta;
 
-import BLAST.BLAST;
+import blast.BLAST;
 
 /**
- * Adds to an implementing class ability to get a remote BLAST task from a
+ * Adds to an implementing class ability to get a remote blast task from a
  * calling module
  * 
  * @author axrt

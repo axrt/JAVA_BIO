@@ -1,11 +1,11 @@
 package format.fasta.protein;
 
-import BLAST.NCBI.remote.NCBI_Q_BLAST_Parameter;
+import blast.ncbi.remote.NCBI_Q_BLAST_Parameter;
 import format.BadFromatException;
 
 /**
  * This exception is thrown whenever a forbidden {@link NCBI_Q_BLAST_Parameter}
- * is being attempted to set for a BLAST
+ * is being attempted to set for a blast
  * 
  * @author axrt
  * 

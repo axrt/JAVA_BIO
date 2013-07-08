@@ -153,7 +153,7 @@ public class ClustalW2Aln extends ClustalAln {
         //Get a full list of names
         while ((line = bufferedReader.readLine()).length() > 0) {
             split = line.split(ClustalW2Aln.FORMATTER);
-            if (split.length == 2) {
+            if (split.length >= 1&&!split[0].equals("")) {
                 names.add(split[0].trim());
                 sequenceBuilders.add(new StringBuilder(split[1]));
             }
@@ -162,8 +162,8 @@ public class ClustalW2Aln extends ClustalAln {
         int i = 0;
         while ((line = bufferedReader.readLine()) != null) {
             split = line.split(ClustalW2Aln.FORMATTER);
-            if (split.length == 2) {
-                sequenceBuilders.get(i).append(split[1].trim());
+            if (split.length >= 2&&!split[0].equals("")) {
+                sequenceBuilders.get(i).append(split[split.length-1].trim());
                 i++;
             } else if (split[0].length() == 0) {
                 i = 0;

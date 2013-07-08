@@ -54,6 +54,14 @@ public abstract class Fasta implements Serializable{
     }
 
     /**
+     * A getter for the sequence
+     * @return {@link String} sequence
+     */
+    public String getSequence() {
+        return sequence;
+    }
+
+    /**
 	 * Checks for whether a given String contains illegal characters (the ones
 	 * that do not correspond to any conventional abbreviation and some special
 	 * characters).

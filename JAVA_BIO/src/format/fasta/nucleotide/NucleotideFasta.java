@@ -13,8 +13,7 @@ public class NucleotideFasta extends Fasta {
         allowedChars = new HashSet<Character>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '\n', '/'}));
     }
 
-    protected NucleotideFasta(String AC, String sequence)
-            throws NucleotideFasta_AC_BadFormatException, NucleotideFasta_Sequence_BadFromatException {
+    protected NucleotideFasta(String AC, String sequence){
         super(AC, sequence);
     }
     /**
