@@ -52,7 +52,7 @@ public class ClustalW2AlignerTest {
             File executable=new File("/usr/local/bin/clustalw2");
             String[]parameterList=new String[]{};
             ClustalW2Aligner<NucleotideFasta> nucleotideFastaClustalW2Aligner=
-                    ClustalW2Aligner.newInstance(
+                    ClustalW2Aligner.newInstanceWithSequences(
                             nucleotideFastas, tmpDir,executable,parameterList,new ExecutableUtilFileOperator<NucleotideFasta>() {
                     });
             nucleotideFastaClustalW2Aligner.align();

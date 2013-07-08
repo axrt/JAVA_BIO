@@ -8,21 +8,17 @@ import java.util.Collection;
 /**
  *TODO Document
  */
-public class OTU <N extends NucleotideFasta> extends ArrayList<N>{
+public abstract class OTU <N extends NucleotideFasta> extends ArrayList<N>{
 
     protected final String name;
 
-    public OTU(int initialCapacity, String name) {
+    protected OTU(int initialCapacity, String name) {
         super(initialCapacity);
         this.name = name;
     }
 
-    public OTU(String name) {
+    protected OTU(String name) {
         this.name = name;
     }
 
-    public OTU(Collection<N> c, String name) {
-        super(c);
-        this.name = name;
-    }
 }

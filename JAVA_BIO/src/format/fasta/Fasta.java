@@ -28,7 +28,7 @@ public abstract class Fasta implements Serializable{
 	/**
 	 * A conventional number of characters within a fasta-fromatted file
 	 */
-	private static final int fastaLineLenght = 60;
+    protected static final int fastaLineLenght = 60;
 	/**
 	 * A special string to form a BadFastaFileFormatException message in case
 	 * the first line of a given fasta does not contain a starter character

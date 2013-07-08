@@ -80,7 +80,7 @@ public class ClustalW2Aln extends ClustalAln {
         });
         //For every character calculate a frequency
         for (Character c : characterSet) {
-            frequencies.put(characters.size() / (double) Collections.frequency(characters, c), c);
+            frequencies.put((double) Collections.frequency(characters, c)/characters.size(), c);
         }
         //Determine the highest frequency
         Double maxFrequency = new ArrayList<>(frequencies.keySet()).get(0);

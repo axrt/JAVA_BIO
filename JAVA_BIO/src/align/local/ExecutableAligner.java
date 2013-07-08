@@ -20,4 +20,11 @@ public abstract class ExecutableAligner<T> extends Aligner<T>{
         this.executable=executable;
         this.parameterList=parameterList;
     }
+
+    protected ExecutableAligner(File tmpDir,File executable,String[] parameterList) {
+        super();
+        this.tmpDir=tmpDir;
+        this.executable=executable;
+        this.parameterList=parameterList;
+    }
 }

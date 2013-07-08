@@ -12,9 +12,17 @@ import java.util.List;
  */
 public abstract class Aligner<T> {
 
-    protected  final List<T> sequences;
+    protected  List<T> sequences;
+
+    protected Aligner() {
+
+    }
 
     protected Aligner(List<T> sequences) {
+        this.sequences = sequences;
+    }
+
+    public void setSequences(List<T> sequences) {
         this.sequences = sequences;
     }
 
