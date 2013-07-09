@@ -34,7 +34,7 @@ public class ClustalW2Aligner<F extends Fasta> extends ClustalAligner<F> {
         if(this.sequences==null){
             throw new IllegalStateException("No sequences provided yet!");
         }else if(this.sequences.size()==1){
-            throw new IllegalStateException("!");
+            throw new IllegalStateException("A single sequence provided, at least two sequences required for a proper alignment!");
         }
         //
         this.checkRecordsRedundancy();
@@ -77,7 +77,8 @@ public class ClustalW2Aligner<F extends Fasta> extends ClustalAligner<F> {
             this.output = ClustalW2Aln.newInstaceFromFile(this.outputFile);
         } finally {
             this.inputFile.delete();
-            //this.outputFile.delete();
+            this.outputFile.delete();
+            new File(this.inputFile.getPath()+".dnd").delete();//TODO: Temporal fix, should suppress in clustal
         }
     }
 

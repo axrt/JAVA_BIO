@@ -30,7 +30,7 @@ public class AlignableOTU<N extends NucleotideFasta> extends OTU<N> {
 
     public String getOtuConsensus(double cutoff) throws InterruptedException, AlignmentException, IOException {
         if (this.size()==1){
-            return this.get(1).getSequence();
+            return this.get(0).getSequence();
         }
         if (this.otuConsensus == null) {
             List<N> redundancyReducedSequences= AlignableOTU.reduceRedundantSequences(this);
@@ -45,7 +45,7 @@ public class AlignableOTU<N extends NucleotideFasta> extends OTU<N> {
         return otuConsensus;
     }
 
-    protected static <N extends NucleotideFasta> List<N> reduceRedundantSequences(List<N> sequences) {
+    public static <N extends NucleotideFasta> List<N> reduceRedundantSequences(List<N> sequences) {
 
         Set<String> nonredundantSequencesSet = new HashSet<>(sequences.size());
         List<N> nonredundantSequencesList = new ArrayList<>(sequences.size());

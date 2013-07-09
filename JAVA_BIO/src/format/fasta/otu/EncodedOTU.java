@@ -23,6 +23,15 @@ public class EncodedOTU extends AlignableOTU<EncodedNucleotideFasta> {
         super(initialCapacity, name, aligner);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder=new StringBuilder();
+        for (EncodedNucleotideFasta e:this){
+            stringBuilder.append(e.toString());
+        }
+        return stringBuilder.toString();
+    }
+
     public static EncodedOTU newDefaultInstanceFromFile(File otuFile, File tmpDir, File executable) throws IOException, NucleotideFasta_AC_BadFormatException, NucleotideFasta_Sequence_BadFromatException, NucleotideFasta_BadFromat_Exception {
 
         BufferedReader bufferedReader = null;

@@ -51,7 +51,7 @@ public class ClustalW2Aln extends ClustalAln {
                 column.add(alignmentLine.getSequence().charAt(i));
             }
             //..and appedn the consensus to the builder
-            stringBuilder.append(this.consensusCharAtCutoff(column,cutoff));
+            stringBuilder.append(ClustalW2Aln.consensusCharAtCutoff(column,cutoff));
         }
         this.consensus=stringBuilder.toString();
         return this.consensus;
@@ -64,29 +64,21 @@ public class ClustalW2Aln extends ClustalAln {
      *                             the character gets accepted
      * @return {@link Character} consensus of it's frequency was over or equals the cutoff, otherwise - 'N'
      */
-    private Character consensusCharAtCutoff(List<Character> characters, double cutoff) {
+    private static Character consensusCharAtCutoff(List<Character> characters, double cutoff) {
         //Calculates a set of characters that occur within a column
         Set<Character> characterSet = new HashSet<>(characters);
         //Assign every character its frequency with a prepared TreeMap
-        Map<Double, Character> frequencies = new TreeMap<>(new Comparator<Double>() {
-            @Override
-            public int compare(Double o1, Double o2) {
-                if (o1 < o2) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-        });
+        Map<Double, Character> frequencies = new HashMap<>();
         //For every character calculate a frequency
         for (Character c : characterSet) {
             frequencies.put((double) Collections.frequency(characters, c)/characters.size(), c);
         }
         //Determine the highest frequency
-        Double maxFrequency = new ArrayList<>(frequencies.keySet()).get(0);
+
+        Double maxFrequency = Collections.max(frequencies.keySet());
         //If the maximum frequency is over or equal the cutoff return the character that occurs with that frequency
         if (maxFrequency*100 >= cutoff) {
-            return new ArrayList<Map.Entry<Double, Character>>(frequencies.entrySet()).get(0).getValue();
+            return frequencies.get(maxFrequency);
         } else {
             //Otherwise return an 'N'
             return ClustalW2Aln.BLANK;
@@ -155,7 +147,7 @@ public class ClustalW2Aln extends ClustalAln {
             split = line.split(ClustalW2Aln.FORMATTER);
             if (split.length >= 1&&!split[0].equals("")) {
                 names.add(split[0].trim());
-                sequenceBuilders.add(new StringBuilder(split[1]));
+                sequenceBuilders.add(new StringBuilder(split[1].trim()));
             }
         }
         //Get to the end of file assembling the sequences

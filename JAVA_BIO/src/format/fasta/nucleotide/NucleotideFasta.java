@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class NucleotideFasta extends Fasta {
 
     static {
-        allowedChars = new HashSet<Character>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '\n', '/'}));
+        allowedChars = new HashSet<Character>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '-','\n', '/'}));
     }
 
     protected NucleotideFasta(String AC, String sequence){
