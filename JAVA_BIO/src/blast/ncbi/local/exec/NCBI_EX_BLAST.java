@@ -84,6 +84,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
         // The uniqueness of the input and output file names is maintained by
         // that the names contain the hashCode of the blast objects, thereby
         // ensuring uniqueness even in multithreaded environment
+        //TODO: correct this to a non-SysFS
         this.inputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
                 + "in_" + String.valueOf(this.hashCode()));
         this.outputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS

@@ -48,9 +48,12 @@ public class BlastOutputUtil {
      * Calculates pIdent for a given {@link Hit}
      *
      * @param h: {@link Hit} that contains the desired pIdent
-     * @return {@link double} representation of the pIdent
+     * @return {@link double} representation of the pIdent, if {@code null} instead of a {@link Hit} - returns 0
      */
     public static double calculatePIdent(Hit h) {
+        if(h==null||h.getHitHsps().getHsp().get(0).getHspIdentity()==null||h.getHitHsps().getHsp().get(0).getHspAlignLen()==null){
+            return 0;
+        }
         double identities = Double.parseDouble(h.getHitHsps().getHsp().get(0).getHspIdentity());
         double alingnmentLenght = Double.parseDouble(h.getHitHsps().getHsp().get(0).getHspAlignLen());
         return Math.ceil(identities * 100 / alingnmentLenght);
