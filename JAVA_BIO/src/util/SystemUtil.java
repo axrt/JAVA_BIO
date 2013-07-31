@@ -50,9 +50,13 @@ public class SystemUtil {
      */
     public static final String GI_TAXID = "gi_taxid";
     /**
+     * GI_TAXID nucl unarchived file
+     */
+    public static final String GI_TAXID_NUCL= SystemUtil.GI_TAXID+"_nucl"+ SystemUtil.DMP_SUF;
+    /**
      * GI_TAXID dump file archive name
      */
-    public static final String GI_TAXID_DMP_ARCH =  SystemUtil.GI_TAXID+"_nucl"+ SystemUtil.DMP_SUF+ SystemUtil.ARCH_SUF;
+    public static final String GI_TAXID_DMP_ARCH =  GI_TAXID_NUCL+ SystemUtil.ARCH_SUF;
     /**
      * GI_TAXID dump diff file archive name
      */

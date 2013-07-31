@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="commons-net-3">
     <CLASSES>
-      <root url="file:///usr/lib/JLF/commons-net-3.1" />
+      <root url="file:///usr/lib/JLF/commons-net-3.3" />
     </CLASSES>
     <JAVADOC>
-      <root url="file:///usr/lib/JLF/commons-net-3.1/apidocs" />
+      <root url="file:///usr/lib/JLF/commons-net-3.3/apidocs" />
     </JAVADOC>
     <SOURCES>
-      <root url="file:///usr/lib/JLF/commons-net-3.1" />
+      <root url="file:///usr/lib/JLF/commons-net-3.3" />
     </SOURCES>
-    <jarDirectory url="file:///usr/lib/JLF/commons-net-3.1" recursive="false" />
-    <jarDirectory url="file:///usr/lib/JLF/commons-net-3.1" recursive="false" type="SOURCES" />
+    <jarDirectory url="file:///usr/lib/JLF/commons-net-3.3" recursive="false" />
+    <jarDirectory url="file:///usr/lib/JLF/commons-net-3.3" recursive="false" type="SOURCES" />
   </library>
 </component>
