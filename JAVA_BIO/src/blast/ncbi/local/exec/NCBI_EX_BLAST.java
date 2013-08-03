@@ -3,21 +3,18 @@
  */
 package blast.ncbi.local.exec;
 
+import blast.ncbi.NCBI_BLAST;
+import blast.ncbi.output.NCBI_BLAST_OutputHelper;
+import format.fasta.Fasta;
+import org.xml.sax.SAXException;
+import util.SystemUtil;
+
+import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-
-import blast.ncbi.output.NCBI_BLAST_OutputHelper;
-import org.xml.sax.SAXException;
-import util.SystemUtil;
-
-import format.fasta.Fasta;
-
-import blast.ncbi.NCBI_BLAST;
-
-import javax.xml.bind.JAXBException;
 
 /**
  * A generalized abstraction of an ncbi blast process that is performed locally
@@ -27,6 +24,11 @@ import javax.xml.bind.JAXBException;
  * @author axrt
  */
 public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
+    /**
+     * A {@link NCBI_EX_BLAST_FileOperator} that will allow to create an input
+     * file as well as catch the blast output
+     */
+    protected final NCBI_EX_BLAST_FileOperator fileOperator;
     /**
      * A file that will automatically be created, fasta records from the batch
      * will then be dumped to the file, and then it will be used as an input to
@@ -48,11 +50,6 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
      */
     protected File executable;
     /**
-     * A {@link NCBI_EX_BLAST_FileOperator} that will allow to create an input
-     * file as well as catch the blast output
-     */
-    protected final NCBI_EX_BLAST_FileOperator fileOperator;
-    /**
      * A list of parameters. Should maintain a certain order. {"<-command>",
      * "[value]"}, just the way if in the blast+ executable input
      */
@@ -70,7 +67,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
      * @param parameterList {@link String[]} A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
-     * @param fileOperator {@link NCBI_EX_BLAST_FileOperator} to allow file load/save
+     * @param fileOperator  {@link NCBI_EX_BLAST_FileOperator} to allow file load/save
      */
     protected NCBI_EX_BLAST(List<T> query,
                             List<String> query_IDs, File tempDir, File executive,
@@ -121,42 +118,45 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
         for (int i = 7; i < command.length; i++) {
             command[i] = parameterList[i - 7];
         }
-        try{
-        // Build a process
-        final Process p = Runtime.getRuntime().exec(command);
-        p.waitFor();
+        try {
+            // Build a process
+            final Process p = Runtime.getRuntime().exec(command);
+            p.waitFor();
 
-        String s;
-        try (BufferedReader stdNorm = new BufferedReader(
-                new InputStreamReader(p.getInputStream()))) {
+            String s;
+            try (BufferedReader stdNorm = new BufferedReader(
+                    new InputStreamReader(p.getInputStream()))) {
 
-            //TODO: For debuggin purposes only, an API should not print out anything!!!
-            while ((s = stdNorm.readLine()) != null) {
-                System.out.println("STD:> " + s);
-            }
-        }
-        // In case of an error - try to recover
-        try (BufferedReader stdError = new BufferedReader(
-                new InputStreamReader(p.getErrorStream()))) {
-
-            while ((s = stdError.readLine()) != null) {
-                System.out.println("ERR:> " + s);
-                if (s.contains("Cannot memory map file")) {
-                    this.BLAST();
+                //TODO: For debuggin purposes only, an API should not print out anything!!!
+                while ((s = stdNorm.readLine()) != null) {
+                    System.out.println("STD:> " + s);
                 }
             }
-        }
-        // Suck in the output
-        this.blastOutput = NCBI_BLAST_OutputHelper
-                .catchBLASTOutput(this.fileOperator
-                        .readOutputXML(this.outputFile));
-        }finally {
+            // In case of an error - try to recover
+            try (BufferedReader stdError = new BufferedReader(
+                    new InputStreamReader(p.getErrorStream()))) {
+
+                while ((s = stdError.readLine()) != null) {
+                    System.out.println("ERR:> " + s);
+                    if (s.contains("Cannot memory map file")) {
+                        this.BLAST();
+                    }
+                }
+            }
+            if (this.outputFile.exists()) {
+                // Suck in the output
+                this.blastOutput = NCBI_BLAST_OutputHelper
+                        .catchBLASTOutput(this.fileOperator
+                                .readOutputXML(this.outputFile));
+            }else throw new IOException("Something might have gone wrong with the BLAST process, check logs.");
+        } finally {
             // Cleanup
-            this.inputFile.delete();
-            this.outputFile.delete();
-            // Note: temp directory will be removed only if not used by any
-            // other parallel process
-            this.tempDir.delete();
+            if (this.inputFile.exists()) {
+                this.inputFile.delete();
+            }
+            if (this.outputFile.exists()) {
+                this.outputFile.delete();
+            }
         }
     }
 
