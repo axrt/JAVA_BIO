@@ -22,8 +22,8 @@ public interface RemoteBLASTer<B extends BLAST,T extends Fasta> extends Remote {
 
 	/**
 	 * 
-	 * @param queryList
-	 * @return
+	 * @param queryList {@link List} a list of query records
+	 * @return a {@link List} of processed BLASTs with results
 	 * @throws InterruptedException 
 	 */
 	public List<B> processDelegatedBLASTBatch(

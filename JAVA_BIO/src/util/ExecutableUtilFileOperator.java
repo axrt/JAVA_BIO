@@ -78,8 +78,6 @@ public abstract class ExecutableUtilFileOperator<T> extends UtilFileOperator {
     /**
      * Create a temporary directory for a {@link blast.ncbi.local.exec.NCBI_EX_BLAST}-extending
      * implementation to operate upon
-     *
-     * @throws IOException
      */
     public synchronized void createTMPFolder(File tmpFolder) {
         // Create the folder if it does not exist (essential for a multithreaded

@@ -79,7 +79,7 @@ public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta
 	 * overriden with a call to the method of a superclass. This implementation
 	 * deletes the calling "finished" balst instance form the tracking array
 	 * 
-	 * @param {@link BLAST_FinishedEvent} an event wrapper to a blast that has
+	 * @param event {@link BLAST_FinishedEvent} an event wrapper to a blast that has
 	 *        finished the blast task
 	 */
 	@Override
@@ -89,7 +89,7 @@ public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta
 	 * Adds another listener to a list of those being notified when the task
 	 * finishes
 	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener
+	 * @param listener {@link NCBI_EX_BLASTer_TaskFinished_listener} listener
 	 */
 	public synchronized void addListener(
 			NCBI_EX_BLASTer_TaskFinished_listener listener) {
@@ -100,7 +100,7 @@ public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta
 	 * Removes a certain listener from a list of those being notified when the
 	 * task finishes
 	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener to remove
+	 * @param listener {@link NCBI_EX_BLASTer_TaskFinished_listener} listener to remove
 	 */
 	public synchronized void removeListener(
 			NCBI_EX_BLASTer_TaskFinished_listener listener) {
@@ -113,7 +113,7 @@ public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta
 	protected void notifyListeners() {
         for (NCBI_EX_BLASTer_TaskFinished_listener listener : this.listeners) {
             listener.handleAFinishedBLASTer(
-                    new NCBI_EX_BLASTer_FinishedEvent(this));
+                    new NCBI_EX_BLASTer_FinishedEvent<NCBI_EX_BLASTer>(this));
         }
 	}
 }

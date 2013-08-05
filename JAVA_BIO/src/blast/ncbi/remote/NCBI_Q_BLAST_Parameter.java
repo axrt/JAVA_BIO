@@ -235,7 +235,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from genetic code
+		 * @param value {@link String} genetic code
 		 */
 		private GENETIC_CODE_PARAM(final String value) {
 			this.value = value;
@@ -421,7 +422,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from format type
+		 * @param value {@link String}
 		 */
 		private FORMAT_TYPE_PARAM(final String value) {
 			this.value = value;
@@ -450,9 +452,10 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	}
 
 	/**
-	 * 
-	 * @param value
-	 *            {@code int}firstValue, {@code int} secondValue parameters,
+     * Static factory from values
+	 * @param firstValue {@code int}firstValue
+	 * @param secondValue {@code int} secondValue
+	 *            parameters,
 	 *            that will be automatically converted to {@link String} in a
 	 *            "value-space-value" format
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"GAPCOSTS=value"</b>.
@@ -552,7 +555,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from mask character
+		 * @param value {@link String} masking character
 		 */
 		private MASK_CHAR_PARAM(final String value) {
 			this.value = value;
@@ -591,7 +595,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from masking color parameter
+		 * @param value {@link String} masking color
 		 */
 		private MASK_COLOR_PARAM(final String value) {
 			this.value = value;
@@ -620,9 +625,10 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	}
 
 	/**
-	 * 
-	 * @param value
-	 *            {@code int}firstValue, {@code int} secondValue parameters,
+     * Static factory from values
+	 * @param firstValue {@code int} firstValue
+	 * @param secondValue  {@code int} secondValue
+	 *            parameters,
 	 *            that will be automatically converted to {@link String} in a
 	 *            "value-comma-value" format
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
@@ -1016,7 +1022,8 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from template length
+		 * @param value {@link String} template length
 		 */
 		private TEMPLATE_LENGTH_PARAM(final String value) {
 			this.value = value;
@@ -1057,7 +1064,9 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 		private final String value;
 
 		/**
-		 * @param text
+         * Constructor from template type parameter
+         *
+		 * @param value {@link String} template type parameter
 		 */
 		private TEMPLATE_TYPE_PARAM(final String value) {
 			this.value = value;

@@ -39,28 +39,31 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	}
 
 	/**
-	 * @param arg0
+     * Constructor from parameters
+	 * @param parameters {@code NCBI_Q_BLAST_Parameter} set
 	 */
-	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,Collection<NCBI_Q_BLAST_Parameter> arg0) {
-		super(arg0);
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,Collection<NCBI_Q_BLAST_Parameter> parameters) {
+		super(parameters);
 		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
 
 	/**
-	 * @param arg0
+     * Constructor from parameters
+	 * @param param {@code int} capacity
 	 */
-	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0) {
-		super(arg0);
+	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int param) {
+		super(param);
 		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
 
 	/**
-	 * @param arg0
-	 * @param arg1
+     * Constructor from parameters
+     * @param      arg0   the initial capacity of the hash map
+     * @param      arg1        the load factor of the hash map
 	 */
 	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0, float arg1) {
 		super(arg0, arg1);

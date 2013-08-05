@@ -13,8 +13,8 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
 
 
     /**
-     * @param {@link        List<Fasta>} - a list of query fasta records
-     * @param {@link        List<String>} - - a list of query fasta record IDs
+     * @param query {@link        List} - a list of query fasta records
+     * @param query_IDs {@link        List} - - a list of query fasta record IDs
      * @param tempDir       {@link java.io.File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
      *                      executable

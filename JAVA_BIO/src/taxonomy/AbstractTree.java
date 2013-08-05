@@ -66,7 +66,7 @@ public abstract class AbstractTree<T> {
 
         /**
          * A setter for the parent {@link Node}
-         * @param parent
+         * @param parent {@link Node} parent node
          */
         public void setParent(Node<T> parent) {
             this.parent = parent;

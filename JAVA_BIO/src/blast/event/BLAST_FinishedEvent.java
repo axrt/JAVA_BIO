@@ -11,13 +11,13 @@ import blast.BLAST;
  * @author axrt
  * 
  */
-public class BLAST_FinishedEvent extends EventObject {
+public class BLAST_FinishedEvent<B extends BLAST> extends EventObject {
 	/**
 	 * A constructor that wraps the source object into {@link Object}
 	 * 
-	 * @param source
+	 * @param source {@link B} that finished
 	 */
-	public BLAST_FinishedEvent(BLAST source) {
+	public BLAST_FinishedEvent(B source) {
 		super(source);
 	}
 

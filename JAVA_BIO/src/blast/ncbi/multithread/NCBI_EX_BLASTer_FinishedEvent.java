@@ -12,7 +12,7 @@ import blast.multithread.BLASTer;
  * @author axrt
  * 
  */
-public class NCBI_EX_BLASTer_FinishedEvent extends EventObject {
+public class NCBI_EX_BLASTer_FinishedEvent<B extends BLASTer> extends EventObject {
 
 	/**
 	 * 
@@ -20,9 +20,9 @@ public class NCBI_EX_BLASTer_FinishedEvent extends EventObject {
 	private static final long serialVersionUID = 336364223009671905L;
 
 	/**
-	 * @param arg0
+	 * @param blaster {@link B} that has finished execution
 	 */
-	public NCBI_EX_BLASTer_FinishedEvent(BLASTer blaster) {
+	public NCBI_EX_BLASTer_FinishedEvent(B blaster) {
 		super(blaster);
 	}
 

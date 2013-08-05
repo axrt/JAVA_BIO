@@ -20,13 +20,9 @@ public class NucleotideFasta extends Fasta {
      * A static factory to assemble a {@link NucleotideFasta} from AC and a
      * sequence.
      *
-     * @param {@link String} AC
-     * @param {@link String} sequence
+     * @param AC {@link String} AC
+     * @param sequence {@link String} sequence
      * @return a new instance of a {@link NucleotideFasta}
-     * @throws NucleotideFasta_AC_BadFormatException
-     *          in case smth is not all right with the AC
-     * @throws NucleotideFasta_Sequence_BadFormatException
-     *          in case smth is not all right with the sequence
      */
     public static NucleotideFasta newInstanceFromParts(String AC, String sequence) {
 
@@ -37,7 +33,7 @@ public class NucleotideFasta extends Fasta {
      * A static factory to assemble a {@link NucleotideFasta} from a {@link String}
      * , that represents a fasta-fromatted record
      *
-     * @param {@link String} fastaRecord
+     * @param fastaRecord {@link String} fastaRecord
      * @return a new instance of a {@link NucleotideFasta}
      * @throws NucleotideFasta_BadFromat_Exception
      *

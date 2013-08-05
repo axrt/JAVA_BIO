@@ -21,7 +21,7 @@ public class ProteinFasta_AC_BadFormatException extends BadFormatException {
 	/**
 	 * Constructor from message
 	 * 
-	 * @param message
+	 * @param message {@link String} message
 	 */
 	public ProteinFasta_AC_BadFormatException(String message) {
 		super(message);
@@ -31,7 +31,7 @@ public class ProteinFasta_AC_BadFormatException extends BadFormatException {
 	/**
 	 * Counstructor from a {@link Throwable}
 	 * 
-	 * @param cause
+	 * @param cause {@link Throwable} cause
 	 */
 	public ProteinFasta_AC_BadFormatException(Throwable cause) {
 		super(cause);
@@ -41,8 +41,8 @@ public class ProteinFasta_AC_BadFormatException extends BadFormatException {
 	/**
 	 * Contructor from both message and a {@link Throwable}
 	 * 
-	 * @param message
-	 * @param cause
+	 * @param message  {@link String} message
+	 * @param cause   {@link Throwable} cause
 	 */
 	public ProteinFasta_AC_BadFormatException(String message, Throwable cause) {
 		super(message, cause);

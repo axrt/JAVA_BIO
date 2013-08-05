@@ -52,10 +52,10 @@ public abstract class NCBI_BLAST<T extends Fasta> extends BLAST {
 	 * Constructor
 	 * 
 	 * @param query
-	 *            {@link List<T extends Fasta>} a list of query fasta-formatted
+	 *            {@link List} a list of query fasta-formatted
 	 *            records
 	 * @param query_IDs
-	 *            {@link List<String>} a list of AC numbers of sequences in a
+	 *            {@link List} a list of AC numbers of sequences in a
 	 *            database
 	 */
 	protected NCBI_BLAST(List<T> query, List<String> query_IDs) {

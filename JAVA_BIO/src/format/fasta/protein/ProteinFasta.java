@@ -21,8 +21,8 @@ public class ProteinFasta extends Fasta {
     /**
      * Constructor
      *
-     * @param {@link String} AC
-     * @param {@link String} sequence
+     * @param AC{@link String} AC
+     * @param sequence {@link String} sequence
      */
     protected ProteinFasta(String AC, String sequence) {
         super(AC, sequence);
@@ -32,11 +32,9 @@ public class ProteinFasta extends Fasta {
      * A static factory to assemble a {@link ProteinFasta} from AC and a
      * sequence.
      *
-     * @param {@link String} AC
-     * @param {@link String} sequence
+     * @param AC {@link String} AC
+     * @param sequence {@link String} sequence
      * @return a new instance of a {@link ProteinFasta}
-     * @throws ProteinFasta_AC_BadFormatException
-     *          in case smth is not all right with the AC
      * @throws ProteinFasta_Sequence_BadFormatException
      *          in case smth is not all right with the sequence
      */
@@ -52,7 +50,7 @@ public class ProteinFasta extends Fasta {
      * A static factory to assemble a {@link ProteinFasta} from a {@link String}
      * , that represents a fasta-fromatted record
      *
-     * @param {@link String} fastaRecord
+     * @param fastaRecord {@link String} fastaRecord
      * @return a new instance of a {@link ProteinFasta}
      * @throws ProteinFasta_BadFromat_Exception
      *

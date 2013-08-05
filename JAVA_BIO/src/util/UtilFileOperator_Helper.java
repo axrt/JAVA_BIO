@@ -28,8 +28,8 @@ public class UtilFileOperator_Helper {
 	 * href="http://www.mkyong.com/java/java-md5-hashing-example/">mkyong's
 	 * awesome page</a>.
 	 * 
-	 * @param file
-	 * @return
+	 * @param file {@link File} to get MD5 sum from
+	 * @return {@code byte[]} from file
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
@@ -56,8 +56,8 @@ public class UtilFileOperator_Helper {
 	 * href="http://www.mkyong.com/java/java-md5-hashing-example/">mkyong's
 	 * awesome page</a>.
 	 * 
-	 * @param md5Bytes
-	 * @return
+	 * @param md5Bytes {@code byte[]} to get the MD5 from
+	 * @return {@link String} representation of MD5
 	 */
 	public static String MD5ToString(byte[] md5Bytes) {
 		StringBuffer hexString = new StringBuffer();
@@ -75,8 +75,8 @@ public class UtilFileOperator_Helper {
 	 * href="http://www.mkyong.com/java/how-to-compress-files-in-zip-format/"
 	 * >mkyong's awesome page</a>.
 	 * 
-	 * @param files
-	 * @param zipFile
+	 * @param files {@link File} that points to the file to zip
+	 * @param zipFile {@link File} that points to the target archive file
 	 * @throws IOException
 	 */
 	public static void ZIPFiles(File[] files, File zipFile) throws IOException {
@@ -108,8 +108,8 @@ public class UtilFileOperator_Helper {
 	 * "http://www.mkyong.com/java/how-to-decompress-files-from-a-zip-file/"
 	 * >mkyong's awesome page</a>.
 	 * 
-	 * @param zipFile
-	 * @param outputFolder
+	 * @param zipFile  {@link File} that points to the zip file
+	 * @param outputFolder {@link File} that points to the output directory
 	 * @throws IOException
 	 */
 	@SuppressWarnings("ResultOfMethodCallIgnored")

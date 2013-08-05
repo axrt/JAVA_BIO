@@ -118,9 +118,9 @@ public abstract class BLASTer<B extends BLAST,T extends Fasta> implements Runnab
 	}
 
 	/**
-	 * 
-	 * @param {@link blast} blast that is being submitted for execution
-	 * @return {@link Future} that allows to track the state of execution
+	 * Submits a given BLAST for execution
+	 * @param blast {@link blast} blast that is being submitted for execution
+	 * @return  {@link Future} that allows to track the state of execution
 	 */
 	protected synchronized Future<?> submitBLAST(BLAST blast) {
 		return this.executorService.submit(blast);
@@ -146,7 +146,7 @@ public abstract class BLASTer<B extends BLAST,T extends Fasta> implements Runnab
 	/**
 	 * Allows to add additional fasta-formatted records on the fly.
 	 * 
-	 * @param {@link List} fastas
+	 * @param fastas {@link List} of fasta records
 	 */
 	public void appendFasta(List<T> fastas) {
 		this.queryList.addAll(fastas);
@@ -188,7 +188,7 @@ public abstract class BLASTer<B extends BLAST,T extends Fasta> implements Runnab
 	/**
 	 * Allows to store finished {@link BLAST}s in a queue.
 	 * 
-	 * @param {@link blast} blast
+	 * @param blast {@link blast} that has finished and needs to be stored
 	 */
 	protected void storeAFinishedBLAST(B blast) {
 		this.finishedBLASTs.add(blast);

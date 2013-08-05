@@ -31,9 +31,9 @@ import format.fasta.protein.ProteinFasta;
 public abstract class NCBI_Q_BLASTP<T extends ProteinFasta> extends NCBI_Q_BLAST<T> {
 
     /**
-     * @param {@link List} query - a list of query fasta records, that
+     * @param query{@link List} query - a list of query fasta records, that
      *               shall be used as an input
-     * @param {@link List} query_IDs - a list of database ID/ACs to
+     * @param query_IDs{@link List} query_IDs - a list of database ID/ACs to
      *               blast. Both parameters may be used simultaneously, making it
      *               easier to mix fasta records with sequences, that are already in
      *               the database
@@ -75,10 +75,10 @@ public abstract class NCBI_Q_BLASTP<T extends ProteinFasta> extends NCBI_Q_BLAST
     }
 
     /**
-     * @param {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
+     * @param parameter {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
      *               to add
-     * @return {@code true} is successfully added, {@link false} elsewise
-     * @throws {@link Bad_Q_BLAST_Parameter_Exception} in case a forbidden
+     * @return {@code true} has been successfully added, {@link false} elsewise
+     * @throws Bad_Q_BLAST_Parameter_Exception in case a forbidden
      *                parameters is attempted to insert
      */
     @Override
@@ -113,9 +113,9 @@ public abstract class NCBI_Q_BLASTP<T extends ProteinFasta> extends NCBI_Q_BLAST
      * A static factory to get a "Default" (XML output, Exception printout)
      * instance of a BLASTP
      *
-     * @param {@link List<ProteinFasta>} query - a list of query fasta records,
+     * @param query {@link List} query - a list of query fasta records,
      *               that shall be used as an input
-     * @param {@link List<String>} query_IDs - a list of database ID/ACs to
+     * @param query_IDs {@link List} query_IDs - a list of database ID/ACs to
      *               blast.
      * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
      */

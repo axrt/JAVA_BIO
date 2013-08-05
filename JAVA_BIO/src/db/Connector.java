@@ -35,7 +35,7 @@ public abstract class Connector {
     protected boolean connected = false;
     /**
      * @param URL
-     *            {@link URL} of the database
+     *            {@link String} of the database
      * @param user
      *            {@link String} user name
      * @param password

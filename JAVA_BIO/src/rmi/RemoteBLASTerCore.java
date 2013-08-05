@@ -22,8 +22,8 @@ public abstract class RemoteBLASTerCore<B extends BLAST,T extends Fasta> impleme
 	private BLASTer<B,T> blaster;
 
 	/**
-	 * @param sprite
-	 * @param blaster
+	 * @param sprite {@link RemoteBLASTer} that will be used to perform blasts
+	 * @param blaster {@link BLASTer} that will be the blasting core
 	 */
 	protected RemoteBLASTerCore(RemoteBLASTer<B,T> sprite, BLASTer<B,T>  blaster) {
 		super();
@@ -33,7 +33,7 @@ public abstract class RemoteBLASTerCore<B extends BLAST,T extends Fasta> impleme
 
 	/**
 	 * 
-	 * @return
+	 * @return {@link List} of {@link B}
 	 * @throws Exception
 	 */
 	// TODO: delete comments

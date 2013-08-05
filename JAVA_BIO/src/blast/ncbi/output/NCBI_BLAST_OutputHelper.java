@@ -33,8 +33,8 @@ public enum NCBI_BLAST_OutputHelper {
 	}
 
 	/**
-	 * Return a {@link BlastOutput} from an {@code InputStream}. Used by
-	 * {@link NCBI_BLAST} to get the output. Being produced in such a form, it
+	 * Returns a {@link BlastOutput} from an {@code InputStream}. Used by
+	 * {@link blast.ncbi.NCBI_BLAST} to get the output. Being produced in such a form, it
 	 * allows to store the schemas in the same package as the
 	 * {@link BlastOutput}, thereby allowing to make it obscure from the user
 	 * within the package
@@ -43,7 +43,6 @@ public enum NCBI_BLAST_OutputHelper {
 	 *            :{@link InputStream } from a URL or other type of connection
 	 * @return {@link BlastOutput}
 	 * @throws JAXBException
-	 * @throws Exception
 	 */
 	public static BlastOutput catchBLASTOutput(InputStream in)
 			throws SAXException, JAXBException {

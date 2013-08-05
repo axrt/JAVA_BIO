@@ -21,7 +21,6 @@ public class BlastOutputUtil {
      * @param hitID {@link String} The id of the hit that may be formatted
      *              like this, gi|385760777|gb|JQ426063.1|,
      * @return {@link String} extracted GI of the hit
-     * @throws {@link format.BadFormatException} in case the given hitID is misformatted
      */
     public static String extractGIFromHitID(String hitID) throws BadFormatException {
         //The IF from a Hit looks smth like this, gi|385760777|gb|JQ426063.1|,

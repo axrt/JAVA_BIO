@@ -17,8 +17,8 @@ public abstract class Q_BLAST_Parameter {
 
 	/**
 	 * Constructor 
-	 * @param {@link String} key
-	 * @param {@link String} value
+	 * @param key {@link String} key
+	 * @param value {@link String} value
 	 */
 	protected Q_BLAST_Parameter(String key, String value) {
 		super();

@@ -31,8 +31,7 @@ public abstract class BLAST implements Runnable {
 	/**
 	 * Adds another listener to a list of those being notified when the task
 	 * finishes
-	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener
+	 * @param listener {@link BLAST_TaskFinished_listener} listener of a finished blast event
 	 */
 	public synchronized void addListener(BLAST_TaskFinished_listener listener) {
 		this.listeners.add(listener);
@@ -42,7 +41,7 @@ public abstract class BLAST implements Runnable {
 	 * Removes a certain listener from a list of those being notified when the
 	 * task finishes
 	 * 
-	 * @param {@link BLAST_TaskFinished_listener} listener to remove
+	 * @param listener {@link BLAST_TaskFinished_listener} listener to remove
 	 */
 	public synchronized void removeListener(BLAST_TaskFinished_listener listener) {
 		this.listeners.remove(listener);
@@ -54,7 +53,7 @@ public abstract class BLAST implements Runnable {
 	protected void notifyListeners() {
         for (BLAST_TaskFinished_listener listener : this.listeners) {
             listener.handleAFinishedBLAST(
-                    new BLAST_FinishedEvent(this));
+                    new BLAST_FinishedEvent<BLAST>(this));
         }
 	}
     /**
