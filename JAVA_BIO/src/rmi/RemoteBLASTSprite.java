@@ -3,6 +3,7 @@
  */
 package rmi;
 
+import blast.ncbi.local.exec.NCBI_EX_BLAST;
 import format.fasta.Fasta;
 
 import java.rmi.RemoteException;
@@ -18,23 +19,14 @@ import blast.BLAST;
  * @author axrt
  * 
  */
-public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable {
+public abstract class RemoteBLASTSprite<B extends BLAST,T extends Fasta> implements RemoteBLASTer<B,T>, Runnable {
 
 	protected String name;
 	protected int port;
 	protected String uri;
 	protected int blastBatchSize;
 
-	/**
-	 * @param name
-	 * @param port
-	 * @param uri
-	 * @param blaster
-	 * @param blastBatchSize
-	 * @param executable
-	 * @param tmpDir
-	 * @param databaseDir
-	 */
+
 	protected RemoteBLASTSprite(String name, int port, String uri, int blastBatchSize) {
 		super();
 		this.name = name;
@@ -61,7 +53,7 @@ public abstract class RemoteBLASTSprite implements RemoteBLASTer, Runnable {
 	 * 
 	 */
 	@Override
-	public abstract List<? extends BLAST> processDelegatedBLASTBatch(
-			List<? extends Fasta> queryList) throws Exception;
+	public abstract List<B> processDelegatedBLASTBatch(
+			List<T> queryList) throws Exception;
 
 }

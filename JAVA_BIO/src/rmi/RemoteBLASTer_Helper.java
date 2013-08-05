@@ -28,13 +28,15 @@ public class RemoteBLASTer_Helper {
 			throw new AssertionError(dbDirectory.getPath()
 					+ " is not a valid directory!");
 		}
-		List<String> lackingFiles = new ArrayList<String>();
-		Map<String, File> fileNames = new HashMap<String, File>();
+		List<String> lackingFiles = new ArrayList<>();
+		Map<String, File> fileNames = new HashMap<>();
 		File[] files = dbDirectory.listFiles();
-		for (int i = 0; i < files.length; i++) {
-			fileNames.put(files[i].getName(), files[i]);
-		}
-		Iterator<Map.Entry<String, String>> it = MD5FileMap.entrySet()
+        if (files != null) {
+            for (File file : files) {
+                fileNames.put(file.getName(), file);
+            }
+        }
+        Iterator<Map.Entry<String, String>> it = MD5FileMap.entrySet()
 				.iterator();
 		Map.Entry<String, String> pairs;
 		while (it.hasNext()) {

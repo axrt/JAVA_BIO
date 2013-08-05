@@ -12,7 +12,7 @@ public class ProteinFasta extends Fasta {
 
     static {
         // Initializing the legal character set for a protein sequence
-        allowedChars = new HashSet<Character>(
+        allowedChars = new HashSet<>(
                 java.util.Arrays.asList(new Character[]{'A', 'R', 'N', 'D',
                         'C', 'E', 'Q', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P',
                         'S', 'T', 'W', 'Y', 'V', 'U', 'O', '\n', '/'}));
@@ -24,9 +24,7 @@ public class ProteinFasta extends Fasta {
      * @param {@link String} AC
      * @param {@link String} sequence
      */
-    protected ProteinFasta(String AC, String sequence)
-            throws ProteinFasta_AC_BadFormatException,
-            ProteinFasta_Sequence_BadFromatException {
+    protected ProteinFasta(String AC, String sequence) {
         super(AC, sequence);
     }
 
@@ -39,12 +37,12 @@ public class ProteinFasta extends Fasta {
      * @return a new instance of a {@link ProteinFasta}
      * @throws ProteinFasta_AC_BadFormatException
      *          in case smth is not all right with the AC
-     * @throws ProteinFasta_Sequence_BadFromatException
+     * @throws ProteinFasta_Sequence_BadFormatException
      *          in case smth is not all right with the sequence
      */
     public static ProteinFasta newInstanceFromParts(String AC, String sequence)
-            throws ProteinFasta_AC_BadFormatException,
-            ProteinFasta_Sequence_BadFromatException {
+            throws
+            ProteinFasta_Sequence_BadFormatException {
 
         // If all goes well, return a new ProteinFasta record object.
         return new ProteinFasta(AC, sequence);
@@ -60,13 +58,13 @@ public class ProteinFasta extends Fasta {
      *
      * @throws ProteinFasta_AC_BadFormatException
      *
-     * @throws ProteinFasta_Sequence_BadFromatException
+     * @throws ProteinFasta_Sequence_BadFormatException
      *
      */
     public static ProteinFasta newInstanceFromFromattedText(String fastaRecord)
             throws ProteinFasta_BadFromat_Exception,
             ProteinFasta_AC_BadFormatException,
-            ProteinFasta_Sequence_BadFromatException {
+            ProteinFasta_Sequence_BadFormatException {
         // Get the first row and check whether it is good for an AC
         String[] splitter = fastaRecord.split("\n");
         if (splitter.length < 2) {
@@ -111,7 +109,7 @@ public class ProteinFasta extends Fasta {
             // and point to the position of an illegal character
             int check = Fasta.checksOutForIllegalCharacters(sequence);
             if (check != 0) {
-                throw new ProteinFasta_Sequence_BadFromatException(
+                throw new ProteinFasta_Sequence_BadFormatException(
                         "Error within the Sequence: illegal character at positon: "
                                 + String.valueOf(check));
             }

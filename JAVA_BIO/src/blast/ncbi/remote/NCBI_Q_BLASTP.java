@@ -28,17 +28,17 @@ import format.fasta.protein.ProteinFasta;
  *
  * @author axrt
  */
-public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
+public abstract class NCBI_Q_BLASTP<T extends ProteinFasta> extends NCBI_Q_BLAST<T> {
 
     /**
-     * @param {@link List<Fasta>} query - a list of query fasta records, that
+     * @param {@link List} query - a list of query fasta records, that
      *               shall be used as an input
-     * @param {@link List<String>} query_IDs - a list of database ID/ACs to
+     * @param {@link List} query_IDs - a list of database ID/ACs to
      *               blast. Both parameters may be used simultaneously, making it
      *               easier to mix fasta records with sequences, that are already in
      *               the database
      */
-    protected NCBI_Q_BLASTP(List<? extends ProteinFasta> query,
+    protected NCBI_Q_BLASTP(List<T> query,
                             List<String> query_IDs) {
         super(query, query_IDs);
         // Declaring a list of allowed parameters
@@ -119,17 +119,17 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
      *               blast.
      * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
      */
-    public static NCBI_Q_BLASTP newDefaultInstance(List<ProteinFasta> query,
+    public static <T extends ProteinFasta>NCBI_Q_BLASTP newDefaultInstance(List<T> query,
                                                    List<String> query_IDs) {
         if (query_IDs == null) {
-            query_IDs = new ArrayList<String>();
+            query_IDs = new ArrayList<>();
         }
         if (query == null) {
-            query = new ArrayList<ProteinFasta>();
+            query = new ArrayList<>();
         }
         // TODO: input a check for whether both lists are empty or declared null
 
-        return new NCBI_Q_BLASTP(query, query_IDs) {
+        return new NCBI_Q_BLASTP<T>(query, query_IDs) {
             /**
              * Combines the formQuery() sendBLASTRequest() extractRID() and
              * retrieveResult() in order to finish the Q_BLAST with ncbi
@@ -141,15 +141,15 @@ public abstract class NCBI_Q_BLASTP extends NCBI_Q_BLAST {
                     this.BLAST();
                     this.retrieveResult();
                 } catch (IOException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (Bad_Q_BLAST_RequestException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (SAXException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (JAXBException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 }
                 this.BLASTed = true;
                 this.notifyListeners();

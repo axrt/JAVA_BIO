@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class ClustalAligner<F extends Fasta> extends ExecutableAligner<F> {
 
     protected ClustalAln output;
-    protected final ExecutableUtilFileOperator fileOperator;
+    protected final ExecutableUtilFileOperator<F> fileOperator;
     protected final File inputFile;
     protected final File outputFile;
 

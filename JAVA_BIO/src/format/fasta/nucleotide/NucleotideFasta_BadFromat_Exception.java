@@ -1,8 +1,8 @@
 package format.fasta.nucleotide;
 
-import format.BadFromatException;
+import format.BadFormatException;
 
-public class NucleotideFasta_BadFromat_Exception extends BadFromatException {
+public class NucleotideFasta_BadFromat_Exception extends BadFormatException {
 
 	public NucleotideFasta_BadFromat_Exception() {
 

@@ -1,8 +1,8 @@
 package format.fasta.protein;
 
-import format.BadFromatException;
+import format.BadFormatException;
 
-public class ProteinFasta_BadFromat_Exception extends BadFromatException {
+public class ProteinFasta_BadFromat_Exception extends BadFormatException {
 
 	public ProteinFasta_BadFromat_Exception() {
 		

@@ -16,16 +16,16 @@ import blast.multithread.BLASTer;
  * @author axrt
  * 
  */
-public abstract class RemoteBLASTerCore implements Runnable {
+public abstract class RemoteBLASTerCore<B extends BLAST,T extends Fasta> implements Runnable {
 
-	private RemoteBLASTer sprite;
-	private BLASTer blaster;
+	private RemoteBLASTer<B,T> sprite;
+	private BLASTer<B,T> blaster;
 
 	/**
 	 * @param sprite
 	 * @param blaster
 	 */
-	protected RemoteBLASTerCore(RemoteBLASTer sprite, BLASTer blaster) {
+	protected RemoteBLASTerCore(RemoteBLASTer<B,T> sprite, BLASTer<B,T>  blaster) {
 		super();
 		this.sprite = sprite;
 		this.blaster = blaster;
@@ -37,11 +37,11 @@ public abstract class RemoteBLASTerCore implements Runnable {
 	 * @throws Exception
 	 */
 	// TODO: delete comments
-	protected List<? extends BLAST> fillUpSprite() throws Exception {
+	protected List<B> fillUpSprite() throws Exception {
 		System.out.println("Size before fillup: "
 				+ this.blaster.getQueryListSize());
-		List<Fasta> fastas = new ArrayList<Fasta>();
-		Fasta f = null;
+		List<T> fastas = new ArrayList<>();
+		T f;
 		System.out.println("Preferred batchsize: "
 				+ this.sprite.preferredBatchSize());
 		while (fastas.size() < this.sprite.preferredBatchSize()) {

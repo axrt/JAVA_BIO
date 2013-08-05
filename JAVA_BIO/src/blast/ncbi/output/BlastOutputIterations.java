@@ -55,7 +55,7 @@ public class BlastOutputIterations implements Serializable{
      */
     public List<Iteration> getIteration() {
         if (iteration == null) {
-            iteration = new ArrayList<Iteration>();
+            iteration = new ArrayList<>();
         }
         return this.iteration;
     }

@@ -22,9 +22,7 @@ public class ClustalW2AlnTest {
             ClustalW2Aln clustalW2Aln=ClustalW2Aln.newInstaceFromFile(alnFile);
             //System.out.println(clustalW2Aln.toString());
             System.out.println(clustalW2Aln.getConsensus(50));
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (AlignmentException e) {
+        } catch (IOException | AlignmentException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }

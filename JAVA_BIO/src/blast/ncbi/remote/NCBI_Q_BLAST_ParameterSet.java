@@ -33,7 +33,7 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	 * 
 	 */
 	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters) {
-		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
@@ -43,7 +43,7 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,Collection<NCBI_Q_BLAST_Parameter> arg0) {
 		super(arg0);
-		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
@@ -53,7 +53,7 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0) {
 		super(arg0);
-		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
@@ -64,7 +64,7 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	 */
 	public NCBI_Q_BLAST_ParameterSet(String[] allowedParameters,int arg0, float arg1) {
 		super(arg0, arg1);
-		this.allowedParameters=new HashSet<String>();
+		this.allowedParameters=new HashSet<>();
 		this.allowedParameters.addAll(Arrays
 				.asList(allowedParameters));
 	}
@@ -80,11 +80,7 @@ public class NCBI_Q_BLAST_ParameterSet extends
 	// parameters multiple times
 	@Override
 	public boolean add(NCBI_Q_BLAST_Parameter e) {
-		if (this.allowedParameters.contains(e.getKey())) {
-			return super.add(e);
-		} else {
-			return false;
-		}
+        return this.allowedParameters.contains(e.getKey()) && super.add(e);
 	}
 
 	/**

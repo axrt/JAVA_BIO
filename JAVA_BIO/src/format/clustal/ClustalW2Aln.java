@@ -97,14 +97,14 @@ public class ClustalW2Aln extends ClustalAln {
         stringBuilder.append("\n\n\n");
         int position = 0;
         while (position < this.alignmentLines.get(0).getSequence().length()) {
-            for (int i = 0; i < this.alignmentLines.size(); i++) {
-                stringBuilder.append(this.alignmentLines.get(i).getName());
+            for (AlignmentLine alignmentLine : this.alignmentLines) {
+                stringBuilder.append(alignmentLine.getName());
                 stringBuilder.append(ClustalW2Aln.FORMATTER);
-                if (position + ClustalW2Aln.FORMATTER_LINE_LENGTH < this.alignmentLines.get(i).getSequence().length()) {
-                    stringBuilder.append(this.alignmentLines.get(i).getSequence().substring(position, position + ClustalW2Aln.FORMATTER_LINE_LENGTH));
+                if (position + ClustalW2Aln.FORMATTER_LINE_LENGTH < alignmentLine.getSequence().length()) {
+                    stringBuilder.append(alignmentLine.getSequence().substring(position, position + ClustalW2Aln.FORMATTER_LINE_LENGTH));
                     stringBuilder.append('\n');
                 } else {
-                    stringBuilder.append(this.alignmentLines.get(i).getSequence().substring(position, this.alignmentLines.get(i).getSequence().length()));
+                    stringBuilder.append(alignmentLine.getSequence().substring(position, alignmentLine.getSequence().length()));
                     stringBuilder.append('\n');
                 }
             }

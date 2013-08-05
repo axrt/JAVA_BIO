@@ -1,7 +1,7 @@
 package format.fasta.protein;
 
 import blast.ncbi.remote.NCBI_Q_BLAST_Parameter;
-import format.BadFromatException;
+import format.BadFormatException;
 
 /**
  * This exception is thrown whenever a forbidden {@link NCBI_Q_BLAST_Parameter}
@@ -10,7 +10,7 @@ import format.BadFromatException;
  * @author axrt
  * 
  */
-public class ProteinFasta_AC_BadFormatException extends BadFromatException {
+public class ProteinFasta_AC_BadFormatException extends BadFormatException {
 	/**
 	 * Counstructor
 	 */

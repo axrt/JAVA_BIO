@@ -41,7 +41,7 @@ public class UtilFileOperator_Helper {
 
 		byte[] rawBytes = new byte[1024];
 
-		int counter = 0;
+		int counter;
 		while ((counter = fileInputStream.read(rawBytes)) != -1) {
 			md.update(rawBytes, 0, counter);
 		}
@@ -61,12 +61,12 @@ public class UtilFileOperator_Helper {
 	 */
 	public static String MD5ToString(byte[] md5Bytes) {
 		StringBuffer hexString = new StringBuffer();
-		for (int i = 0; i < md5Bytes.length; i++) {
-			String hex = Integer.toHexString(0xff & md5Bytes[i]);
-			if (hex.length() == 1)
-				hexString.append('0');
-			hexString.append(hex);
-		}
+        for (byte md5Byte : md5Bytes) {
+            String hex = Integer.toHexString(0xff & md5Byte);
+            if (hex.length() == 1)
+                hexString.append('0');
+            hexString.append(hex);
+        }
 		return new String(hexString);
 	}
 
@@ -87,20 +87,20 @@ public class UtilFileOperator_Helper {
 
 		FileInputStream fileInputStream;
 		ZipEntry zipEntry;
-		for (int i = 0; i < files.length; i++) {
+        for (File file : files) {
 
-			zipEntry = new ZipEntry(files[i].getPath());
-			zipOutputStream.putNextEntry(zipEntry);
+            zipEntry = new ZipEntry(file.getPath());
+            zipOutputStream.putNextEntry(zipEntry);
 
-			fileInputStream = new FileInputStream(files[i]);
+            fileInputStream = new FileInputStream(file);
 
-			int len;
-			while ((len = fileInputStream.read(buffer)) > 0) {
-				zipOutputStream.write(buffer, 0, len);
-			}
+            int len;
+            while ((len = fileInputStream.read(buffer)) > 0) {
+                zipOutputStream.write(buffer, 0, len);
+            }
 
-			zipOutputStream.close();
-		}
+            zipOutputStream.close();
+        }
 	}
 
 	/**
@@ -112,7 +112,8 @@ public class UtilFileOperator_Helper {
 	 * @param outputFolder
 	 * @throws IOException
 	 */
-	public void UNZIPFiles(File zipFile, File outputFolder) throws IOException {
+	@SuppressWarnings("ResultOfMethodCallIgnored")
+    public void UNZIPFiles(File zipFile, File outputFolder) throws IOException {
 		if (!outputFolder.isDirectory()) {
 			throw new AssertionError(outputFolder.getPath()
 					+ " is not a valid directory!");
@@ -153,23 +154,19 @@ public class UtilFileOperator_Helper {
 
 	public static Map<String, String> MD5FileMap(File[] filesToMap)
 			throws NoSuchAlgorithmException, IOException {
-		Map<String, String> MD5FM = new HashMap<String, String>();
-		for (int i = 0; i < filesToMap.length; i++) {
-			MD5FM.put(filesToMap[i].getName(), UtilFileOperator_Helper
-					.MD5ToString(UtilFileOperator_Helper
-							.getFileMD5(filesToMap[i])));
-		}
+		Map<String, String> MD5FM = new HashMap<>();
+        for (File aFilesToMap : filesToMap) {
+            MD5FM.put(aFilesToMap.getName(), UtilFileOperator_Helper
+                    .MD5ToString(UtilFileOperator_Helper
+                            .getFileMD5(aFilesToMap)));
+        }
 
 		return MD5FM;
 	}
 
 	public static boolean fileConfirmsMD5(String hexMD5, File file)
 			throws NoSuchAlgorithmException, IOException {
-		if (UtilFileOperator_Helper.MD5ToString(
-				UtilFileOperator_Helper.getFileMD5(file)).equals(hexMD5)) {
-			return true;
-		} else {
-			return false;
-		}
+        return UtilFileOperator_Helper.MD5ToString(
+                UtilFileOperator_Helper.getFileMD5(file)).equals(hexMD5);
 	}
 }

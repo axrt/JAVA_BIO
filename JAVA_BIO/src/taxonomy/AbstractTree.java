@@ -4,44 +4,81 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: alext
- * Date: 6/10/13
- * Time: 2:25 PM
- * To change this template use File | Settings | File Templates.
+ * Abstract tree, generified
+ *
+ * @param <T> generic
  */
 public abstract class AbstractTree<T> {
+    /**
+     * Root node
+     */
+    protected Node<T> root;
 
-        protected Node<T> root;
+    /**
+     * Constructor from root node
+     * @param rootData {@link T} root node
+     */
+    public AbstractTree(T rootData) {
+        root = new Node<>();
+        root.data = rootData;
+    }
 
-        public AbstractTree(T rootData) {
-            root = new Node<T>();
-            root.data = rootData;
+    /**
+     * Static node class
+     * @param <T> {@link T}
+     */
+    public static class Node<T> {
+        /**
+         * data
+         */
+        protected T data;
+        /**
+         * Parent node
+         */
+        protected Node<T> parent;
+        /**
+         * A list of children nodes
+         */
+        protected List<Node<T>> children;
+
+        /**
+         * Constructor
+         */
+        public Node() {
+            this.children = new ArrayList<>();
         }
 
-        public static class Node<T> {
-            protected T data;
-            protected Node<T> parent;
-            protected List<Node<T>> children;
-
-            public Node() {
-                 this.children=new ArrayList<>();
-            }
-
-            public void setParent(Node<T> parent){
-                this.parent=parent;
-            }
-            public T getData() {
-                return data;
-            }
-
-            public Node<T> getParent() {
-                return parent;
-            }
-
-            public List<Node<T>> getChildren() {
-                return children;
-            }
+        /**
+         * Data getter
+         * @return {@link T} data
+         */
+        public T getData() {
+            return data;
         }
+
+        /**
+         * Parent node getter
+         * @return {@link Node} parent node
+         */
+        public Node<T> getParent() {
+            return parent;
+        }
+
+        /**
+         * A setter for the parent {@link Node}
+         * @param parent
+         */
+        public void setParent(Node<T> parent) {
+            this.parent = parent;
+        }
+
+        /**
+         * A getter for the {@link List} of children nodes
+         * @return {@link List} of children nodes
+         */
+        public List<Node<T>> getChildren() {
+            return children;
+        }
+    }
 
 }

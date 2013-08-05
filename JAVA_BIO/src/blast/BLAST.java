@@ -25,7 +25,7 @@ public abstract class BLAST implements Runnable {
 	 */
 	protected BLAST() {
 		// Initialize a list of listeners
-		this.listeners = new ArrayList<BLAST_TaskFinished_listener>();
+		this.listeners = new ArrayList<>();
 	}
 
 	/**
@@ -52,10 +52,10 @@ public abstract class BLAST implements Runnable {
 	 * Notifies all the listening modules form the list of listeners
 	 */
 	protected void notifyListeners() {
-		for (int i = 0; i < this.listeners.size(); i++) {
-			this.listeners.get(i).handleAFinishedBLAST(
-					new BLAST_FinishedEvent(this));
-		}
+        for (BLAST_TaskFinished_listener listener : this.listeners) {
+            listener.handleAFinishedBLAST(
+                    new BLAST_FinishedEvent(this));
+        }
 	}
     /**
      * Should launch the blast process. In case a separate thread is created

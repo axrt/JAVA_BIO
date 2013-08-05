@@ -23,6 +23,7 @@ public abstract class ExecutableUtilFileOperator<T> extends UtilFileOperator {
      *                   executable as a parameter
      * @throws java.io.IOException
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void writeFastaListToFile(List<T> list,
                                         File outputFile) throws IOException {
         BufferedWriter bufferedWriter = null;
@@ -34,14 +35,16 @@ public abstract class ExecutableUtilFileOperator<T> extends UtilFileOperator {
             // Write to the file line by line
             bufferedWriter = new BufferedWriter(new FileWriter(
                     outputFile, true));
-            for (int i = 0; i < list.size(); i++) {
-                bufferedWriter.write(list.get(i).toString());
+            for (T aList : list) {
+                bufferedWriter.write(aList.toString());
                 bufferedWriter.newLine();
             }
             bufferedWriter.flush();
         } finally {
             // Close the reader
-            bufferedWriter.close();
+            if (bufferedWriter != null) {
+                bufferedWriter.close();
+            }
         }
 
     }
@@ -78,7 +81,7 @@ public abstract class ExecutableUtilFileOperator<T> extends UtilFileOperator {
      *
      * @throws IOException
      */
-    public synchronized void createTMPFolder(File tmpFolder) throws IOException {
+    public synchronized void createTMPFolder(File tmpFolder) {
         // Create the folder if it does not exist (essential for a multithreaded
         // environment where other blasts may want to create one as well using
         // the same name)

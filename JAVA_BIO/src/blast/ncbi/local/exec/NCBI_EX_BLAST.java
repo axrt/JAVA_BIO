@@ -23,12 +23,12 @@ import java.util.List;
  *
  * @author axrt
  */
-public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
+public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
     /**
      * A {@link NCBI_EX_BLAST_FileOperator} that will allow to create an input
      * file as well as catch the blast output
      */
-    protected final NCBI_EX_BLAST_FileOperator fileOperator;
+    protected final NCBI_EX_BLAST_FileOperator<T> fileOperator;
     /**
      * A file that will automatically be created, fasta records from the batch
      * will then be dumped to the file, and then it will be used as an input to
@@ -71,7 +71,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
      */
     protected NCBI_EX_BLAST(List<T> query,
                             List<String> query_IDs, File tempDir, File executive,
-                            String[] parameterList, NCBI_EX_BLAST_FileOperator fileOperator) {
+                            String[] parameterList, NCBI_EX_BLAST_FileOperator<T> fileOperator) {
         super(query, query_IDs);
         this.fileOperator = fileOperator;
         this.tempDir = tempDir;
@@ -97,6 +97,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
      * @throws JAXBException
      * @throws SAXException
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void BLAST() throws IOException, InterruptedException,
             JAXBException, SAXException {
@@ -115,9 +116,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST {
         command[5] = "-outfmt";
         command[6] = "5";
         // Copy all the parameters
-        for (int i = 7; i < command.length; i++) {
-            command[i] = parameterList[i - 7];
-        }
+        System.arraycopy(parameterList, 0, command, 7, command.length - 7);
         try {
             // Build a process
             final Process p = Runtime.getRuntime().exec(command);

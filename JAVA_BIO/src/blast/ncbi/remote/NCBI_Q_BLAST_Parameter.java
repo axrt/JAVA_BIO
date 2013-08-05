@@ -52,7 +52,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum ALIGNMENT_VIEW_PARAM {
-		Pairwise, PairwiseWithIdentities, QueryAnchored, QueryAnchoredNoIdentities, FlatQueryAnchored, FlatQueryAnchoredNoIdentities, Tabular;
+		Pairwise, PairwiseWithIdentities, QueryAnchored, QueryAnchoredNoIdentities, FlatQueryAnchored, FlatQueryAnchoredNoIdentities, Tabular
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum BLAST_PROGRAM_PARAM {
-		blastn, MegaBlast, discoMegablast, blastp, psiBlast, phiBlast, blastx, tblastn, tblastx;
+		blastn, MegaBlast, discoMegablast, blastp, psiBlast, phiBlast, blastx, tblastn, tblastx
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum CMD_PARAM {
-		Put, Get, Web, Info, requestx;
+		Put, Get, Web, Info, requestx
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum COMPOSITION_BASED_STATISTICS_PARAM {
-		zero, one, two, three;
+		zero, one, two, three
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum DATABASE_PARAM {
-		nr, refseq_rna, refseq_genomic, chromosome, est, gss, htgs, pat, pdb, alu, dbsts, Whole_Genome_Shotgun_contigs, tsa_nt, TL, refseq_protein, swissprot, env_nr;
+		nr, refseq_rna, refseq_genomic, chromosome, est, gss, htgs, pat, pdb, alu, dbsts, Whole_Genome_Shotgun_contigs, tsa_nt, TL, refseq_protein, swissprot, env_nr
 	}
 
 	/**
@@ -360,7 +360,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum FILTER_PARAM {
-		T, F, m, L, R, S, D;
+		T, F, m, L, R, S, D
 	}
 
 	/**
@@ -394,7 +394,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum FORMAT_OBJECT_PARAM {
-		Alignment, PSSM, TaxBlast, Bioseq;
+		Alignment, PSSM, TaxBlast, Bioseq
 	}
 
 	/**
@@ -641,7 +641,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum MATRIX_NAME_PARAM {
-		PAM30, PAM70, BLOSUM45, BLOSUM42, BLOSUM80;
+		PAM30, PAM70, BLOSUM45, BLOSUM42, BLOSUM80
 	}
 
 	/**
@@ -764,7 +764,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum PAGE_TYPE_PARAM {
-		BlastHome, BlastDocs, BlastNews, BlastTips, BlastSearch, BlastFormatting, BlastResults;
+		BlastHome, BlastDocs, BlastNews, BlastTips, BlastSearch, BlastFormatting, BlastResults
 	}
 
 	/**
@@ -825,7 +825,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	 * 
 	 */
 	public enum PROGRAM_PARAM {
-		blastn, blastp, blastx, tblastn, tblastx;
+		blastn, blastp, blastx, tblastn, tblastx
 	}
 
 	/**

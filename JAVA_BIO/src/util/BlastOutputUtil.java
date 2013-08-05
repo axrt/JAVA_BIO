@@ -1,7 +1,7 @@
 package util;
 
 import blast.ncbi.output.Hit;
-import format.BadFromatException;
+import format.BadFormatException;
 
 /**
  * Contains utility methods for the {@link blast.ncbi.output.BlastOutput} processing
@@ -21,16 +21,16 @@ public class BlastOutputUtil {
      * @param hitID {@link String} The id of the hit that may be formatted
      *              like this, gi|385760777|gb|JQ426063.1|,
      * @return {@link String} extracted GI of the hit
-     * @throws {@link BadFromatException} in case the given hitID is misformatted
+     * @throws {@link format.BadFormatException} in case the given hitID is misformatted
      */
-    public static String extractGIFromHitID(String hitID) throws BadFromatException {
+    public static String extractGIFromHitID(String hitID) throws BadFormatException {
         //The IF from a Hit looks smth like this, gi|385760777|gb|JQ426063.1|,
         //so it nedds to get splitted by "\\|"
         String[] splitter = hitID.split("\\|");
         if (splitter.length > 1) {
             return splitter[1];
         } else {
-            throw new BadFromatException("The hitID provided is corrupt..");
+            throw new BadFormatException("The hitID provided is corrupt..");
         }
     }
 

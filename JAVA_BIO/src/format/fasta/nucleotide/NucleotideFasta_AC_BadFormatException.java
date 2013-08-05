@@ -1,6 +1,6 @@
 package format.fasta.nucleotide;
 
-import format.BadFromatException;
+import format.BadFormatException;
 
 /**
  * This exception is thrown whenever a forbidden {@link blast.ncbi.remote.NCBI_Q_BLAST_Parameter}
@@ -8,7 +8,7 @@ import format.BadFromatException;
  *
  * @author axrt
  */
-public class NucleotideFasta_AC_BadFormatException extends BadFromatException {
+public class NucleotideFasta_AC_BadFormatException extends BadFormatException {
     /**
      * Counstructor
      */

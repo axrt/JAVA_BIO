@@ -138,9 +138,10 @@ public class SystemUtil {
      * @return {@link File} an abstract path of the directory where the archive
      * has been extracted
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File unArchiveTarGZFile(final File archiveFile, File outputDir) throws IOException {
         InputStream inputStream = null;
-        OutputStream fileOutputStream = null;
+        OutputStream fileOutputStream;
         TarInputStream tarInputStream = null;
 
         outputDir=SystemUtil.createASubDirFromFileName(archiveFile, outputDir);
@@ -238,12 +239,12 @@ public class SystemUtil {
             ftpClient.connect(SystemUtil.NCBI_FTP, 21);
             ftpClient.enterLocalPassiveMode();
             //Login
-            final boolean login = ftpClient.login(SystemUtil.ANONYMOUS, "");
+            ftpClient.login(SystemUtil.ANONYMOUS, "");
             System.out.print(ftpClient.getReplyString());
             //Set binary mode
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             //Change the directory to the one that contains taxonomic information
-            final boolean cwd = ftpClient.changeWorkingDirectory(subDir.getAbsolutePath());
+            ftpClient.changeWorkingDirectory(subDir.getAbsolutePath());
             //Prepare the outputstream to save the file
             System.out.print(ftpClient.getReplyString());
             outputStream = new FileOutputStream(outputFile=new File(tmpDownloadDir, fileName.getName()));

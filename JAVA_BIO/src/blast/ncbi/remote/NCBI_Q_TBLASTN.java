@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.UnmarshalException;
 
+import format.fasta.nucleotide.NucleotideFasta;
 import org.xml.sax.SAXException;
 
 import blast.ncbi.output.NCBI_BLAST_OutputHelper;
@@ -20,13 +21,13 @@ import format.fasta.protein.ProteinFasta;
 /**
  * @author axrt
  */
-public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
+public abstract class NCBI_Q_TBLASTN<T extends NucleotideFasta> extends NCBI_Q_BLAST<T> {
 
     /**
      * @param query
      * @param query_IDs
      */
-    public NCBI_Q_TBLASTN(List<? extends ProteinFasta> query,
+    public NCBI_Q_TBLASTN(List<T> query,
                           List<String> query_IDs) {
         super(query, query_IDs);
         // Declaring a list of allowed parameters
@@ -119,10 +120,10 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
      *               blast.
      * @return a "Default" instance of a {@link NCBI_Q_BLASTP}.
      */
-    public static NCBI_Q_TBLASTN newDefaultInstance(List<ProteinFasta> query,
+    public static <T extends NucleotideFasta>NCBI_Q_TBLASTN newDefaultInstance(List<T> query,
                                                     List<String> query_IDs) {
 
-        return new NCBI_Q_TBLASTN(query, query_IDs) {
+        return new NCBI_Q_TBLASTN<T>(query, query_IDs) {
             /**
              * Combines the formQuery() sendBLASTRequest() extractRID() and
              * retrieveResult() in order to finish the Q_BLAST with ncbi
@@ -133,15 +134,15 @@ public abstract class NCBI_Q_TBLASTN extends NCBI_Q_BLAST {
                     this.BLAST();
                     this.retrieveResult();
                 } catch (IOException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (Bad_Q_BLAST_RequestException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (SAXException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 } catch (JAXBException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 }
                 this.BLASTed = true;
                 this.notifyListeners();

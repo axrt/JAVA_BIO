@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class NucleotideFasta extends Fasta {
 
     static {
-        allowedChars = new HashSet<Character>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '-','\n', '/'}));
+        allowedChars = new HashSet<>(java.util.Arrays.asList(new Character[]{'A', 'T', 'G', 'C', 'N', '-','\n', '/'}));
     }
 
     protected NucleotideFasta(String AC, String sequence){
@@ -25,12 +25,10 @@ public class NucleotideFasta extends Fasta {
      * @return a new instance of a {@link NucleotideFasta}
      * @throws NucleotideFasta_AC_BadFormatException
      *          in case smth is not all right with the AC
-     * @throws NucleotideFasta_Sequence_BadFromatException
+     * @throws NucleotideFasta_Sequence_BadFormatException
      *          in case smth is not all right with the sequence
      */
-    public static NucleotideFasta newInstanceFromParts(String AC, String sequence)
-            throws NucleotideFasta_AC_BadFormatException,
-            NucleotideFasta_Sequence_BadFromatException {
+    public static NucleotideFasta newInstanceFromParts(String AC, String sequence) {
 
         // If all goes well, return a new NucleotideFasta record object.
         return new NucleotideFasta(AC, sequence);
@@ -45,13 +43,13 @@ public class NucleotideFasta extends Fasta {
      *
      * @throws NucleotideFasta_AC_BadFormatException
      *
-     * @throws NucleotideFasta_Sequence_BadFromatException
+     * @throws NucleotideFasta_Sequence_BadFormatException
      *
      */
     public static NucleotideFasta newInstanceFromFromattedText(String fastaRecord)
             throws NucleotideFasta_BadFromat_Exception,
             NucleotideFasta_AC_BadFormatException,
-            NucleotideFasta_Sequence_BadFromatException {
+            NucleotideFasta_Sequence_BadFormatException {
         // Get the first row and check whether it is good for an AC
         String[] splitter = fastaRecord.split("\n");
         if (splitter.length < 2) {
@@ -97,7 +95,7 @@ public class NucleotideFasta extends Fasta {
             // and point to the position of an illegal character
             int check = Fasta.checksOutForIllegalCharacters(sequence);
             if (check != 0) {
-                throw new NucleotideFasta_Sequence_BadFromatException(
+                throw new NucleotideFasta_Sequence_BadFormatException(
                         "Error within the Sequence: illegal character at positon: "
                                 + String.valueOf(check));
             }

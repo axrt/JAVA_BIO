@@ -12,14 +12,14 @@ import format.fasta.protein.ProteinFasta;
  *
  * @author axrt
  */
-public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLAST {
+public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLAST<T> {
 
     // TODO: think of smth what to do about the ids
 
     /**
-     * @param query         {@link List<? extends ProteinFasta>} a list of query
+     * @param query         {@link List} a list of query
      *                      fasta-formatted records
-     * @param query_IDs     {@link List<String>} a list of AC numbers of sequences in a
+     * @param query_IDs     {@link List} a list of AC numbers of sequences in a
      *                      database
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
@@ -33,14 +33,14 @@ public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLA
      */
     protected NCBI_EX_BLASTP(List<T> query,
                              List<String> query_IDs, File tempDir, File executable,
-                             String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
+                             String[] parameterList,NCBI_EX_BLAST_FileOperator<T> fileOperator) {
         super(query, query_IDs, tempDir, executable, parameterList,fileOperator);
     }
 
     /**
-     * @param query         {@link List<T extends ProteinFasta>} a list of query
+     * @param query         {@link List} a list of query
      *                      fasta-formatted records
-     * @param query_IDs     {@link List<String>} a list of AC numbers of sequences in a
+     * @param query_IDs     {@link List} a list of AC numbers of sequences in a
      *                      database
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
@@ -56,15 +56,15 @@ public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLA
      */
     public static <T extends ProteinFasta>NCBI_EX_BLASTP newDefaultInstance(
             List<T> query, List<String> query_IDs,
-            File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
+            File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator<T> fileOperator) {
         if (query_IDs == null) {
-            query_IDs = new ArrayList<String>();
+            query_IDs = new ArrayList<>();
         }
         if (query == null) {
-            query = new ArrayList<T>();
+            query = new ArrayList<>();
         }
         // TODO: input a check for whether both lists are empty or declared null
-        return new NCBI_EX_BLASTP(query, query_IDs, tempDir, executive,
+        return new NCBI_EX_BLASTP<T>(query, query_IDs, tempDir, executive,
                 parameterList,fileOperator) {
 
             @Override

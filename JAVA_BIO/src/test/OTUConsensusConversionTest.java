@@ -4,7 +4,7 @@ import format.clustal.AlignmentException;
 import format.fasta.Fasta;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
 import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
-import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFromatException;
+import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import format.fasta.otu.EncodedOTU;
 import org.junit.Test;
 
@@ -22,6 +22,7 @@ import java.io.IOException;
  */
 public class OTUConsensusConversionTest {
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testOTUConsensusConversion() {
         File otuDir = new File("/home/alext/Documents/tuit/OTU Seq90/Seqs");
@@ -55,7 +56,7 @@ public class OTUConsensusConversionTest {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 } catch (NucleotideFasta_AC_BadFormatException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                } catch (NucleotideFasta_Sequence_BadFromatException e) {
+                } catch (NucleotideFasta_Sequence_BadFormatException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 } catch (NucleotideFasta_BadFromat_Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

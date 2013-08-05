@@ -26,7 +26,7 @@ import blast.event.BLAST_TaskFinished_listener;
  * @author axrt
  * 
  */
-public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFinished_listener {
+public abstract class BLASTer<B extends BLAST,T extends Fasta> implements Runnable, BLAST_TaskFinished_listener {
 
 	/**
 	 * Private executor service, only allows {@link BLAST} tasks via
@@ -46,7 +46,7 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	 * A list of queries in fasta format (represented by {@link Fasta} or
 	 * extending) that will be taken to perform the blast search
 	 */
-    protected Queue<Fasta> queryList;
+    protected Queue<T> queryList;
 	/**
 	 * A list of database ACs of sequences that will be taken to perform the
 	 * blast search
@@ -55,7 +55,7 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	/**
 	 * A que of finished blasts, ready to return their results
 	 */
-    protected Queue<BLAST> finishedBLASTs;
+    protected Queue<B> finishedBLASTs;
 	/**
 	 * A flag, that indicates that the task is being performed (in order to
 	 * prevent illegal state calls)
@@ -72,18 +72,18 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 		// Initialize a list if null is passed in order to prevent falures
 		// (should be corrected)
 		if (queryList == null) {
-			queryList = new ArrayList<T>();
+			queryList = new ArrayList<>();
 		}
 		// Initialize a list if null is passed in order to prevent falures
 		// (should be corrected)
 		if (queryListACs == null) {
-			queryListACs = new ArrayList<String>();
+			queryListACs = new ArrayList<>();
 		}
 		// A list of query Fasta records must handle operations atomically
-		this.queryList = new ConcurrentLinkedQueue<Fasta>(queryList);
+		this.queryList = new ConcurrentLinkedQueue<>(queryList);
 		// A list of query AC numbers must handle operations atomically
-		this.queryListACs = new ConcurrentLinkedQueue<String>(queryListACs);
-		this.finishedBLASTs = new ConcurrentLinkedQueue<BLAST>();
+		this.queryListACs = new ConcurrentLinkedQueue<>(queryListACs);
+		this.finishedBLASTs = new ConcurrentLinkedQueue<>();
 		// The rest of constructor
 		this.numberOfThereds = numberOfThreads;
 		this.batchSize = batchSize;
@@ -100,8 +100,8 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	 * 
 	 * @return {@link List} {@link BLAST}s
 	 */
-	public List<BLAST> getFinishedBLASTs() {
-		List<BLAST> fBLASTs = new ArrayList<BLAST>();
+	public List<B> getFinishedBLASTs() {
+		List<B> fBLASTs = new ArrayList<>();
 		while (!this.finishedBLASTs.isEmpty()) {
 			fBLASTs.add(this.finishedBLASTs.poll());
 		}
@@ -120,7 +120,7 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	/**
 	 * 
 	 * @param {@link blast} blast that is being submitted for execution
-	 * @return {@link Future<?>} that allows to track the state of execution
+	 * @return {@link Future} that allows to track the state of execution
 	 */
 	protected synchronized Future<?> submitBLAST(BLAST blast) {
 		return this.executorService.submit(blast);
@@ -139,7 +139,7 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	 * 
 	 * @return a next {@link Fasta} query record
 	 */
-	public Fasta pollFasta() {
+	public T pollFasta() {
 		return this.queryList.poll();
 	}
 
@@ -190,7 +190,7 @@ public abstract class BLASTer<T extends Fasta> implements Runnable, BLAST_TaskFi
 	 * 
 	 * @param {@link blast} blast
 	 */
-	protected void storeAFinishedBLAST(BLAST blast) {
+	protected void storeAFinishedBLAST(B blast) {
 		this.finishedBLASTs.add(blast);
 	}
 

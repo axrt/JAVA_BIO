@@ -5,14 +5,13 @@ import format.clustal.AlignmentException;
 import format.fasta.nucleotide.NucleotideFasta;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
 import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
-import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFromatException;
+import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import org.junit.Test;
 import util.ExecutableUtilFileOperator;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,17 +58,7 @@ public class ClustalW2AlignerTest {
             System.out.println(nucleotideFastaClustalW2Aligner.getOutput().toString());
 
 
-        } catch (NucleotideFasta_BadFromat_Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (NucleotideFasta_AC_BadFormatException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (NucleotideFasta_Sequence_BadFromatException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (AlignmentException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
+        } catch (NucleotideFasta_BadFromat_Exception | NucleotideFasta_AC_BadFormatException | NucleotideFasta_Sequence_BadFormatException | InterruptedException | AlignmentException | IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 

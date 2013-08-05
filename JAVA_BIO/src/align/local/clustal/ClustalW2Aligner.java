@@ -29,6 +29,7 @@ public class ClustalW2Aligner<F extends Fasta> extends ClustalAligner<F> {
         super(tmpDir, executable, parameterList, fileOperator);
 
     }
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void align() throws IOException, InterruptedException, AlignmentException {
         if(this.sequences==null){
@@ -47,9 +48,7 @@ public class ClustalW2Aligner<F extends Fasta> extends ClustalAligner<F> {
         command[0] = this.executable.getPath();
         command[1] = "-infile"+"="+this.inputFile.getPath();
         command[2] = "-outfile"+"="+this.outputFile.getPath();
-        for (int i = 3; i < command.length; i++) {
-            command[i] = parameterList[i - 3];
-        }
+        System.arraycopy(parameterList, 0, command, 3, command.length - 3);
         try {
             // Build a process
             final Process p = Runtime.getRuntime().exec(command);
@@ -99,14 +98,14 @@ public class ClustalW2Aligner<F extends Fasta> extends ClustalAligner<F> {
             }
         }
     }
-    public static <F extends Fasta>ClustalW2Aligner newDefaultInstance(List<F> sequences, File tmpDir, File executable){
-        return new ClustalW2Aligner(sequences,tmpDir,executable,new String[]{},new ExecutableUtilFileOperator() {
+    public static <F extends Fasta>ClustalW2Aligner<F> newDefaultInstance(List<F> sequences, File tmpDir, File executable){
+        return new ClustalW2Aligner<F>(sequences,tmpDir,executable,new String[]{},new ExecutableUtilFileOperator<F>() {
         });
     }
-    public static <F extends Fasta>ClustalW2Aligner newInstanceWithSequences(List<F> sequences, File tmpDir, File executable, String[] parameterList, ExecutableUtilFileOperator<F> fileOperator){
-        return new ClustalW2Aligner(sequences,tmpDir,executable,parameterList,fileOperator);
+    public static <F extends Fasta>ClustalW2Aligner<F> newInstanceWithSequences(List<F> sequences, File tmpDir, File executable, String[] parameterList, ExecutableUtilFileOperator<F> fileOperator){
+        return new ClustalW2Aligner<F>(sequences,tmpDir,executable,parameterList,fileOperator);
     }
-    public static <F extends Fasta>ClustalW2Aligner newInstance(File tmpDir, File executable, String[] parameterList, ExecutableUtilFileOperator<F> fileOperator){
-        return new ClustalW2Aligner(tmpDir,executable,parameterList,fileOperator);
+    public static <F extends Fasta>ClustalW2Aligner<F> newInstance(File tmpDir, File executable, String[] parameterList, ExecutableUtilFileOperator<F> fileOperator){
+        return new ClustalW2Aligner<F>(tmpDir,executable,parameterList,fileOperator);
     }
 }

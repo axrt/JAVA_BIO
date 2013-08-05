@@ -18,7 +18,7 @@ import blast.BLAST;
  * @author axrt
  * 
  */
-public interface RemoteBLASTer extends Remote {
+public interface RemoteBLASTer<B extends BLAST,T extends Fasta> extends Remote {
 
 	/**
 	 * 
@@ -26,11 +26,11 @@ public interface RemoteBLASTer extends Remote {
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public List<? extends BLAST> processDelegatedBLASTBatch(
-			List<? extends Fasta> queryList) throws Exception;
+	public List<B> processDelegatedBLASTBatch(
+			List<T> queryList) throws Exception;
     /**
      * Returns a number of query fastas per one batch
      * @return {@code int} number of query records
      */
-    public int preferredBatchSize() throws Exception;
+    public int preferredBatchSize();
 }

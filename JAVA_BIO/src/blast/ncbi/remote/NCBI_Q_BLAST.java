@@ -22,7 +22,7 @@ import format.fasta.Fasta;
  * @author axrt
  * 
  */
-public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
+public abstract class NCBI_Q_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
 
 	/**
 	 * The QBLAST service address
@@ -60,7 +60,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 * @param {@link List<String> query_IDs} - - a list of query fasta record
 	 *        IDs
 	 */
-	protected NCBI_Q_BLAST(List<? extends Fasta> query, List<String> query_IDs) {
+	protected NCBI_Q_BLAST(List<T> query, List<String> query_IDs) {
 		super(query, query_IDs);
 	}
 
@@ -101,15 +101,15 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	protected void formQuery() {
 		// For each Fasta in the query list - add it to a single string
         final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < this.query.size(); i++) {
-			sb.append(this.query.get(i).toString());
-			sb.append('\n');
-		}
+        for (Object aQuery : this.query) {
+            sb.append(aQuery.toString());
+            sb.append('\n');
+        }
 		// Now for every ID/AC - add to the same query string
-		for (int i = 0; i < this.query_IDs.size(); i++) {
-			sb.append(this.query_IDs.get(i));
-			sb.append('\n');
-		}
+        for (Object query_ID : this.query_IDs) {
+            sb.append(query_ID);
+            sb.append('\n');
+        }
 		// Flush the newly formed query into parameters
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.QUERY(NCBI_Q_BLAST_EscapeSymbols
@@ -127,7 +127,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 		// Make the CMD=Put
 		this.request_parameters.add(NCBI_Q_BLAST_Parameter
 				.CMD(NCBI_Q_BLAST_Parameter.CMD_PARAM.Put));
-		BufferedReader br = null;
+		BufferedReader br;
 		// Generates a request
         final URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
@@ -215,7 +215,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
 	 */
 	protected boolean resultsReady() throws IOException,
 			Bad_Q_BLAST_RequestException {
-		BufferedReader br = null;
+		BufferedReader br;
 		// Generates a status request
 		final String statusRequest = NCBI_Q_BLAST_Parameter.CMD(
 				NCBI_Q_BLAST_Parameter.CMD_PARAM.Get).toString()
@@ -251,7 +251,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
     @Override
     protected void BLAST() throws IOException,Bad_Q_BLAST_RequestException,InterruptedException {
         this.formQuery();
-        try {
+
             this.sendBLASTRequest();
             this.extractRID();
             // System.out.println("RID: "+this.getBLAST_RID());
@@ -259,13 +259,7 @@ public abstract class NCBI_Q_BLAST extends NCBI_BLAST {
                 // System.out.println("Waiting..");
                 Thread.sleep(3000);
             }
-        } catch (IOException ioe) {
-            throw ioe;
-        } catch (Bad_Q_BLAST_RequestException bqre) {
-            throw bqre;
-        } catch (InterruptedException ie) {
-            throw ie;
-        }
+
     }
 
 	/**

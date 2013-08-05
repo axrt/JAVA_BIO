@@ -23,13 +23,13 @@ import blast.multithread.BLASTer;
  * @author axrt
  * 
  */
-public abstract class NCBI_EX_BLASTer<T> extends BLASTer {
+public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta> extends BLASTer<N,T> {
 	/**
 	 * A {@link List<NCBI_EX_BLAST>} of blasts that are currently being operated
 	 * upon (running) by the {@link NCBI_EX_BLASTer}. *<i><b>Is wrapped to a
 	 * synchronized implementation in the constructor</i></b>
 	 */
-	protected final List<NCBI_EX_BLAST> blasts;
+	protected final List<N> blasts;
 	/**
 	 * {@link File} - A temporary directory that will be used to dump the input
 	 * and output files, that are used by the ncbi+ executable
@@ -67,11 +67,11 @@ public abstract class NCBI_EX_BLASTer<T> extends BLASTer {
 		// In order to push/pull the blasts from the list, the list should be
 		// synchronized
 		this.blasts = Collections
-				.synchronizedList(new ArrayList<NCBI_EX_BLAST>());
+				.synchronizedList(new ArrayList<N>());
 		this.tempDir = tempDir;
 		this.executable = executive;
 		this.parameterList = parameterList;
-		this.listeners = new ArrayList<NCBI_EX_BLASTer_TaskFinished_listener>();
+		this.listeners = new ArrayList<>();
 	}
 
 	/**
@@ -111,9 +111,9 @@ public abstract class NCBI_EX_BLASTer<T> extends BLASTer {
 	 * Notifies all the listening modules form the list of listeners
 	 */
 	protected void notifyListeners() {
-		for (int i = 0; i < this.listeners.size(); i++) {
-			this.listeners.get(i).handleAFinishedBLASTer(
-					new NCBI_EX_BLASTer_FinishedEvent(this));
-		}
+        for (NCBI_EX_BLASTer_TaskFinished_listener listener : this.listeners) {
+            listener.handleAFinishedBLASTer(
+                    new NCBI_EX_BLASTer_FinishedEvent(this));
+        }
 	}
 }

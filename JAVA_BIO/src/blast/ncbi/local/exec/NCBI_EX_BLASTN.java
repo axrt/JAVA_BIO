@@ -9,7 +9,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_BLAST {
+public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_BLAST<T> {
 
 
     /**
@@ -25,11 +25,11 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      */
-    protected NCBI_EX_BLASTN(List<T> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
+    protected NCBI_EX_BLASTN(List<T> query, List<String> query_IDs, File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator<T> fileOperator) {
         super(query, query_IDs, tempDir, executive, parameterList,fileOperator);
     }
     /**
-     * @param query         {@link List<? extends   format.fasta.nucleotide.NucleotideFasta  >} a list of query
+     * @param query         {@link List} a list of query
      *                      fasta-formatted records
      * @param query_IDs     {@link List<String>} a list of AC numbers of sequences in a
      *                      database
@@ -47,15 +47,15 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
      */
     public static <T extends NucleotideFasta>NCBI_EX_BLASTN newDefaultInstance(
             List<T> query, List<String> query_IDs,
-            File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator fileOperator) {
+            File tempDir, File executive, String[] parameterList,NCBI_EX_BLAST_FileOperator<T> fileOperator) {
         if (query_IDs == null) {
-            query_IDs = new ArrayList<String>();
+            query_IDs = new ArrayList<>();
         }
         if (query == null) {
-            query = new ArrayList<T>();
+            query = new ArrayList<>();
         }
         // TODO: input a check for whether both lists are empty or declared null
-        return new NCBI_EX_BLASTN(query, query_IDs, tempDir, executive,
+        return new NCBI_EX_BLASTN<T>(query, query_IDs, tempDir, executive,
                 parameterList,fileOperator) {
 
             @Override

@@ -55,7 +55,7 @@ public class HitHsps implements Serializable {
      */
     public List<Hsp> getHsp() {
         if (hsp == null) {
-            hsp = new ArrayList<Hsp>();
+            hsp = new ArrayList<>();
         }
         return this.hsp;
     }
