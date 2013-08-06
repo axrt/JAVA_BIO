@@ -3,7 +3,7 @@ package test;
 import format.clustal.AlignmentException;
 import format.fasta.Fasta;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+import format.fasta.nucleotide.NucleotideFasta_BadFormat_Exception;
 import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import format.fasta.otu.EncodedOTU;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class OTUConsensusConversionTest {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 } catch (NucleotideFasta_Sequence_BadFormatException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                } catch (NucleotideFasta_BadFromat_Exception e) {
+                } catch (NucleotideFasta_BadFormat_Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }

@@ -4,7 +4,7 @@ import align.local.clustal.ClustalW2Aligner;
 import format.clustal.AlignmentException;
 import format.fasta.nucleotide.NucleotideFasta;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+import format.fasta.nucleotide.NucleotideFasta_BadFormat_Exception;
 import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import org.junit.Test;
 import util.ExecutableUtilFileOperator;
@@ -27,7 +27,7 @@ public class ClustalW2AlignerTest {
     public void testClustalW2Aligner(){
 
         try {
-            NucleotideFasta nucleotideFasta1=NucleotideFasta.newInstanceFromFromattedText(
+            NucleotideFasta nucleotideFasta1=NucleotideFasta.newInstanceFromFormattedText(
                     ">1\n"
                             + "CGTGGGAATCTACCCAACTCTACGGAATAACTCAGGGAAACTTGTGCTAATACCGTATACGCCCTTCGGGGGAAAGATTTATCGGAGTT"
                             + "GGATGAGCTCGCGTCTGATTAGCTAGTTGGTGGGGTAAAGGCCTACCAAGGCGACGATCAGTAGCCGGTCTGAGAGGATGAACGGCCA" +
@@ -35,7 +35,7 @@ public class ClustalW2AlignerTest {
                             "ACGCCGCGTGAGCGAAGAAGGCTTTCGAGTCGTAAAGCTCTGTCCTATGAGAAGATAATGACGGTATCATAGGAGGAAGCCCTGGCTAAATACGTG"
 
             );
-            NucleotideFasta nucleotideFasta2=NucleotideFasta.newInstanceFromFromattedText(
+            NucleotideFasta nucleotideFasta2=NucleotideFasta.newInstanceFromFormattedText(
                     ">2\n"
                             + "CGTGGGATTCTAGCCAACTCTACGGAATAACTCAGGGAAACTTGTGCTAATACCGTATACGCCCTTCGGGGGAAAGATTTATCGGAGTT"
                             + "GGATGAGCTCGCGTCTGATTAGCTAGTTGGTGGGGTAAAGGCCTACCAAGGCGACGATCAGTAGCCGGTCTGAGAGGATGAACGGCCA" +
@@ -58,7 +58,7 @@ public class ClustalW2AlignerTest {
             System.out.println(nucleotideFastaClustalW2Aligner.getOutput().toString());
 
 
-        } catch (NucleotideFasta_BadFromat_Exception | NucleotideFasta_AC_BadFormatException | NucleotideFasta_Sequence_BadFormatException | InterruptedException | AlignmentException | IOException e) {
+        } catch (NucleotideFasta_BadFormat_Exception | NucleotideFasta_AC_BadFormatException | NucleotideFasta_Sequence_BadFormatException | InterruptedException | AlignmentException | IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 

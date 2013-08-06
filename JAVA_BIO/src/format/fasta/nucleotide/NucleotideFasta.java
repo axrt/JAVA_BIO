@@ -31,25 +31,25 @@ public class NucleotideFasta extends Fasta {
     }
     /**
      * A static factory to assemble a {@link NucleotideFasta} from a {@link String}
-     * , that represents a fasta-fromatted record
+     * , that represents a fasta-formatted record
      *
      * @param fastaRecord {@link String} fastaRecord
      * @return a new instance of a {@link NucleotideFasta}
-     * @throws NucleotideFasta_BadFromat_Exception
+     * @throws NucleotideFasta_BadFormat_Exception
      *
      * @throws NucleotideFasta_AC_BadFormatException
      *
      * @throws NucleotideFasta_Sequence_BadFormatException
      *
      */
-    public static NucleotideFasta newInstanceFromFromattedText(String fastaRecord)
-            throws NucleotideFasta_BadFromat_Exception,
+    public static NucleotideFasta newInstanceFromFormattedText(String fastaRecord)
+            throws NucleotideFasta_BadFormat_Exception,
             NucleotideFasta_AC_BadFormatException,
             NucleotideFasta_Sequence_BadFormatException {
         // Get the first row and check whether it is good for an AC
         String[] splitter = fastaRecord.split("\n");
         if (splitter.length < 2) {
-            throw new NucleotideFasta_BadFromat_Exception(
+            throw new NucleotideFasta_BadFormat_Exception(
                     "Nucleotide Fasta record: bad format; represented by a single line.");
         } else {
             // Prepare a StringBuilder of a proper (at least close to proper)

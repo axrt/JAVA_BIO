@@ -1,7 +1,7 @@
 package test;
 
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+import format.fasta.nucleotide.NucleotideFasta_BadFormat_Exception;
 import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import format.fasta.otu.AlignableOTU;
 import format.fasta.otu.EncodedNucleotideFasta;
@@ -60,7 +60,7 @@ public class OTUReducedRedundancyTest {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 } catch (NucleotideFasta_Sequence_BadFormatException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                } catch (NucleotideFasta_BadFromat_Exception e) {
+                } catch (NucleotideFasta_BadFormat_Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }

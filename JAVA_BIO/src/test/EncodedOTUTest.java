@@ -2,7 +2,7 @@ package test;
 
 import format.clustal.AlignmentException;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+import format.fasta.nucleotide.NucleotideFasta_BadFormat_Exception;
 import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 import format.fasta.otu.EncodedOTU;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class EncodedOTUTest {
         try {
             EncodedOTU encodedOTU=EncodedOTU.newDefaultInstanceFromFile(otuFile,tmpDir,executable);
             System.out.println(encodedOTU.getOtuConsensus(90));
-        } catch (IOException | NucleotideFasta_AC_BadFormatException | NucleotideFasta_Sequence_BadFormatException | NucleotideFasta_BadFromat_Exception | InterruptedException e) {
+        } catch (IOException | NucleotideFasta_AC_BadFormatException | NucleotideFasta_Sequence_BadFormatException | NucleotideFasta_BadFormat_Exception | InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (AlignmentException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

@@ -48,25 +48,25 @@ public class ProteinFasta extends Fasta {
 
     /**
      * A static factory to assemble a {@link ProteinFasta} from a {@link String}
-     * , that represents a fasta-fromatted record
+     * , that represents a fasta-formatted record
      *
      * @param fastaRecord {@link String} fastaRecord
      * @return a new instance of a {@link ProteinFasta}
-     * @throws ProteinFasta_BadFromat_Exception
+     * @throws ProteinFasta_BadFormat_Exception
      *
      * @throws ProteinFasta_AC_BadFormatException
      *
      * @throws ProteinFasta_Sequence_BadFormatException
      *
      */
-    public static ProteinFasta newInstanceFromFromattedText(String fastaRecord)
-            throws ProteinFasta_BadFromat_Exception,
+    public static ProteinFasta newInstanceFromFormattedText(String fastaRecord)
+            throws ProteinFasta_BadFormat_Exception,
             ProteinFasta_AC_BadFormatException,
             ProteinFasta_Sequence_BadFormatException {
         // Get the first row and check whether it is good for an AC
         String[] splitter = fastaRecord.split("\n");
         if (splitter.length < 2) {
-            throw new ProteinFasta_BadFromat_Exception(
+            throw new ProteinFasta_BadFormat_Exception(
                     "Protein Fasta record: bad format; represented by a single line.");
         } else {
             // Prepare a StringBuilder of a proper (at least close to proper)

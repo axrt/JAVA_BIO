@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * An Object representation of a fasta-fromatted sequence.
+ * An Object representation of a fasta-formatted sequence.
  * 
  * @author axrt
  */
@@ -26,7 +26,7 @@ public abstract class Fasta implements Serializable{
 	 */
 	public static final String fastaStart = ">";
 	/**
-	 * A conventional number of characters within a fasta-fromatted file
+	 * A conventional number of characters within a fasta-formatted file
 	 */
     protected static final int fastaLineLenght = 60;
 	/**

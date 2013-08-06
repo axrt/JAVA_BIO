@@ -4,7 +4,7 @@ import align.local.clustal.ClustalW2Aligner;
 import format.fasta.Fasta;
 import format.fasta.nucleotide.NucleotideFasta;
 import format.fasta.nucleotide.NucleotideFasta_AC_BadFormatException;
-import format.fasta.nucleotide.NucleotideFasta_BadFromat_Exception;
+import format.fasta.nucleotide.NucleotideFasta_BadFormat_Exception;
 import format.fasta.nucleotide.NucleotideFasta_Sequence_BadFormatException;
 
 import java.io.*;
@@ -31,7 +31,7 @@ public class EncodedOTU extends AlignableOTU<EncodedNucleotideFasta> {
         return stringBuilder.toString();
     }
 
-    public static EncodedOTU newDefaultInstanceFromFile(File otuFile, File tmpDir, File executable) throws IOException, NucleotideFasta_AC_BadFormatException, NucleotideFasta_Sequence_BadFormatException, NucleotideFasta_BadFromat_Exception {
+    public static EncodedOTU newDefaultInstanceFromFile(File otuFile, File tmpDir, File executable) throws IOException, NucleotideFasta_AC_BadFormatException, NucleotideFasta_Sequence_BadFormatException, NucleotideFasta_BadFormat_Exception {
 
         BufferedReader bufferedReader = null;
         EncodedOTU encodedOTU = null;
@@ -47,7 +47,7 @@ public class EncodedOTU extends AlignableOTU<EncodedNucleotideFasta> {
             encodedOTU = new EncodedOTU(otuFile.getName().split("\\.")[0],
                     ClustalW2Aligner.<EncodedNucleotideFasta>newDefaultInstance(encodedOTU, tmpDir, executable));
             for (int i=1;i<split.length;i++) {
-                encodedOTU.add(EncodedNucleotideFasta.convertFromNucleotideFasta(NucleotideFasta.newInstanceFromFromattedText(Fasta.fastaStart+split[i])));
+                encodedOTU.add(EncodedNucleotideFasta.convertFromNucleotideFasta(NucleotideFasta.newInstanceFromFormattedText(Fasta.fastaStart + split[i])));
             }
         } finally {
             if (bufferedReader != null) {
