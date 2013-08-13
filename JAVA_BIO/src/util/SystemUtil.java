@@ -221,12 +221,12 @@ public class SystemUtil {
      * Downloads a file for a given file name from the ncbi FTP (Taxonomy directory) server
      *
      * @param tmpDownloadDir {@link File} a temporary directory to store the files downloaded
-     * @param subDir         {@link File} a subdirectory of the ncbi FTP to download file from
-     * @param fileName       {@link File} requested file name
+     * @param subDir         {@link String} a subdirectory of the ncbi FTP to download file from
+     * @param fileName       {@link String} requested file name
      * @return {@link File} pointer to the file that has been retrieved and saved locally to the temporary folder
      * @throws java.io.IOException in case anything goes wrong during the ftp communication of file saving locally
      */
-    public static File downloadFileFromNCBIFTP(final File tmpDownloadDir, final File subDir, final File fileName) throws IOException {
+    public static File downloadFileFromNCBIFTP(final File tmpDownloadDir, final String subDir, final String fileName) throws IOException {
         //TODO: create a separate utility class, make it extendable and make a more general abstraction for ftp downloads, remove all the printouts
         //Prepare an FTP client
         final FTPClient ftpClient = new FTPClient();
@@ -244,12 +244,12 @@ public class SystemUtil {
             //Set binary mode
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             //Change the directory to the one that contains taxonomic information
-            ftpClient.changeWorkingDirectory(subDir.getAbsolutePath());
+            ftpClient.changeWorkingDirectory(subDir);
             //Prepare the outputstream to save the file
             System.out.print(ftpClient.getReplyString());
-            outputStream = new FileOutputStream(outputFile=new File(tmpDownloadDir, fileName.getName()));
+            outputStream = new FileOutputStream(outputFile=new File(tmpDownloadDir, fileName));
             System.out.print(ftpClient.getReplyString());
-            inputStream = ftpClient.retrieveFileStream(fileName.getName());
+            inputStream = ftpClient.retrieveFileStream(fileName);
             System.out.print(ftpClient.getReplyString());
             IOUtils.copy(inputStream, outputStream);
         } finally {

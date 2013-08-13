@@ -89,12 +89,12 @@ public class NucleotideFasta extends Fasta {
             }
             // If the sequence provided contains any illegal characters - complain
             // and point to the position of an illegal character
-            int check = Fasta.checksOutForIllegalCharacters(sequence);
-            if (check != 0) {
-                throw new NucleotideFasta_Sequence_BadFormatException(
-                        "Error within the Sequence: illegal character at positon: "
-                                + String.valueOf(check));
-            }
+            //int check = Fasta.checksOutForIllegalCharacters(sequence);
+            //if (check != 0) {
+            //    throw new NucleotideFasta_Sequence_BadFormatException(
+            //            "Error within the Sequence: illegal character at positon: "
+            //                    + String.valueOf(check));
+            //}
 
             return NucleotideFasta.newInstanceFromParts(AC,
                     sequence);

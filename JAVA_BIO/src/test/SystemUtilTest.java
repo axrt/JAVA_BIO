@@ -28,8 +28,8 @@ public class SystemUtilTest {
     public void downloadFileFromNCBIFTPTest() {
 
         final File tmpDownloadDir =  new File("/home/alext/Downloads/tmp");
-        final File subDir  = new File(SystemUtil.NCBI_TAXONOMY);
-        final File fileName = new File(SystemUtil.TAXDUMP_ARCH);
+        final String subDir  = SystemUtil.NCBI_TAXONOMY;
+        final String fileName = SystemUtil.TAXDUMP_ARCH;
 
         try {
             SystemUtil.downloadFileFromNCBIFTP(tmpDownloadDir,subDir,fileName);
