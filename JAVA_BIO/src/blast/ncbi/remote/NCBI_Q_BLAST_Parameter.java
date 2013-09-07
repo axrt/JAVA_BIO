@@ -35,9 +35,9 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value for a parameter that will be automatically
-	 *            converted to {@link String}
-	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
+	 *            {@code int} value for a parameter that will be automatically
+	 *            converted to {@code String}
+	 * @return a new {@code NCBI_Q_BLAST_Parameter} of
 	 *         <b>"ALIGNMENTS=value"</b>.
 	 */
 	public static NCBI_Q_BLAST_Parameter ALIGNMENTS(int value) {
@@ -95,7 +95,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"BLAST_PROGRAM=value"</b>.
@@ -197,7 +197,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value for a parameter that will be automatically
+	 *            {@code int} value for a parameter that will be automatically
 	 *            converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DATABASE_SORT=value"</b>.
@@ -268,7 +268,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value for a parameter that will be automatically
+	 *            {@code int} value for a parameter that will be automatically
 	 *            converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DESCRIPTIONS=value"</b>.
@@ -281,7 +281,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value for a parameter that will be automatically
+	 *            {@code int} value for a parameter that will be automatically
 	 *            converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"DISPLAY_SORT=value"</b>.
@@ -306,7 +306,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link double} value, value for a parameter that will be
+	 *            {@code double} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"EXPECT=value"</b>.
 	 */
@@ -318,7 +318,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link double} value, value for a parameter that will be
+	 *            {@code double} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"EXPECT_HIGH=value"</b>.
@@ -331,7 +331,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link double} value, value for a parameter that will be
+	 *            {@code double} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"EXPECT_LOW=value"</b>.
@@ -344,7 +344,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value, value for a parameter that will be
+	 *            {@code int} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"FIRST_QUERY_NUM=value"</b>.
@@ -482,7 +482,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"GET_SEQUENCE=value"</b>.
@@ -495,7 +495,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value, value for a parameter that will be
+	 *            {@code int} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"HITLIST_SIZE=value"</b>.
@@ -508,7 +508,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link int} value, value for a parameter that will be
+	 *            {@code int} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"HSP_SORT=value"</b>.
 	 */
@@ -520,7 +520,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link double} value, value for a parameter that will be
+	 *            {@code double} value, value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"I_THRESHOLD=value"</b>.
@@ -533,7 +533,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"LCASE_MASK=value"</b>.
@@ -679,7 +679,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"MEGABLAST=value"</b>.
 	 */
@@ -691,7 +691,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NCBI_GI=value"</b>.
 	 */
@@ -703,7 +703,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NEWWIN=value"</b>.
 	 */
@@ -715,7 +715,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NEWWINRES=value"</b>.
 	 */
@@ -727,7 +727,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"NOHEADER=value"</b>.
 	 */
@@ -871,7 +871,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"QUERY_BELIEVE_DEFLINE=value"</b>.
@@ -935,7 +935,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"RUN_PSIBLAST=value"</b>.
@@ -948,7 +948,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SEARCHSP_EFF=value"</b>.
@@ -961,7 +961,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHORT_QUERY_ADJUST=value"</b>.
@@ -974,7 +974,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_CDS_FEATURE=value"</b>.
@@ -987,7 +987,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_LINKOUT=value"</b>.
@@ -1000,7 +1000,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of
 	 *         <b>"SHOW_OVERVIEW=value"</b>.
@@ -1109,7 +1109,7 @@ public class NCBI_Q_BLAST_Parameter extends Q_BLAST_Parameter {
 	/**
 	 * 
 	 * @param value
-	 *            {@link boolean} value for a parameter that will be
+	 *            {@code boolean} value for a parameter that will be
 	 *            automatically converted to {@link String}
 	 * @return a new {@link NCBI_Q_BLAST_Parameter} of <b>"TWO_HITS=value"</b>.
 	 */

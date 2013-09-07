@@ -66,14 +66,14 @@ public abstract class NCBI_BLAST<T extends Fasta> extends BLAST {
 	}
 
 	/**
-	 * @return {@link List<Fasta>} the query
+	 * @return {@link List} the query
 	 */
 	public List<? extends Fasta> getQuery() {
 		return query;
 	}
 
 	/**
-	 * @return {@link List<String>} the query_IDs
+	 * @return {@link List} the query_IDs
 	 */
 	public List<String> getQuery_IDs() {
 		return query_IDs;

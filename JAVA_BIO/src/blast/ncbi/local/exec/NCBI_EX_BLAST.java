@@ -64,7 +64,7 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
      * @param executive     {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
-     * @param parameterList {@link String[]} A list of parameters. Should maintain a
+     * @param parameterList {@link String}[] A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      * @param fileOperator  {@link NCBI_EX_BLAST_FileOperator} to allow file load/save

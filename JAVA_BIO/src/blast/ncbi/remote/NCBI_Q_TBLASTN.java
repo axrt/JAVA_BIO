@@ -84,7 +84,7 @@ public abstract class NCBI_Q_TBLASTN<T extends NucleotideFasta> extends NCBI_Q_B
     /**
      * @param parameter {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
      *               to add
-     * @return {@code true} is successfully added, {@link false} elsewise
+     * @return {@code true} is successfully added, {@code false} elsewise
      * @throws Bad_Q_BLAST_Parameter_Exception in case a forbidden
      *                parameters is attempted to insert
      */

@@ -15,7 +15,7 @@ public class BLAST_FinishedEvent<B extends BLAST> extends EventObject {
 	/**
 	 * A constructor that wraps the source object into {@link Object}
 	 * 
-	 * @param source {@link B} that finished
+	 * @param source {@code B} that finished
 	 */
 	public BLAST_FinishedEvent(B source) {
 		super(source);

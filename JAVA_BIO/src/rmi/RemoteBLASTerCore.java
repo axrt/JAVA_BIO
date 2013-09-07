@@ -33,7 +33,7 @@ public abstract class RemoteBLASTerCore<B extends BLAST,T extends Fasta> impleme
 
 	/**
 	 * 
-	 * @return {@link List} of {@link B}
+	 * @return {@link List} of {@code B}
 	 * @throws Exception
 	 */
 	// TODO: delete comments

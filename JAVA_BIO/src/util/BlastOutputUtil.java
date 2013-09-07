@@ -36,8 +36,8 @@ public class BlastOutputUtil {
     /**
      * Converts the textual representation of the E-value of a given hit to double value
      *
-     * @param h: {@link Hit} that contains the desired E-value parameter
-     * @return {@link double} representation of the E-value
+     * @param h {@code Hit} that contains the desired E-value parameter
+     * @return {@code double} representation of the E-value
      */
     public static double getEvalueFromHit(Hit h) {
         return Double.parseDouble(h.getHitHsps().getHsp().get(0).getHspEvalue());
@@ -46,8 +46,8 @@ public class BlastOutputUtil {
     /**
      * Calculates pIdent for a given {@link Hit}
      *
-     * @param h: {@link Hit} that contains the desired pIdent
-     * @return {@link double} representation of the pIdent, if {@code null} instead of a {@link Hit} - returns 0
+     * @param h {@code Hit} that contains the desired pIdent
+     * @return {@code double} representation of the pIdent, if {@code null} instead of a {@link Hit} - returns 0
      */
     public static double calculatePIdent(Hit h) {
         if(h==null||h.getHitHsps().getHsp().get(0).getHspIdentity()==null||h.getHitHsps().getHsp().get(0).getHspAlignLen()==null){
@@ -61,9 +61,9 @@ public class BlastOutputUtil {
     /**
      * Calculates the query coverage for a given {@code Hit}
      *
-     * @param queryLength {@link int} of the querry sequence
-     * @param h:          {@link Hit} that contains the desired query coverage parameter
-     * @return {@link double} representation of the query coverage parameter
+     * @param queryLength {@code int} of the querry sequence
+     * @param h          {@link Hit} that contains the desired query coverage parameter
+     * @return {@code double} representation of the query coverage parameter
      */
     public static double calculateQueryCoverage(int queryLength, Hit h) {
         return (1 + Integer.parseInt(h.getHitHsps().getHsp().get(0).getHspQueryTo())

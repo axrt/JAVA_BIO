@@ -1,27 +1,16 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="javabio:jar">
+  <artifact build-on-make="true" name="javabio:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/javabio_jar</output-path>
-    <root id="archive" name="javabio.jar">
-      <element id="module-output" name="javabio" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-tests.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-javadoc.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-compress-1.5/commons-compress-1.5-test-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-net-3.3/commons-net-3.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-net-3.3/commons-net-3.3-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-net-3.3/commons-net-examples-3.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/javatar-2.5/jars/tar.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/javatar-2.5/jars/activation.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-io-2.4/commons-io-2.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-io-2.4/commons-io-2.4-tests.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-io-2.4/commons-io-2.4-javadoc.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-io-2.4/commons-io-2.4-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/commons-io-2.4/commons-io-2.4-test-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.10.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="/usr/lib/JLF/mysql-connector-java-5.1.25/mysql-connector-java-5.1.25-bin.jar" path-in-jar="/" />
-      <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/src" />
-      <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/docs" />
+    <root id="root">
+      <element id="archive" name="javabio.jar">
+        <element id="module-output" name="JAVA_BIO" />
+      </element>
+      <element id="library" level="project" name="commons-io:commons-io:2.4" />
+      <element id="file-copy" path="$APPLICATION_HOME_DIR$/lib/junit-4.10.jar" />
+      <element id="library" level="project" name="commons-net:commons-net:3.3" />
+      <element id="library" level="project" name="javatar:javatar:2.5" />
+      <element id="library" level="project" name="mysql:mysql-connector-java:5.1.25" />
+      <element id="library" level="project" name="org.apache.commons:commons-compress:1.5" />
     </root>
   </artifact>
 </component>

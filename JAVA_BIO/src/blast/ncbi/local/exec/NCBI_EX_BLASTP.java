@@ -27,7 +27,7 @@ public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLA
      * @param executable    {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
-     * @param parameterList {@link String[]} A list of parameters. Should maintain a
+     * @param parameterList {@link String}[] A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      */
@@ -48,7 +48,7 @@ public abstract class NCBI_EX_BLASTP<T extends ProteinFasta> extends NCBI_EX_BLA
      * @param executive     {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
-     * @param parameterList {@link String[]} A list of parameters. Should maintain a
+     * @param parameterList {@link String}[] A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      * @return a new instance of {@link NCBI_EX_BLASTP} from a given set of

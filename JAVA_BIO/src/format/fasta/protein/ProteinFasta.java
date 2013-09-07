@@ -21,7 +21,7 @@ public class ProteinFasta extends Fasta {
     /**
      * Constructor
      *
-     * @param AC{@link String} AC
+     * @param AC {@link String} AC
      * @param sequence {@link String} sequence
      */
     protected ProteinFasta(String AC, String sequence) {

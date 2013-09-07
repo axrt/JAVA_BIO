@@ -21,7 +21,7 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
      * @param executive     {@link java.io.File} A {@link blast.ncbi.local.exec.NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
-     * @param parameterList {@link String[]} A list of parameters. Should maintain a
+     * @param parameterList {@link String}[] A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      */
@@ -31,7 +31,7 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
     /**
      * @param query         {@link List} a list of query
      *                      fasta-formatted records
-     * @param query_IDs     {@link List<String>} a list of AC numbers of sequences in a
+     * @param query_IDs     {@link List} a list of AC numbers of sequences in a
      *                      database
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
@@ -39,7 +39,7 @@ public abstract class NCBI_EX_BLASTN<T extends NucleotideFasta> extends NCBI_EX_
      * @param executive     {@link File} A {@link NCBI_EX_BLAST_FileOperator} that will
      *                      allow to create an input file as well as catch the blast
      *                      output
-     * @param parameterList {@link String[]} A list of parameters. Should maintain a
+     * @param parameterList {@link String}[] A list of parameters. Should maintain a
      *                      certain order. {"<-command>", "[value]"}, just the way if in
      *                      the blast+ executable input
      * @return a new instance of {@link NCBI_EX_BLASTN} from a given set of

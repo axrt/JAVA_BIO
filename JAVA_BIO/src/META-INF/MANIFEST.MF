@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-Class-Path: commons-compress-1.5.jar commons-compress-1.5-tests.jar co
- mmons-compress-1.5-javadoc.jar commons-compress-1.5-sources.jar commo
- ns-compress-1.5-test-sources.jar commons-net-3.3.jar commons-net-3.3-
- sources.jar commons-net-examples-3.3.jar tar.jar activation.jar commo
- ns-io-2.4.jar commons-io-2.4-tests.jar commons-io-2.4-javadoc.jar com
- mons-io-2.4-sources.jar commons-io-2.4-test-sources.jar junit-4.10.ja
- r mysql-connector-java-5.1.25-bin.jar
+Class-Path: commons-io-2.4.jar junit-4.10.jar commons-net-3.3.jar java
+ tar-2.5.jar mysql-connector-java-5.1.25.jar commons-compress-1.5.jar 
+ xz-1.2.jar
 

@@ -16,7 +16,7 @@ public abstract class AbstractTree<T> {
 
     /**
      * Constructor from root node
-     * @param rootData {@link T} root node
+     * @param rootData {@code T} root node
      */
     public AbstractTree(T rootData) {
         root = new Node<>();
@@ -25,7 +25,7 @@ public abstract class AbstractTree<T> {
 
     /**
      * Static node class
-     * @param <T> {@link T}
+     * @param <T> {@code T}
      */
     public static class Node<T> {
         /**
@@ -50,7 +50,7 @@ public abstract class AbstractTree<T> {
 
         /**
          * Data getter
-         * @return {@link T} data
+         * @return {@code T} data
          */
         public T getData() {
             return data;

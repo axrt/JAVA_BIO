@@ -27,7 +27,7 @@ public class ClustalW2Aln extends ClustalAln {
     /**
      * Constructor from field parameters
      * @param header {@link String} header, most likely to be CLUSTAL [version]
-     * @param alignmentLines {@link List} of {@link AlignmentLine}s that represent the alignment
+     * @param alignmentLines {@link List} of {@link ClustalAln.AlignmentLine}s that represent the alignment
      */
     protected ClustalW2Aln(String header, List<ClustalAln.AlignmentLine> alignmentLines) {
         super(header, alignmentLines);

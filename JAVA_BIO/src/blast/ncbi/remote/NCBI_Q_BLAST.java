@@ -56,8 +56,8 @@ public abstract class NCBI_Q_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
 	/**
 	 * Constructor
 	 * 
-	 * @param query {@link List<Fasta> query} - a list of query fasta records
-	 * @param query_IDs {@link List<String> query_IDs} - - a list of query fasta record
+	 * @param query {@link List query} - a list of query fasta records
+	 * @param query_IDs {@link List} query_IDs - - a list of query fasta record
 	 *        IDs
 	 */
 	protected NCBI_Q_BLAST(List<T> query, List<String> query_IDs) {
@@ -70,7 +70,7 @@ public abstract class NCBI_Q_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
 	 * 
 	 * @param parameter {@link NCBI_Q_BLAST_Parameter} parameter that is being attempted
 	 *        to add
-	 * @return {@code true} is successfully added, {@link false} elsewise
+	 * @return {@code true} is successfully added, {@code false} elsewise
 	 * @throws Bad_Q_BLAST_Parameter_Exception in case a forbidden
 	 *         parameters is attempted to insert
 	 */

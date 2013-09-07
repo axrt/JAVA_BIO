@@ -25,7 +25,7 @@ import blast.multithread.BLASTer;
  */
 public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta> extends BLASTer<N,T> {
 	/**
-	 * A {@link List<NCBI_EX_BLAST>} of blasts that are currently being operated
+	 * A {@link List} of blasts that are currently being operated
 	 * upon (running) by the {@link NCBI_EX_BLASTer}. *<i><b>Is wrapped to a
 	 * synchronized implementation in the constructor</i></b>
 	 */
@@ -53,11 +53,11 @@ public abstract class NCBI_EX_BLASTer<N extends NCBI_EX_BLAST<T>,T extends Fasta
 
 	/**
 	 * @param queryList
-	 *            {@link List<Fasta>} - a list of query fasta records
+	 *            {@link List} - a list of query fasta records
 	 * @param numberOfThreads
-	 *            {@link int} a number of simultanious blasts running
+	 *            {@code int} a number of simultanious blasts running
 	 * @param batchSize
-	 *            {@link int} a number of fasta {@link Fasta} records in on
+	 *            {@code int} a number of fasta {@link Fasta} records in on
 	 *            single batch
 	 */
 	protected NCBI_EX_BLASTer(List<T> queryList,

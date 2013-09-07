@@ -20,7 +20,7 @@ public class NCBI_EX_BLASTer_FinishedEvent<B extends BLASTer> extends EventObjec
 	private static final long serialVersionUID = 336364223009671905L;
 
 	/**
-	 * @param blaster {@link B} that has finished execution
+	 * @param blaster {@code B} that has finished execution
 	 */
 	public NCBI_EX_BLASTer_FinishedEvent(B blaster) {
 		super(blaster);
