@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="javabio_javadoc:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/javabio_javadoc_jar</output-path>
+    <root id="root">
+      <element id="archive" name="javadoc.jar">
+        <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/doc" />
+      </element>
+    </root>
+  </artifact>
+</component>

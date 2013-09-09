@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="javabio_src:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/javabio_src_jar</output-path>
+    <root id="root">
+      <element id="archive" name="source.jar">
+        <element id="dir-copy" path="$PROJECT_DIR$/JAVA_BIO/src" />
+      </element>
+    </root>
+  </artifact>
+</component>
