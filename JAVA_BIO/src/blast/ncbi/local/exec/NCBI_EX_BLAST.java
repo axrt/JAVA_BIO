@@ -32,6 +32,7 @@ import java.util.List;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 /**
  * A generalized abstraction of an ncbi blast process that is performed locally
  * through an ncbi executable from
@@ -72,8 +73,8 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
     protected String[] parameterList;
 
     /**
-     * @param query {@link        List} a list of query fasta records, where T exends {@link Fasta}
-     * @param query_IDs {@link        List} a list of query fasta record IDs
+     * @param query         {@link        List} a list of query fasta records, where T exends {@link Fasta}
+     * @param query_IDs     {@link        List} a list of query fasta record IDs
      * @param tempDir       {@link File} - A temporary directory that will be used to dump
      *                      the input and output files, that are used by the ncbi+
      *                      executable
@@ -133,45 +134,45 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
         command[6] = "5";
         // Copy all the parameters
         System.arraycopy(parameterList, 0, command, 7, command.length - 7);
-        try {
-            // Build a process
-            final Process p = Runtime.getRuntime().exec(command);
-            p.waitFor();
+        // Build a process
+        final Process p = Runtime.getRuntime().exec(command);
+        p.waitFor();
 
-            String s;
-            try (BufferedReader stdNorm = new BufferedReader(
-                    new InputStreamReader(p.getInputStream()))) {
+        String s;
+        try (BufferedReader stdNorm = new BufferedReader(
+                new InputStreamReader(p.getInputStream()))) {
 
-                //TODO: For debuggin purposes only, an API should not print out anything!!!
-                while ((s = stdNorm.readLine()) != null) {
-                    System.out.println("STD:> " + s);
+            //TODO: For debuggin purposes only, an API should not print out anything!!!
+            while ((s = stdNorm.readLine()) != null) {
+                System.out.println("STD:> " + s);
+            }
+        }
+        // In case of an error - try to recover
+        try (BufferedReader stdError = new BufferedReader(
+                new InputStreamReader(p.getErrorStream()))) {
+
+            while ((s = stdError.readLine()) != null) {
+                System.out.println("ERR:> " + s);
+                if (s.contains("Cannot memory map file")) {
+                    this.BLAST();
                 }
             }
-            // In case of an error - try to recover
-            try (BufferedReader stdError = new BufferedReader(
-                    new InputStreamReader(p.getErrorStream()))) {
+        }
+        if (this.outputFile.exists()) {
+            // Suck in the output
+            this.blastOutput = NCBI_BLAST_OutputHelper
+                    .catchBLASTOutput(this.fileOperator
+                            .readOutputXML(this.outputFile));
+        } else throw new IOException("Something might have gone wrong with the BLAST process, check logs.");
+    }
 
-                while ((s = stdError.readLine()) != null) {
-                    System.out.println("ERR:> " + s);
-                    if (s.contains("Cannot memory map file")) {
-                        this.BLAST();
-                    }
-                }
-            }
-            if (this.outputFile.exists()) {
-                // Suck in the output
-                this.blastOutput = NCBI_BLAST_OutputHelper
-                        .catchBLASTOutput(this.fileOperator
-                                .readOutputXML(this.outputFile));
-            }else throw new IOException("Something might have gone wrong with the BLAST process, check logs.");
-        } finally {
-            // Cleanup
-            if (this.inputFile.exists()) {
-                this.inputFile.delete();
-            }
-            if (this.outputFile.exists()) {
-                this.outputFile.delete();
-            }
+    /**
+     * Deletes a give file
+     * @param file {@link File} that has to be deleted (most likely - a temporary file that the module used as an input-output)
+     */
+    public void cleanup(final File file) {
+        if (file.exists()&!file.isDirectory()){
+            file.delete();
         }
     }
 
