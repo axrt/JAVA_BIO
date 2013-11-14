@@ -147,7 +147,6 @@ public abstract class NCBI_Q_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
 		// Generates a request
         final URL request = new URL(NCBI_Q_BLAST.QBLAST_SERVICE_URL
 				+ this.request_parameters.toString());
-		System.out.println(request);
 		// Opens a connection to send the request to the server
         final URLConnection connection = request.openConnection();
 		// Gets the text output, which is actually an HTML page

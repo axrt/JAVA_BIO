@@ -7,7 +7,6 @@ import blast.ncbi.NCBI_BLAST;
 import blast.ncbi.output.NCBI_BLAST_OutputHelper;
 import format.fasta.Fasta;
 import org.xml.sax.SAXException;
-import util.SystemUtil;
 
 import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
@@ -15,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.UUID;
 /**
  * Java Bio is a free open source library for routine bioinformatics tasks.
  * Copyright (C) 2013  Alexander Tuzhikov
@@ -98,11 +98,10 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
         // The uniqueness of the input and output file names is maintained by
         // that the names contain the hashCode of the blast objects, thereby
         // ensuring uniqueness even in multithreaded environment
-        //TODO: correct this to a non-SysFS
-        this.inputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
-                + "in_" + String.valueOf(this.hashCode()));
-        this.outputFile = new File(this.tempDir.getPath() + SystemUtil.SysFS
-                + "out_" + String.valueOf(this.hashCode()));
+        this.inputFile = new File(this.tempDir.getPath(),
+                "in_" + String.valueOf(this.hashCode() + UUID.randomUUID().toString()));
+        this.outputFile = new File(this.tempDir.getPath(),
+                "out_" + String.valueOf(this.hashCode() + UUID.randomUUID().toString()));
     }
 
     /**
@@ -168,10 +167,11 @@ public abstract class NCBI_EX_BLAST<T extends Fasta> extends NCBI_BLAST<T> {
 
     /**
      * Deletes a give file
+     *
      * @param file {@link File} that has to be deleted (most likely - a temporary file that the module used as an input-output)
      */
     public void cleanup(final File file) {
-        if (file.exists()&!file.isDirectory()){
+        if (file.exists() & !file.isDirectory()) {
             file.delete();
         }
     }
