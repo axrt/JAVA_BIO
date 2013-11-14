@@ -50,7 +50,7 @@ public abstract class ExecutableUtilFileOperator<T> extends UtilFileOperator {
             }
             // Write to the file line by line
             bufferedWriter = new BufferedWriter(new FileWriter(
-                    outputFile, true));
+                    outputFile));
             for (T aList : list) {
                 bufferedWriter.write(aList.toString());
                 bufferedWriter.newLine();
