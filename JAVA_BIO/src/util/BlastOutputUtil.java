@@ -1,6 +1,8 @@
 package util;
 
 import blast.ncbi.output.Hit;
+import blast.ncbi.output.HitHsps;
+import blast.ncbi.output.Hsp;
 import format.BadFormatException;
 /**
  * Java Bio is a free open source library for routine bioinformatics tasks.
@@ -66,11 +68,29 @@ public class BlastOutputUtil {
      * @return {@code double} representation of the pIdent, if {@code null} instead of a {@link Hit} - returns 0
      */
     public static double calculatePIdent(Hit h) {
-        if(h==null||h.getHitHsps().getHsp().get(0).getHspIdentity()==null||h.getHitHsps().getHsp().get(0).getHspAlignLen()==null){
+        if(h==null){
             return 0;
         }
-        double identities = Double.parseDouble(h.getHitHsps().getHsp().get(0).getHspIdentity());
-        double alingnmentLenght = Double.parseDouble(h.getHitHsps().getHsp().get(0).getHspAlignLen());
+        if(h.getHitHsps()==null){
+            return 0;
+        }
+        for(Hsp hsp:h.getHitHsps().getHsp()){
+            if(hsp.getHspIdentity()==null){
+                return 0;
+            }
+            if(hsp.getHspAlignLen()==null){
+                return 0;
+            }
+        }
+
+        double identities = 0;
+        for(Hsp hsp:h.getHitHsps().getHsp()){
+            identities+=Double.parseDouble(hsp.getHspIdentity());
+        }
+        double alingnmentLenght = 0;
+        for(Hsp hsp:h.getHitHsps().getHsp()){
+            alingnmentLenght+=Double.parseDouble(hsp.getHspAlignLen());
+        }
         return Math.ceil(identities * 100 / alingnmentLenght);
     }
 
@@ -82,7 +102,24 @@ public class BlastOutputUtil {
      * @return {@code double} representation of the query coverage parameter
      */
     public static double calculateQueryCoverage(int queryLength, Hit h) {
-        return (1 + Integer.parseInt(h.getHitHsps().getHsp().get(0).getHspQueryTo())
-                - Integer.parseInt(h.getHitHsps().getHsp().get(0).getHspQueryFrom())) * 100 / queryLength;
+        if(h==null){
+            return 0;
+        }
+        if(h.getHitHsps()==null){
+            return 0;
+        }
+        for(Hsp hsp:h.getHitHsps().getHsp()){
+            if(hsp.getHspQueryTo()==null){
+                return 0;
+            }
+            if(hsp.getHspQueryFrom()==null){
+                return 0;
+            }
+        }
+        int partLength=0;
+        for(Hsp hsp:h.getHitHsps().getHsp()){
+            partLength+=1+ Integer.parseInt(hsp.getHspQueryTo())-Integer.parseInt(hsp.getHspQueryFrom());
+        }
+        return partLength * 100 / queryLength;
     }
 }
