@@ -2,7 +2,13 @@ package format.fasta.nucleotide;
 
 import format.fasta.Fasta;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 /**
  * Java Bio is a free open source library for routine bioinformatics tasks.
  * Copyright (C) 2013  Alexander Tuzhikov
@@ -70,7 +76,7 @@ public class NucleotideFasta extends Fasta {
         } else {
             // Prepare a StringBuilder of a proper (at least close to proper)
             // size
-            StringBuilder sb = new StringBuilder(splitter.length
+            final StringBuilder sb = new StringBuilder(splitter.length
                     * splitter[1].length());
             for (int i = 1; i < splitter.length; i++) {
                 // Get rid of all the spaces on the fly
@@ -117,5 +123,24 @@ public class NucleotideFasta extends Fasta {
             // TODO: this implementation may not be the fastest, see if smth
             // could be done
         }
+    }
+    public static List<NucleotideFasta> loadFromText(InputStream inputStream) throws IOException, NucleotideFasta_AC_BadFormatException, NucleotideFasta_BadFormat_Exception, NucleotideFasta_Sequence_BadFormatException {
+        final List<NucleotideFasta> toReturn=new ArrayList<>();
+        try(BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream))){
+            final StringBuilder stringBuilder=new StringBuilder();
+            String line;
+            while((line=bufferedReader.readLine())!=null){
+                stringBuilder.append(line);
+                stringBuilder.append('\n');
+            }
+            final String[]records=stringBuilder.toString().trim().split(Fasta.fastaStart);
+            for(String s:records){
+                if(s.length()==0){
+                    continue;
+                }
+                toReturn.add(newInstanceFromFormattedText(Fasta.fastaStart.concat(s)));
+            }
+        }
+        return toReturn;
     }
 }
